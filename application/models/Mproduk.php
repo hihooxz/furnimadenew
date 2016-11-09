@@ -1,0 +1,177 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Mproduk extends CI_Model {
+	// constrcutor
+	function __construct(){
+		parent::__construct();
+	}
+
+  function fetchProduk($limit,$start,$pagenumber) {
+
+    if($pagenumber!=""){
+			/*$this->db->limit($limit,($pagenumber*$limit)-$limit);*/
+			$limit = ($pagenumber*$limit)-$limit.",".$limit;
+		}
+    else{
+			/* $this->db->limit($limit,$start); */
+			$limit = $start.",".$limit;
+		}
+
+		/*$this->db->join('user','user.id_user = header_booked.id_stylist');
+		$this->db->join('user','user.id_user = header_booked.id_customer');
+    $this->db->order_by('date_insert','DESC');
+    $query = $this->db->get('header_booked');*/
+		$sql = "select fm_produk.*,fm_user.username,fm_kategori.*
+		FROM
+		fm_produk
+		JOIN fm_user ON fm_produk.id_penjual = fm_user.id_user
+		JOIN fm_kategori ON fm_produk.id_kategori = fm_kategori.id_kategori
+		limit ".$limit."
+		";
+		$query = $this->db->query($sql);
+    if($query->num_rows()>0){
+      return $query->result();
+    }
+    else return FALSE;
+  }
+  function countAllproduk() {
+    return $this->db->count_all("header_booked");
+    }
+
+		function getproduk($id) {
+			$sql = "select fm_produk.*,fm_user.username,fm_kategori.*
+			FROM
+			fm_produk
+			JOIN fm_user ON fm_product.id_penjual = fm_user.id_user
+			JOIN fm_kategori ON fm_produk.id_kategori = fm_kategori.id_kategori
+			where id_produk = ".$id."
+			";
+			$query = $this->db->query($sql);
+	    if($query->num_rows()>0){
+	      return $query->row_array();
+	    }
+	    else return FALSE;
+	  }
+
+		function saveProduk($data,$upload_data){
+			$array = array(
+					'id_admin' => $this->session->userdata('idAdmin'),
+					'id_penjual' => $data['user'],
+					'id_kategori' => $data['kategori'],
+					'nama_produk' =>$data['nama_produk'],
+					'harga_produk' => $data['harga_produk'],
+					'deskripsi_produk' =>$data['deskripsi_produk'],
+					'tanggal_produk' => date('Y-m-d H:i:s'),
+					'gambar_produk' => 'asset/gambar/thumbnail/'.$upload_data['orig_name']
+				);
+			$this->db->insert('produk',$array);
+			return 1;
+		}
+			function editProduk($data,$upload_data,$id){
+				$array = array(
+					'id_penjual' => $data['user'],
+					'id_kategori' => $data['kategori'],
+					'nama_produk' =>$data['nama_produk'],
+					'harga_produk' => $data['harga_produk'],
+					'deskripsi_produk' =>$data['deskripsi_produk'],
+					'tanggal_produk' => date('Y-m-d H:i:s')
+
+				);
+
+				if($upload_data!=false){
+					$array['gambar_produk'] = 'asset/gambar/thumbnail/'.$upload_data['orig_name'];
+				}
+				$this->db->where('id_produk',$id);
+				$this->db->update('produk',$array);
+				return 1;
+			}
+
+
+
+		function fetchProdukSearch($data){
+			if($data['by'] == "username") $data['by'] = "fm_user.username";
+			$sql = "select fm_produk.*,fm_user.username,fm_kategori.*
+			FROM
+			fm_produk
+			JOIN fm_user ON fm_product.id_penjual = fm_user.id_user
+			JOIN fm_kategori ON fm_produk.id_kategori = fm_kategori.id_kategori
+			where ".$data['by']." like '%".$data['search']."%'
+			";
+			$query = $this->db->query($sql);
+	    if($query->num_rows()>0){
+	      return $query->result();
+	    }
+	    else return FALSE;
+
+		}
+
+		function fetchKategori($limit,$start,$pagenumber) {
+
+			if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+
+			$this->db->order_by('id_kategori','DESC');
+			$query = $this->db->get('kategori');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;
+		}
+		function countAllKategori() {
+			return $this->db->count_all("kategori");
+		}
+
+		function saveKategori($data,$upload_data){
+		$result = $this->mod->getDataWhere('kategori','nama_kategori',$data['id_parent']);
+			$array = array(
+					'id_parent' => $data['id_parent'],
+					'nama_kategori' =>($data['nama_kategori']),
+					'keterangan_kategori' => $data['keterangan_kategori'],
+				);
+			if($upload_data != FALSE){
+				$array['gambar_kategori'] = 'asset/gambar/produk/'.$upload_data['orig_name'];
+			}
+
+			$this->db->insert('kategori',$array);
+			return 1;
+		}
+			function editKategori($data,$id,$upload_data){
+				$result = $this->mod->getDataWhere('kategori','nama_kategori',$data['id_parent']);
+				$array = array(
+					    'id_parent' => $data['id_parent'],
+							'nama_kategori' =>($data['nama_kategori']),
+							'keterangan_kategori' => $data['keterangan_kategori'],
+				);
+
+				if($upload_data!=false){
+					$array['gambar_kategori'] = 'asset/gambar/produk/'.$upload_data['orig_name'];
+				}
+				$this->db->where('id_kategori',$id);
+				$this->db->update('kategori',$array);
+				return 1;
+			}
+
+			function fetchKategoriSearch($data) {
+				$this->db->like($data['by'],$data['search']);
+				$this->db->order_by('id_kategori','DESC');
+				$query = $this->db->get('kategori');
+				if($query->num_rows()>0){
+					return $query->result();
+				}
+				else return FALSE;
+			}
+			function fetchAllParent(){
+				$this->db->where('id_parent',0);
+				$this->db->order_by('nama_kategori','ASC');
+				$query = $this->db->get('kategori');
+				if($query->num_rows()>0){
+					return $query->result();
+				}
+				else return FALSE;
+			}
+
+  }
+?>
