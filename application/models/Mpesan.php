@@ -26,30 +26,7 @@ class Mpesan extends CI_Model {
     return $this->db->count_all("pesan");
   }
 
-  function savePesan($data,$upload_data){
-    $array = array(
-        'pesan' => $data['pesan'],
-        'gambar_pesan' => 'asset/gambar/pesan/'.$upload_data['orig_name'],
-        'id_user' => $this->session->userdata('idAdmin'),
-				'id_ruangpesan'=> 1,
-				'tanggal_pesan' => date('Y-m-d H:i:s')
-
-      );
-    $this->db->insert('pesan',$array);
-    return 1;
-  }
-    function editPesan($data,$upload_data,$id){
-      $array = array(
-        'pesan' => $data['pesan']
-        	);
-
-			if($upload_data!=false){
-				$array['gambar_pesan'] = 'asset/gambar/pesan/'.$upload_data['orig_name'];
-			}
-      $this->db->where('id_pesan',$id);
-      $this->db->update('pesan',$array);
-      return 1;
-    }
+  
 
 		function fetchPesanSearch($data) {
 			$this->db->like($data['by'],$data['search']);

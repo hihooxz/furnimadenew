@@ -37,39 +37,39 @@
         <span class="label label-primary pull-right"></span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="<?php echo base_url('adminpanel/user/tambah_user') ?>"><i class="fa fa-circle-o"></i> Tambah user</a></li>
-        <li><a href="<?php echo base_url('adminpanel/user/lihat_user') ?>"><i class="fa fa-circle-o"></i> Lihat Semua user</a></li>
+        <li><a href="<?php echo base_url('adminpanel/user/tambah-user') ?>"><i class="fa fa-circle-o"></i> Tambah user</a></li>
+        <li><a href="<?php echo base_url('adminpanel/user/lihat-user') ?>"><i class="fa fa-circle-o"></i> Lihat Semua user</a></li>
       </ul>
     </li>
     <li>
-      <a href="pages/widgets.html">
+      <a href="#">
         <i class="fa fa-th"></i> <span>Produk</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="<?php echo base_url('adminpanel/produk/tambah_produk') ?>"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
-          <li><a href="<?php echo base_url('adminpanel/produk/lihat_produk') ?>"><i class="fa fa-circle-o"></i> Lihat Semua Produk</a></li>
-          <li><a href="<?php echo base_url('adminpanel/produk/tambah_kategori') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori</a></li>
-          <li><a href="<?php echo base_url('adminpanel/produk/lihat_kategori') ?>"><i class="fa fa-circle-o"></i> Lihat Semua Kategori</a></li>
-        </ul>
-    </li>
-    
-    <li>
-      <a href="pages/widgets.html">
-        <i class="fa fa-newspaper-o"></i> <span>Blog</span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="<?php echo base_url('adminpanel/blog/tambah_blog') ?>"><i class="fa fa-circle-o"></i> Tambah Blog</a></li>
-          <li><a href="<?php echo base_url('adminpanel/blog/lihat_blog') ?>"><i class="fa fa-circle-o"></i> Lihat Blog</a></li>
+          <li><a href="<?php echo base_url('adminpanel/produk/tambah-produk') ?>"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
+          <li><a href="<?php echo base_url('adminpanel/produk/lihat-produk') ?>"><i class="fa fa-circle-o"></i> Lihat Semua Produk</a></li>
+          <li><a href="<?php echo base_url('adminpanel/produk/tambah-kategori') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori</a></li>
+          <li><a href="<?php echo base_url('adminpanel/produk/lihat-kategori') ?>"><i class="fa fa-circle-o"></i> Lihat Semua Kategori</a></li>
         </ul>
     </li>
 
     <li>
-      <a href="pages/widgets.html">
+      <a href="#">
+        <i class="fa fa-newspaper-o"></i> <span>Blog</span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="<?php echo base_url('adminpanel/blog/tambah-blog') ?>"><i class="fa fa-circle-o"></i> Tambah Blog</a></li>
+          <li><a href="<?php echo base_url('adminpanel/blog/lihat-blog') ?>"><i class="fa fa-circle-o"></i> Lihat Blog</a></li>
+        </ul>
+    </li>
+
+    <li>
+      <a href="#">
         <i class="fa fa-th"></i> <span>Pesan</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="<?php echo base_url('adminpanel/pesan/tambah_pesan') ?>"><i class="fa fa-circle-o"></i> Tambah Pesan</a></li>
-          <li><a href="<?php echo base_url('adminpanel/pesan/lihat_pesan') ?>"><i class="fa fa-circle-o"></i> Lihat Pesan</a></li>
+          <li><a href="<?php echo base_url('adminpanel/pesan/tambah-pesan') ?>"><i class="fa fa-circle-o"></i> Tambah Pesan</a></li>
+          <li><a href="<?php echo base_url('adminpanel/pesan/lihat-pesan') ?>"><i class="fa fa-circle-o"></i> Lihat Pesan</a></li>
         </ul>
     </li>
 
