@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Furnimade</title>
+  <link href="asset/asset_index/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn|Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="asset/asset_index/fa/css/font-awesome.min.css">
+    <link rel="stylesheet" href="asset/asset_index/bootstrap/js/jquery.min.js">
+    <link rel="stylesheet" href="asset/asset_index/bootstrap/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="asset/default.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){ 
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+    if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script> 
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="fur-topbar hidden-xs">
+
+      <div class="row text-center">
+        <div class="col-md-5 col-sm-5 hidden-xs" style="padding-top:5px">
+          <a href="#">TENTANG KAMI</a>
+          <a href="#">FAQ's</a>
+          <a href="#">BLOG</a>
+          <a href="#">SYARAT & KETENTUAN</a>
+          <a href="#">PARTNER</a>
+          <a href="#">GABUNG SEBAGAI SUPPLIER</a>
+        </div>
+        <div class="col-md-5 col-sm-5 hidden-xs"></div>
+        <div class="col-md-2 col-sm-5 hidden-xs" style="font-size:20px">
+          <a href="#"><i class="fa fa-facebook-square fa-fw"></i></a>
+          <a href="#"><i class="fa fa-twitter-square fa-fw"></i></a>
+          <a href="#"><i class="fa fa-instagram fa-fw"></i></a>
+          <a href="#"><i class="fa fa-google-plus fa-fw"></i></a>
+          <a href="#"><i class="fa fa-pinterest-square fa-fw"></i></a>
+        </div>
+      </div>
+
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xs-12">
+        <img class="img-responsive" src="asset/images/logo.png">
+      </div>
+      <div class="col-md-4 hidden-xs fur-navbar">
+        <a href="#"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>
+        <a href="#"><b><i class="fa fa-pencil fa-fw"></i> Buat Furniture Impianmu</b></a>
+      </div>
+      <div class="col-md-4 hidden-xs">
+        <div class="col-md-9 fur-navbar">
+          <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search">
+            <span class="input-group-addon fur-btn-sa">
+              <button type="submit" class="button" style="background-color: transparent;">
+                <i class="fa fa-search fa-fw"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-3 text-center" style="margin-top:35px">
+          <a class="btn fur-btn-primary" data-toggle="modal" data-target="#loginModal" id="fur-btn-primary" href="#" role="button">Login</a>
+        </div>
+      </div>    
+    </div>
+  </div>
+  <div class="nav menu sf-menu responsive-menu superfish sf-js-enabled">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#fur-collapse-nav" id="#fur-collapse-nav" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+            <div class="collapse navbar-collapse" id="fur-collapse-nav">
+              <ul class="nav navbar-nav">
+                    <li><a href="#home">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ruang Tamu<span class="caret"></span></a>
+                      <ul class="dropdown-menu bpt-submenu">
+                        <li><a href="#">Bantal</a></li>
+                        <li><a href="#">Hiasan Dinding</a></li>
+                        <li><a href="#">Hiasan Lantai</a></li>
+                        <li><a href="#">Lampu Gantung</a></li>
+                        <li><a href="#">Lampu Lantai</a></li>
+                        <li><a href="#">Lantai</a></li>
+                        <li><a href="#">Sofa</a></li>
+                        <li><a href="#">Sofa Kasur</a></li>
+                        <li><a href="#">Tirai</a></li>
+                        <li><a href="#">Wallpaper</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#contact">Ruang Makan & Dapur</a></li>
+                    <li><a href="#contact">Kamar Tidur</a></li>
+                    <li><a href="#contact">Kamar Tidur Anak</a></li>
+                    <li><a href="#contact">Cari Inspirasi Ruangan</a></li>
+                  </ul>
+            </div>
+</nav>
+<div class="container" style="margin-bottom:70px">
+  <div class="modal-title text-center" style="margin-bottom:25px">
+        Sofa 1
+  </div>
+  <div class="row text-center btn-produk" style="margin-top:20px">
+  <span class="pull-right">Product by: <i class="fa fa-user fa-fw"></i> Iwen</span>
+    <div class="col-md-6 col-sm-4 col-xs-6">
+      <img class="img" width="250" height="180" src="asset/images/sofa1.jpg">
+    </div>
+
+    <div class="col-md-6 col-sm-8 col-xs-6 text-left">
+        <b>Spesifikasi Produk</b><br/>
+        Lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet
+    </div><br/>
+    <div class="produk-price cart-btn text-left row">
+        <span class="col-md-3"><i class="fa fa-tag fa-fw"></i> Rp 6,408,000</span>
+        <span class="col-md-3 text-center"><a href="#"><i class="fa fa-cart-plus fa-fw"></i>Add to Cart</a></span>
+    </div>
+  </div>
+</div>
+
+<div id="fur-bottom-footer">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <p>&copy; 2016 Furnimade All Rights Reserved</p>
+      <p>Developed By <a href="http://dzillaweb.com/">Dzilla Web</a></p>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+<div id="loginModal" class="modal fade in" role="dialog">
+  <div class="modal-dialog modal-lg product-modal">
+    <div class="modal-content flat text-center" style="border-radius:0px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fa fa-close fa-2x"></i>
+        </button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6" style="border-right:1px solid #e0e0e0">
+            <div class="input-group margin-bottom-sm form-group" style="border-radius:0px">
+              <span class="input-group-addon modal-fa"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" placeholder="Username">
+            </div>
+              <div class="input-group margin-bottom-sm form-group">
+              <span class="input-group-addon modal-fa"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
+                <input class="form-control" type="text" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <a href="#" style="color:#333">Forgot Password ?</a>
+            </div>
+            <button class="btn btn-md form-control fur-btn-primary" style="border-radius:0px">Login</button>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+        Belum punya akun ?
+         <a href="#"> Daftar Disini</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="asset/asset_index/bootstrap/js/jquery.min.js"></script>
+    <script src="asset/asset_index/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</body>
+</html>
