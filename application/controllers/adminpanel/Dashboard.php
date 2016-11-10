@@ -33,7 +33,8 @@ class Dashboard extends CI_Controller {
 			else{
 				$session = array(
 						'loginAdmin' => TRUE,
-						'idAdmin' => $data['id_user']
+						'idAdmin' => $data['id_user'],
+						'username' => $data['username']
 					);
 				$this->session->set_userdata($session);
 				return TRUE;
