@@ -61,22 +61,28 @@
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ruang Tamu<span class="caret"></span></a>
                       <ul class="dropdown-menu bpt-submenu">
-                        <li><a href="#">Bantal</a></li>
-                        <li><a href="#">Hiasan Dinding</a></li>
-                        <li><a href="#">Hiasan Lantai</a></li>
-                        <li><a href="#">Lampu Gantung</a></li>
-                        <li><a href="#">Lampu Lantai</a></li>
-                        <li><a href="#">Lantai</a></li>
-                        <li><a href="#">Sofa</a></li>
-                        <li><a href="#">Sofa Kasur</a></li>
-                        <li><a href="#">Tirai</a></li>
-                        <li><a href="#">Wallpaper</a></li>
+                        <?php
+                          $category = $this->mod->fetchDataWhere('kategori','id_parent',1);
+                          if($category!=FALSE){
+                            foreach ($category as $rows) {
+                              ?>
+                                <li><a href="<?php echo base_url('h/lihat-kategori/'.$rows->id_kategori.'/'.$this->mod->toAscii($rows->nama_kategori),'','-')?>"><?php echo $rows->nama_kategori?></a></li>
+                              <?php
+                            }
+                          }
+                          else{
+                            ?>
+                              <li><i>No Data</i></li>
+                              <li></li>
+                            <?php
+                          }
+                        ?>
                       </ul>
                     </li>
                     <li><a href="#contact">Ruang Makan & Dapur</a></li>
                     <li><a href="#contact">Kamar Tidur</a></li>
                     <li><a href="#contact">Kamar Tidur Anak</a></li>
-                    <li><a href="#contact">Cari Inspirasi Ruangan</a></li>
+                    <!-- <li><a href="#contact">Cari Inspirasi Ruangan</a></li> -->
                   </ul>
             </div>
 </nav>
