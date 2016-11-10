@@ -9,7 +9,7 @@
 
 <br/>
   
-
+<?php $this->load->view('yellow/common/footer'); ?>
 <div id="loginModal" class="modal fade in" role="dialog">
   <div class="modal-dialog modal-lg product-modal">
     <div class="modal-content flat text-center" style="border-radius:0px">
@@ -47,7 +47,7 @@
   </div>
 </div>
 
-    <script src="asset/asset_index/bootstrap/js/jquery.min.js"></script>
-    <script src="asset/asset_index/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url('asset/asset_yellow/asset_index/bootstrap/js/jquery.min.js') ?>"></script>
+    <script src="<?php echo base_url('asset/asset_yellow/asset_index/bootstrap/js/bootstrap.min.js') ?>"></script>
 </body>
 </html>

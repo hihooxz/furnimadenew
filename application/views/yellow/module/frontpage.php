@@ -54,7 +54,7 @@
   <div class="row text-center" style="margin-top:20px">
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="asset/images/sofa_ketje.jpg">
+        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
       </a>
       <span class="label label-warning">
         <b>Rp 5,000,000</b>
@@ -63,7 +63,7 @@
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="asset/images/sofa_ketje.jpg">
+        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
       </a>
       <span class="label label-warning">
         <b>Rp 5,000,000</b>
@@ -72,7 +72,7 @@
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="asset/images/sofa_ketje.jpg">
+        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
       </a>
       <span class="label label-warning">
         <b>Rp 5,000,000</b>
@@ -81,7 +81,7 @@
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="asset/images/sofa_ketje.jpg">
+        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
       </a>
       <span class="label label-warning">
         <b>Rp 5,000,000</b>
@@ -90,7 +90,7 @@
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="asset/images/sofa_ketje.jpg">
+        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
       </a>
       <span class="label label-warning">
         <b>Rp 5,000,000</b>
@@ -99,7 +99,7 @@
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="asset/images/sofa_ketje.jpg">
+        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
       </a>
       <span class="label label-warning">
         <b>Rp 5,000,000</b>
@@ -120,37 +120,37 @@
   <div class="row text-center btn-produk" style="margin-top:20px">
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="asset/images/wallpaper.jpg">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/wallpaper.jpg')?>">
         <b>Wallpaper</b>
       </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="asset/images/lantai.jpg">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lantai.jpg')?>">
         <b>Lantai</b>
       </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="asset/images/hiasan.jpg">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/hiasan.jpg')?>">
         <b>Hiasan Lantai</b>
       </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="asset/images/tirai.jpg">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/tirai.jpg')?>">
         <b>Tirai</b>
       </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="asset/images/lampu_gantung.jpg">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_gantung.jpg')?>">
         <b>Lampu Gantung</b>
       </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6">
       <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="asset/images/lampu_lantai.jpg">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_lantai.jpg')?>">
         <b>Lampu Lantai</b>
       </a>
     </div>

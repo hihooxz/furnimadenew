@@ -24,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 col-xs-12">
-        <img class="img-responsive" src="asset/images/logo.png">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/logo.png')?>">
       </div>
       <div class="col-md-4 hidden-xs fur-navbar">
         <a href="#"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>

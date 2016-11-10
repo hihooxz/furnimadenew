@@ -6,10 +6,10 @@
             </ol>
             <div class="carousel-inner" role="listbox">
               <div class="item active">
-                <img src="asset/images/slide1.jpg" alt="First slide" height="600px">
+                <img src="<?php echo base_url('asset/asset_yellow/images/slide1.jpg')?>" alt="First slide" height="600px">
               </div>
               <div class="item">
-                <img src="asset/images/slide2.jpg" alt="Third slide" height="600px">
+                <img src="<?php echo base_url('asset/asset_yellow/images/slide2.jpg')?>" alt="Third slide" height="600px">
               </div>
             </div>
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
