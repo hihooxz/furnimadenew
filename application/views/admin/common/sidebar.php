@@ -3,11 +3,11 @@
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
     </div>
     <div class="pull-left info">
-      <p>Furnimade</p>
-      <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
+
     </div>
   </div>
   <!-- search form -->
@@ -65,7 +65,7 @@
 
     <li>
       <a href="#">
-        <i class="fa fa-th"></i> <span>Pesan</span>
+        <i class="fa fa-paper-plane-o"></i> <span>Pesan</span>
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo base_url('adminpanel/pesan/tambah-pesan') ?>"><i class="fa fa-circle-o"></i> Tambah Pesan</a></li>
