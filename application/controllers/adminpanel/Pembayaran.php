@@ -46,7 +46,7 @@ class Pembayaran extends CI_Controller {
 			$this->form_validation->set_rules('nama_bank','Nama Bank','required');
 			$this->form_validation->set_rules('atas_nama','Atas Nama','required');
 			$this->form_validation->set_rules('no_rekening','No Rekening','required|numeric');
-			
+
 			if(!$this->form_validation->run()){
 				$data['error'] = false;
 				$this->load->view('admin/index',$data);
@@ -73,7 +73,7 @@ class Pembayaran extends CI_Controller {
 			$data['title_web'] = 'Ubah Pembayaran | Adminpanel Furnimade';
 			$data['path_content'] = 'admin/Pembayaran/ubah_Pembayaran';
 			$id=$this->uri->segment(4);
-			$data['result']=$this->mod->getDataWhere('Pembayaran','id_Pembayaran',$id);
+			$data['result']=$this->mpbd->getDataWhere('Pembayaran','id_Pembayaran',$id);
 			if($data['result']==FALSE)
 				redirect(base_url('adminpanel/Pembayaran/lihat_Pembayaran'));
 
@@ -111,6 +111,110 @@ class Pembayaran extends CI_Controller {
 			$this->db->delete('pembayaran');
 			redirect(base_url($this->uri->segment(1).'/Pembayaran/lihat_pembayaran'));
 		}
+
+		function lihat_konfirmasi_pembayaran(){
+	    $data['title_web'] = 'Lihat Konfirmasi | Adminpanel Furnimade';
+	    $data['path_content'] = 'admin/pembayaran/lihat_konfirmasi_pembayaran';
+
+		$this->form_validation->set_rules('search','Search','required');
+
+			if(!$this->form_validation->run()){
+	    // Ngeload data
+	    $perpage = 10;
+	    $this->load->library('pagination'); // load libraray pagination
+	    $config['base_url'] = base_url($this->uri->segment(1).'/pembayaran/lihat-konfirmasi-pembayaran/'); // configurate link pagination
+	    $config['total_rows'] = $this->mod->countData('konfirmasi_pembayaran');// fetch total record in databae using load
+	    $config['per_page'] = $perpage; // Total data in one page
+	    $config['uri_segment'] = 4; // catch uri segment where locate in 4th posisition
+	    $choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
+	    $config['num_links'] = round($choice); // Rounding Choice Variable
+	    $config['use_page_numbers'] = TRUE;
+	    $config['full_tag_open'] = '<ul class="pagination">';
+	    $config['full_tag_close'] = '</ul>';
+	    $config['num_tag_open'] = '<li>';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="disabled"><a href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['next_tag_open'] = '<li>';
+	    $config['next_tag_close'] = '</li>';
+	    $this->pagination->initialize($config); // intialize var config
+	    $page = ($this->uri->segment(4))? $this->uri->segment(4) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+	    $data['results'] = $this->mpb->fetchKonfirmasiPembayaran($config['per_page'],$page,$this->uri->segment(5)); // fetch data using limit and pagination
+	    $data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
+	    $data['total_rows'] = $this->mod->countData('konfirmasi_pembayaran'); // Make a variable (array) link so the view can call the variable
+	    $this->load->view('admin/index',$data);
+			}
+			else{
+				$data['results'] = $this->mpb->fetchKonfirmasiPembayaranSearch($_POST); // fetch data using limit and pagination
+				$data['links'] = false;
+				$this->load->view('admin/index',$data);
+			}
+	  }
+
+		function status_done(){
+	  	$id=$this->uri->segment(4);
+			$data['result']=$this->mpb->getKonfirmasi($id);
+			if($data['result']==FALSE)
+				redirect(base_url($this->uri->segment(1).'/pembayaran/lihat_konfirmasi_pembayaran'));
+
+			$array = array(
+					'status' => 1
+				);
+			$this->db->where('id_konfirmasi_pembayaran',$id);
+			$this->db->update('konfirmasi_pembayaran',$array);
+
+			// sent email changed status
+			$this->mpb->changeStatusOrder(1,$data['result']);
+
+			redirect(base_url($this->uri->segment(1).'/pembayaran/lihat_konfirmasi_pembayaran'));
+	  }
+
+		function status_pending(){
+			$id=$this->uri->segment(4);
+			$data['result']=$this->mpb->getKonfirmasi($id);
+			if($data['result']==FALSE)
+				redirect(base_url($this->uri->segment(1).'/pembayaran/lihat_konfirmasi_pembayaran'));
+
+			$array = array(
+					'status' => 2
+				);
+			$this->db->where('id_konfirmasi_pembayaran',$id);
+			$this->db->update('konfirmasi_pembayaran',$array);
+
+			// sent email changed status
+			$this->mpb->changeStatusOrder(2,$data['result']);
+
+			redirect(base_url($this->uri->segment(1).'/pembayaran/lihat_konfirmasi_pembayaran'));
+	  }
+
+		function ubah_konfirmasi_pembayaran(){
+				$data['title_web'] = 'Edit konfirmasi pembayaran | Adminpanel Furnimade';
+				$data['path_content'] = 'admin/pembayaran/ubah_konfirmasi_pembayaran';
+				$id=$this->uri->segment(4);
+				$data['result']=$this->mpb->getKonfirmasi($id);
+				if($data['result']==FALSE)
+					redirect(base_url('adminpanel/pembayaran/lihat_konfirmasi_pembayaran'));
+
+					$this->form_validation->set_rules('status','Status','required');
+
+	        if(!$this->form_validation->run()){
+	          $this->load->view('admin/index',$data);
+	        }
+	        else{
+	          $save = $this->mpb->editKonfirmasi($_POST,$id);
+	          redirect(base_url($this->uri->segment(1).'/pembayaran/lihat_konfirmasi_pembayaran'));
+	        }
+		}
+
+		function hapus_konfirmasi_pembayaran(){
+			$id = $this->uri->segment(4);
+			$this->db->where('id_konfirmasi_pembayaran',$id);
+			$this->db->delete('konfirmasi_pembayaran');
+			redirect(base_url($this->uri->segment(1).'/pembayaran/lihat_konfirmasi_pembayaran'));
+		}
+
   }
 
 ?>

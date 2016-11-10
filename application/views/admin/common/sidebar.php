@@ -55,11 +55,12 @@
 
     <li>
       <a href="#">
-        <i class="fa fa-university"></i> <span>Pembayaran</span>
+        <i class="fa fa-usd"></i> <span>Pembayaran</span>
         </a>
         <ul class="treeview-menu">
           <li><a href="<?php echo base_url('adminpanel/pembayaran/tambah-pembayaran') ?>"><i class="fa fa-circle-o"></i> Tambah Pembayaran</a></li>
           <li><a href="<?php echo base_url('adminpanel/pembayaran/lihat-pembayaran') ?>"><i class="fa fa-circle-o"></i> Lihat Pembayaran</a></li>
+          <li><a href="<?php echo base_url('adminpanel/pembayaran/lihat-konfirmasi-pembayaran') ?>"><i class="fa fa-circle-o"></i> Lihat konfirmasi Pembayaran</a></li>
         </ul>
     </li>
 

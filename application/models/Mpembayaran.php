@@ -34,7 +34,7 @@ class Mpembayaran extends CI_Model {
 
 
       );
-    $this->db->insert('Pembayaran',$array);
+    $this->db->insert('pembayaran',$array);
     return 1;
   }
     function editPembayaran($data,$upload_data,$id){
@@ -47,7 +47,7 @@ class Mpembayaran extends CI_Model {
 			if($upload_data!=false){
 				$array['gambar_bank'] = 'asset/gambar/pembayaran/'.$upload_data['orig_name'];
 			}
-      $this->db->where('id_Pembayaran',$id);
+      $this->db->where('id_pembayaran',$id);
       $this->db->update('pembayaran',$array);
       return 1;
     }
@@ -61,6 +61,67 @@ class Mpembayaran extends CI_Model {
 	    }
 	    else return FALSE;
 		}
+		function fetchKonfirmasiPembayaran($limit,$start,$pagenumber) {
+
+	    if($pagenumber!="")
+	      $this->db->limit($limit,($pagenumber*$limit)-$limit);
+	    else
+	      $this->db->limit($limit,$start);
+			$this->db->join('pembayaran','konfirmasi_pembayaran.id_pembayaran = pembayaran.id_pembayaran');
+			$this->db->join('user','konfirmasi_pembayaran.id_user = user.id_user');
+	    $this->db->order_by('tanggal_transfer','ASC');
+	    $query = $this->db->get('konfirmasi_pembayaran');
+	    if($query->num_rows()>0){
+	      return $query->result();
+	    }
+	    else return FALSE;
+	  }
+	  function countAllKonfirmasiPembayaran() {
+	    return $this->db->count_all("konfirmasi_pembayaran");
+	  }
+
+
+	    function editKonfirmasi($data,$id){
+	      $array = array(
+					'status' => $data['status']
+
+	        	);
+
+
+	      $this->db->where('id_konfirmasi_pembayaran',$id);
+	      $this->db->update('konfirmasi_pembayaran',$array);
+	      return 1;
+	    }
+
+			function fetchKonfirmasiPembayaranSearch($data) {
+				$this->db->like($data['by'],$data['search']);
+				$this->db->order_by('tanggal_transfer','ASC');
+		    $query = $this->db->get('konfirmasi_pembayaran');
+		    if($query->num_rows()>0){
+		      return $query->result();
+		    }
+		    else return FALSE;
+			}
+
+			function getKonfirmasi($id) {
+
+				$this->db->join('pembayaran','konfirmasi_pembayaran.id_pembayaran = pembayaran.id_pembayaran');
+				$this->db->join('user','konfirmasi_pembayaran.id_user = user.id_user');
+		    $this->db->order_by('tanggal_transfer','ASC');
+				$this->db->where('id_konfirmasi_pembayaran',$id);
+				$query = $this->db->get('konfirmasi_pembayaran');
+				if($query->num_rows()>0){
+					return $query->row_array();
+				}
+				else return FALSE;
+			}
+			function changeStatusOrder($status,$data){
+		    $status_pembayaran = "";
+		    if($status == 1)
+		      $status_pembayaran = "Done";
+		    else if($status == 2)
+		      $status_pembayaran = "Pending";
+		  }
 
 
 }
