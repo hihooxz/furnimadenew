@@ -1,12 +1,44 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Halaman extends CI_Controller {
+class Hal extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('muser');
 		$this->load->model('mproduk');
 		$this->load->model('mblog');
+	}
+	function login(){
+		$data['title_web'] = 'Masuk ke Halaman Member | Furnimade';
+		$data['path_content'] = 'yellow/module/login';
+
+		$this->form_validation->set_rules('username','Username','required');
+		$this->form_validation->set_rules('password','Password','required|callback_validLoginMember');
+
+		if(!$this->form_validation->run())
+			$this->load->view('yellow/index',$data);
+		else{
+			redirect(base_url('user/profil'));
+		}
+	}
+	function validLoginMember(){
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$result = $this->muser->validLoginCustomer($username,$password);
+		if($result != FALSE){
+			$array = array(
+					'loginMember' => TRUE,
+					'idUser' => $result['id_user'],
+					'username' => $result['username'],
+					'hakAkses' => $result['hak_akses']
+				);
+			$this->session->set_userdata($array);
+			return TRUE;
+		}
+		else{
+			$this->form_validation->set_message('validLoginMember','Username atau Password Tidak Ditemukan');
+			return FALSE;
+		}
 	}
 	function cari_inspirasi(){
 		$data['title_web'] = 'Cari Inspirasi | Furnimade';
@@ -26,52 +58,33 @@ class Halaman extends CI_Controller {
 
 		$this->load->view('default/index',$data);
 	}
-	function lihat_blog(){
+	function blog(){
 		$data['title_web'] = 'Lihat Blog | Furnimade';
-		$data['path_content'] = 'default/module/lihat_blog';
-		$id=$this->uri->segment(3);
-		$data['result']=$this->mblog->getLihatBlog($id);
-
+		$data['path_content'] = 'yellow/module/blog';
 
 		$perpage = 10;
 		$this->load->library('pagination'); // load libraray pagination
-		$config['base_url'] = base_url('module/lihat-blog/'.$id.'/'); // configurate link pagination
+		$config['base_url'] = base_url('hal/blog/'); // configurate link pagination
 		$config['total_rows'] = $this->mod->countData('blog');// fetch total record in databae using load
 		$config['per_page'] = $perpage; // Total data in one page
-		$config['uri_segment'] = 4; // catch uri segment where locate in 4th posisition
+		$config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
 		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
 		$config['num_links'] = round($choice); // Rounding Choice Variable
 		$config['use_page_numbers'] = TRUE;
 		$this->pagination->initialize($config); // intialize var config
-		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-		$data['results'] = $this->mblog->fetchLihatBlogMember($config['per_page'],$page,$this->uri->segment(4),$id); // fetch data using limit and pagination
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+		$data['results'] = $this->mblog->fetchLihatBlogMember($config['per_page'],$page,$this->uri->segment(3)); // fetch data using limit and pagination
 		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
 		$data['total_rows'] = $this->mod->countData('blog'); // Make a variable (array) link so the view can call the variable
-		$this->load->view('default/index',$data);
+		$this->load->view('yellow/index',$data);
 
 	}
 	function baca_blog(){
 		$data['title_web'] = 'Baca Blog | Furnimade';
-		$data['path_content'] = 'default/module/baca_blog';
+		$data['path_content'] = 'yellow/module/baca_blog';
 		$id = $this->uri->segment(3);
 		$data['result']=$this->mblog->getLihatBlog($id);
-
-
-		$perpage = 10;
-		$this->load->library('pagination'); // load libraray pagination
-		$config['base_url'] = base_url('module/lihat-blog/'.$id.'/'); // configurate link pagination
-		$config['total_rows'] = $this->mod->countData('blog');// fetch total record in databae using load
-		$config['per_page'] = $perpage; // Total data in one page
-		$config['uri_segment'] = 4; // catch uri segment where locate in 4th posisition
-		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
-		$config['num_links'] = round($choice); // Rounding Choice Variable
-		$config['use_page_numbers'] = TRUE;
-		$this->pagination->initialize($config); // intialize var config
-		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-		$data['results'] = $this->mblog->fetchLihatBlogMember($config['per_page'],$page,$this->uri->segment(4),$id); // fetch data using limit and pagination
-		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
-		$data['total_rows'] = $this->mod->countData('blog'); // Make a variable (array) link so the view can call the variable
-		$this->load->view('default/index',$data);
+		$this->load->view('yellow/index',$data);
 
 	}
 
@@ -188,38 +201,7 @@ class Halaman extends CI_Controller {
 		$data['finishing'] = $message;
 		echo json_encode($data);
 	}*/
-	function login(){
-		$data['title_web'] = 'Masuk ke Halaman Member | Furnimade';
-		$data['path_content'] = 'default/module/login';
-
-		$this->form_validation->set_rules('username','Username','required');
-		$this->form_validation->set_rules('password','Password','required|callback_validLoginMember');
-
-		if(!$this->form_validation->run())
-			$this->load->view('default/index',$data);
-		else{
-			redirect(base_url('module/profil'));
-		}
-	}
-	function validLoginMember(){
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-		$result = $this->muser->validLoginCustomer($username,$password);
-		if($result != FALSE){
-			$array = array(
-					'loginMember' => TRUE,
-					'idUser' => $result['id_user'],
-					'username' => $result['username'],
-					'hakAkses' => $result['hak_akses']
-				);
-			$this->session->set_userdata($array);
-			return TRUE;
-		}
-		else{
-			$this->form_validation->set_message('validLoginMember','Username atau Password Tidak Ditemukan');
-			return FALSE;
-		}
-	}
+	
 	function login_supplier(){
 		$data['title_web'] = 'Masuk ke Halaman Supplier | Furnimade';
 		$data['path_content'] = 'default/module/login_supplier';
@@ -254,7 +236,7 @@ class Halaman extends CI_Controller {
 	}
 	function daftar(){
 		$data['title_web'] = 'Daftar Halaman Member | Furnimade';
-		$data['path_content'] = 'default/module/daftar';
+		$data['path_content'] = 'yellow/module/daftar';
 
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
@@ -263,14 +245,14 @@ class Halaman extends CI_Controller {
 
 
 		if(!$this->form_validation->run())
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		else{
 			$data['save'] = $this->muser->daftarCustomer($_POST);
 			$array = array(
 					'post' => TRUE
 				);
 			$this->session->set_flashdata($array);
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		}
 	}
 	function daftar_supplier(){

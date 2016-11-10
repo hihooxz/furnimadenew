@@ -5,7 +5,7 @@
         <div class="col-md-5 col-sm-5 hidden-xs" style="padding-top:5px">
           <a href="#">TENTANG KAMI</a>
           <a href="#">FAQ's</a>
-          <a href="#">BLOG</a>
+          <a href="<?php echo base_url('hal/blog/'); ?>">BLOG</a>
           <a href="#">SYARAT & KETENTUAN</a>
           <a href="#">PARTNER</a>
           <a href="#">GABUNG SEBAGAI SUPPLIER</a>
@@ -27,8 +27,8 @@
         <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/logo.png')?>">
       </div>
       <div class="col-md-4 hidden-xs fur-navbar">
-        <a href="#"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>
-        <a href="#"><b><i class="fa fa-pencil fa-fw"></i> Buat Furniture Impianmu</b></a>
+        <a href="<?php echo base_url('produk/katalog/')?>"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>
+        <a href="<?php echo base_url('hal/furniture-impian/')?>"><b><i class="fa fa-pencil fa-fw"></i> Buat Furniture Impianmu</b></a>
       </div>
       <div class="col-md-4 hidden-xs">
         <div class="col-md-9 fur-navbar">
@@ -66,7 +66,7 @@
                           if($category!=FALSE){
                             foreach ($category as $rows) {
                               ?>
-                                <li><a href="<?php echo base_url('h/lihat-kategori/'.$rows->id_kategori.'/'.$this->mod->toAscii($rows->nama_kategori),'','-')?>"><?php echo $rows->nama_kategori?></a></li>
+                                <li><a href="<?php echo base_url('produk/kategori/'.$rows->id_kategori.'/'.$this->mod->toAscii($rows->nama_kategori,'','-'))?>"><?php echo $rows->nama_kategori?></a></li>
                               <?php
                             }
                           }
@@ -79,9 +79,65 @@
                         ?>
                       </ul>
                     </li>
-                    <li><a href="#contact">Ruang Makan & Dapur</a></li>
-                    <li><a href="#contact">Kamar Tidur</a></li>
-                    <li><a href="#contact">Kamar Tidur Anak</a></li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Ruang Makan & Dapur<span class="caret"></span></a>
+                      <ul class="dropdown-menu bpt-submenu">
+                        <?php
+                          $category = $this->mod->fetchDataWhere('kategori','id_parent',2);
+                          if($category!=FALSE){
+                            foreach ($category as $rows) {
+                              ?>
+                                <li><a href="<?php echo base_url('produk/kategori/'.$rows->id_kategori.'/'.$this->mod->toAscii($rows->nama_kategori,'','-'))?>"><?php echo $rows->nama_kategori?></a></li>
+                              <?php
+                            }
+                          }
+                          else{
+                            ?>
+                              <li><i>No Data</i></li>
+                              <li></li>
+                            <?php
+                          }
+                        ?>
+                      </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Kamar Tidur<span class="caret"></span></a>
+                      <ul class="dropdown-menu bpt-submenu">
+                        <?php
+                          $category = $this->mod->fetchDataWhere('kategori','id_parent',8);
+                          if($category!=FALSE){
+                            foreach ($category as $rows) {
+                              ?>
+                                <li><a href="<?php echo base_url('produk/kategori/'.$rows->id_kategori.'/'.$this->mod->toAscii($rows->nama_kategori,'','-'))?>"><?php echo $rows->nama_kategori?></a></li>
+                              <?php
+                            }
+                          }
+                          else{
+                            ?>
+                              <li><i>No Data</i></li>
+                              <li></li>
+                            <?php
+                          }
+                        ?>
+                      </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Kamar Tidur Anak<span class="caret"></span></a>
+                      <ul class="dropdown-menu bpt-submenu">
+                        <?php
+                          $category = $this->mod->fetchDataWhere('kategori','id_parent',9);
+                          if($category!=FALSE){
+                            foreach ($category as $rows) {
+                              ?>
+                                <li><a href="<?php echo base_url('hal/lihat-kategori/'.$rows->id_kategori.'/'.$this->mod->toAscii($rows->nama_kategori,'','-'))?>"><?php echo $rows->nama_kategori?></a></li>
+                              <?php
+                            }
+                          }
+                          else{
+                            ?>
+                              <li><a href="#"><i>No Data</i></a></li>
+                            <?php
+                          }
+                        ?>
+                      </ul>
+                    </li>
                     <!-- <li><a href="#contact">Cari Inspirasi Ruangan</a></li> -->
                   </ul>
             </div>

@@ -8,10 +8,10 @@ class Produk extends CI_Controller {
 	}
 	function katalog(){
 		$data['title_web'] = 'Katalog Produk | Furnimade';
-		$data['path_content'] = 'default/module/katalog';
+		$data['path_content'] = 'yellow/module/katalog';
 
 		$data['results'] = $this->mod->fetchAllData('kategori');
-		$this->load->view('default/index',$data);
+		$this->load->view('yellow/index',$data);
 	}
 	function kategori(){
 		$id = $this->uri->segment(3);

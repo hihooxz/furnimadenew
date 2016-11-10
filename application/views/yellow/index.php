@@ -41,7 +41,7 @@
       </div>
       <div class="modal-footer text-center">
         Belum punya akun ?
-         <a href="#"> Daftar Disini</a>
+         <a href="<?php echo base_url('hal/daftar')?>"> Daftar Disini</a>
       </div>
     </div>
   </div>
