@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 09 Nov 2016 pada 10.11
+-- Generation Time: 10 Nov 2016 pada 06.25
 -- Versi Server: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `fm_kategori` (
   `nama_kategori` varchar(100) NOT NULL,
   `keterangan_kategori` longtext NOT NULL,
   `gambar_kategori` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `fm_kategori`
@@ -106,8 +106,30 @@ CREATE TABLE IF NOT EXISTS `fm_kategori` (
 INSERT INTO `fm_kategori` (`id_kategori`, `id_parent`, `nama_kategori`, `keterangan_kategori`, `gambar_kategori`) VALUES
 (1, 0, 'Ruang Tamu', 'kuat', ''),
 (2, 0, 'Ruang Makan dan Dapur', '', ''),
-(3, 0, 'Kamar Tidur', '', ''),
-(4, 3, 'Rak', 'Kabinet', 'asset/gambar/produk/catKidsRoom1.jpg');
+(3, 1, 'Sofa & Kursi', '', ''),
+(5, 1, 'Rak TV & Solusi media', '', ''),
+(6, 1, 'Penyimpanan Ruang Keluarga', '', ''),
+(7, 1, 'Meja Tamu & Meja Samping', '', ''),
+(8, 0, 'Kamar Tidur', '', ''),
+(9, 0, 'Kamar Tidur Anak', '', ''),
+(10, 2, 'Meja Makan', '', ''),
+(11, 2, 'Meja Samping', '', ''),
+(12, 2, 'Set Meja Makan', '', ''),
+(13, 2, 'Meja Kerja', '', ''),
+(14, 2, 'Kursi', '', ''),
+(15, 2, 'Kursi Makan', '', ''),
+(16, 2, 'Kursi Gantung', '', ''),
+(17, 2, 'Kursi Armchair', '', ''),
+(18, 8, 'Meja TV', '', ''),
+(19, 8, 'Rak', '', ''),
+(20, 8, 'Kabinet', '', ''),
+(21, 8, 'Lemari Meja Samping', '', ''),
+(22, 8, 'Lemari Pakaian', '', ''),
+(23, 8, 'Tempat Tidur Single', '', ''),
+(24, 8, 'Tempat Tidur Double', '', ''),
+(25, 8, 'Matras', '', ''),
+(26, 8, 'Meja Samping Tempat Tidur', '', ''),
+(27, 8, 'Lemari Pakaian', '', '');
 
 -- --------------------------------------------------------
 
@@ -173,7 +195,14 @@ CREATE TABLE IF NOT EXISTS `fm_pembayaran` (
   `atas_nama` varchar(100) NOT NULL,
   `no_rekening` varchar(20) NOT NULL,
   `gambar_bank` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `fm_pembayaran`
+--
+
+INSERT INTO `fm_pembayaran` (`id_pembayaran`, `nama_bank`, `atas_nama`, `no_rekening`, `gambar_bank`) VALUES
+(1, 'BCA', 'Irwinn', '60012930219', 'asset/gambar/pembayaran/bca-bank-logo.png');
 
 -- --------------------------------------------------------
 
@@ -430,7 +459,7 @@ ALTER TABLE `fm_gambar_produk`
 -- AUTO_INCREMENT for table `fm_kategori`
 --
 ALTER TABLE `fm_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `fm_konfigurasi`
 --
@@ -450,7 +479,7 @@ ALTER TABLE `fm_konfirmasi_pengerjaan`
 -- AUTO_INCREMENT for table `fm_pembayaran`
 --
 ALTER TABLE `fm_pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `fm_pesan`
 --

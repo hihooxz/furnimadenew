@@ -172,6 +172,25 @@ class Mproduk extends CI_Model {
 				}
 				else return FALSE;
 			}
+			function getKategori($id){
+				$result = $this->mod->getDataWhere('kategori','id_kategori',$id);
+				if($result['parent_kategori'] == 0){
+					$this->db->where('id_kategori',$id);
+				    $query = $this->db->get('kategori');
+				}
+				else{
+					$sql = "select fm_kategori.*,table_kategori.nama_kategori as nama_parent
+					FROM
+					fm_kategori
+					JOIN (select * from fm_kategori) as table_kategori ON fm_kategori.id_parent = table_kategori.id_kategori
+					";
+					$query = $this->db->query($sql);
+				}
+				if($query->num_rows()>0){
+				    return $query->row_array();
+				}
+				else return FALSE;
+			}
 
   }
 ?>

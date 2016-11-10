@@ -44,7 +44,16 @@
       <!-- text input -->
       <div class="form-group">
         <label>Parent Kategori</label>
-        <input type="text" class="form-control" name="id_parent" value="<?php echo $result['id_parent']?>" id="parentKategori">
+        <?php
+        $options = array(''=>'Pilih Parent');
+          if($parent != FALSE){
+            foreach ($parent as $rows) {
+              $options[$rows->id_kategori] = $rows->nama_kategori;
+            }
+          }
+          echo form_dropdown('id_parent',$options,$result['id_parent'],'class="form-control"');
+
+        ?>
       </div>
       <div class="form-group">
         <label>Nama Kategori</label>

@@ -161,7 +161,7 @@ class Produk extends CI_Controller {
 			$data['parent'] = $this->mp->fetchAllParent();
 			$this->form_validation->set_rules('nama_kategori','Nama Kategori','required');
 			$this->form_validation->set_rules('id_parent','Parent','required');
-			$this->form_validation->set_rules('keterangan_kategori','Keterangan Kategori','required');
+			$this->form_validation->set_rules('keterangan_kategori','Keterangan Kategori');
 
 			if(!$this->form_validation->run()){
 				$data['error'] = false;
@@ -198,7 +198,7 @@ class Produk extends CI_Controller {
 
 				$this->form_validation->set_rules('nama_kategori','Nama Kategori','required');
 				$this->form_validation->set_rules('id_parent','Parent','required');
-				$this->form_validation->set_rules('keterangan_kategori','Keterangan Kategori','required');
+				$this->form_validation->set_rules('keterangan_kategori','Keterangan Kategori');
 				if(!$this->form_validation->run()){
 					$this->load->view('admin/index',$data);
 				}

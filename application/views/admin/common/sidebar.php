@@ -55,6 +55,16 @@
 
     <li>
       <a href="#">
+        <i class="fa fa-university"></i> <span>Pembayaran</span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="<?php echo base_url('adminpanel/pembayaran/tambah-pembayaran') ?>"><i class="fa fa-circle-o"></i> Tambah Pembayaran</a></li>
+          <li><a href="<?php echo base_url('adminpanel/pembayaran/lihat-pembayaran') ?>"><i class="fa fa-circle-o"></i> Lihat Pembayaran</a></li>
+        </ul>
+    </li>
+
+    <li>
+      <a href="#">
         <i class="fa fa-newspaper-o"></i> <span>Blog</span>
         </a>
         <ul class="treeview-menu">
