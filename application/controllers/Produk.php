@@ -17,26 +17,28 @@ class Produk extends CI_Controller {
 		$id = $this->uri->segment(3);
 		$kategori = $this->mod->getDataWhere('kategori','id_kategori',$id);
 		$data['result'] = $kategori;
+		if($kategori == FALSE)
+			redirect(base_url('produk/katalog'));
 
 		$data['title_web'] = 'Lihat Katalog '.$kategori['nama_kategori'].' | Furnimade';
-		$data['path_content'] = 'default/module/kategori';
+		$data['path_content'] = 'yellow/module/kategori';
 
 		// Ngeload data
 	    $perpage = 16;
 	    $this->load->library('pagination'); // load libraray pagination
-	    $config['base_url'] = base_url('/produk/kategori/'.$id.'/'); // configurate link pagination
-	    $config['total_rows'] = $this->mp->countProdukKategori($id);// fetch total record in databae using load
+	    $config['base_url'] = base_url('produk/kategori/'.$id.'/'.$this->mod->toAscii($kategori['nama_kategori'],'','-')); // configurate link pagination
+	    $config['total_rows'] = $this->mod->countWhereData('produk','id_kategori',$id);// fetch total record in databae using load
 	    $config['per_page'] = $perpage; // Total data in one page
-	    $config['uri_segment'] = 4; // catch uri segment where locate in 4th posisition
+	    $config['uri_segment'] = 5; // catch uri segment where locate in 4th posisition
 	    $choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
 	    $config['num_links'] = round($choice); // Rounding Choice Variable
 	    $config['use_page_numbers'] = TRUE;
     	$this->pagination->initialize($config); // intialize var config
-    	$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-    	$data['results'] = $this->mp->fetchProdukKategori($config['per_page'],$page,$this->uri->segment(4),$this->uri->segment(3)); // fetch data using limit and pagination
+    	$page = ($this->uri->segment(5))? $this->uri->segment(5) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+    	$data['results'] = $this->mp->fetchProdukKategori($config['per_page'],$page,$this->uri->segment(5),$this->uri->segment(3)); // fetch data using limit and pagination
     	$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
-    	$data['total_rows'] = $this->mp->countProdukKategori($id); // Make a variable (array) link so the view can call the variable
-		$this->load->view('default/index',$data);
+    	$data['total_rows'] = $this->mod->countWhereData('produk','id_kategori',$id); // Make a variable (array) link so the view can call the variable
+		$this->load->view('yellow/index',$data);
 	}
 	function lihat_produk(){
 		$data['title_web'] = 'Lihat Produk |  Furnimade';

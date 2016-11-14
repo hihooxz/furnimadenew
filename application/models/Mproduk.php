@@ -202,6 +202,20 @@ class Mproduk extends CI_Model {
 				}
 				else return FALSE;
 			}
+	function fetchProdukKategori($limit,$start,$pagenumber,$id) {
 
+			if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+
+			$this->db->where('id_kategori',$id);
+			$this->db->order_by('tanggal_produk','DESC');
+			$query = $this->db->get('produk');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;
+		}
   }
 ?>
