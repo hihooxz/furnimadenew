@@ -172,6 +172,30 @@ class Mproduk extends CI_Model {
 				}
 				else return FALSE;
 			}
+
+			function fetchAllKategori(){
+				$this->db->where('id_parent !=',0);
+				$this->db->order_by('nama_kategori','ASC');
+				$query = $this->db->get('kategori');
+				if($query->num_rows()>0){
+					return $query->result();
+				}
+				else return FALSE;
+			}
+
+			function unggahproduk($data,$upload_data){
+				$array = array(
+						'id_kategori' => $data['id_kategori'],
+						'nama_produk' =>$data['nama_produk'],
+						'harga_produk' => $data['harga_produk'],
+						'deskripsi_produk' =>$data['deskripsi_produk'],
+						'gambar_produk' => 'asset/gambar/produk/'.$upload_data['file_name'],
+						'id_penjual' => $this->session->userdata('idUser'),
+						'tanggal_produk' => date('Y-m-d H:i:s')
+					);
+				$this->db->insert('produk',$array);
+				return 1;
+			}
 			// function getKategori($id){
 			// 	$result = $this->mod->getDataWhere('kategori','id_kategori',$id);
 			// 	if($result['parent_kategori'] == 0){

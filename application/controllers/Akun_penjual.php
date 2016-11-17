@@ -65,8 +65,8 @@ class Akun_penjual extends CI_Controller {
 	function unggah_produk(){
 		$data['title_web'] = 'Unggah Produk| Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/unggah_produk';
-
-		$this->form_validation->set_rules('kategori','Nama Kategori','required');
+		$data['kategori'] = $this->mp->fetchAllKategori();
+		$this->form_validation->set_rules('id_kategori','Nama Kategori','required');
 		$this->form_validation->set_rules('nama_produk','Nama Produk','required');
 		$this->form_validation->set_rules('harga_produk','Harga Produk','required|numeric');
 		$this->form_validation->set_rules('deskripsi_produk','Deskripsi Produk','required');
@@ -82,13 +82,14 @@ class Akun_penjual extends CI_Controller {
 			$this->load->library('upload', $config);
 				if ( ! $this->upload->do_upload()){
 					$data['error'] = $this->upload->display_errors();
-					$this->load->view('yellow/index',$data);	
+					$this->load->view('yellow/index',$data);
 				}
 				else{
-					$data['save'] = $this->mproduk->unggahProduk($_POST,$this->upload->data());
-					$this->load->view('yellow/index',$data);	
+						$this->session->set_flashdata(array('success_form'=>TRUE));
+					$data['save'] = $this->mp->unggahProduk($_POST,$this->upload->data());
+					$this->load->view('yellow/index',$data);
 				}
-			$data['save'] = $this->mproduk->unggahProduk($_POST);
+
 		}
 	}
 	function logout(){
