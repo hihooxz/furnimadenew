@@ -120,6 +120,74 @@
     </div>
         <?php
       }
+      else if($this->session->userdata('hakAkses') == 3){
+        ?>
+        <div class="row">
+      <div class="col-md-4 col-xs-12">
+        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/logo.png')?>">
+      </div>
+      <div class="col-md-4 hidden-xs fur-navbar">
+        <a href="<?php echo base_url('produk/katalog/')?>"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>
+        <a href="<?php echo base_url('hal/furniture-impian/')?>"><b><i class="fa fa-pencil fa-fw"></i> Buat Furniture Impianmu</a>
+      </div>
+      <div class="col-md-4 hidden-xs">
+        <div class="col-md-7 fur-navbar">
+          <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search">
+            <span class="input-group-addon fur-btn-sa">
+              <button type="submit" class="button" style="background-color: transparent;">
+                <i class="fa fa-search fa-fw"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-5 text-center" style="padding-top:30px">
+          <span class="dropdown">
+            <button class="btn btn-primary dropdown-toggle user" type="button" data-toggle="dropdown">
+            <i class="fa fa-user fa-fw"></i>
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="<?php echo base_url('akun/profil')?>"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
+              <li><a href="<?php echo base_url('akun/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
+              <li><a href="<?php echo base_url('akun/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
+              <li><a href="<?php echo base_url('akun/pesan')?>"><i class="fa fa-comments fa-fw"></i> Pesan</a></li>
+              <li><a href="<?php echo base_url('hal/furniture-impian')?>"><i class="fa fa-cloud-upload fa-fw"></i> Unggah Desain Produk</a></li>
+              <li><a href="<?php echo base_url('akun/riwayat-desain-produk')?>"><i class="fa fa-th-list fa-fw"></i> Riwayat Desain Produk</a></li>
+              <li><a href="<?php echo base_url('akun/tender')?>"><i class="fa fa-briefcase fa-fw"></i> Tender</a></li>
+              <li><a href="<?php echo base_url('akun/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
+            </ul>
+          </span>
+            <button class="btn btn-primary user" type="button">
+            <i class="fa fa-shopping-cart fa-fw"></i>
+           </button>
+        </div>
+      </div>    
+      <div class="visible-xs col-xs-12 text-left" style="padding-top:30px">
+          <span class="dropdown">
+            <button class="btn btn-primary dropdown-toggle user" type="button" data-toggle="dropdown">
+            <i class="fa fa-user fa-fw"></i>
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="<?php echo base_url('akun-penjual/profil')?>"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/pesan')?>"><i class="fa fa-comments fa-fw"></i> Pesan</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/konfirmasi-pengerjaan')?>"><i class="fa fa-exchange fa-fw"></i> Konfirmasi Pengerjaan</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/unggah-produk')?>"><i class="fa fa-cloud-upload fa-fw"></i> Unggah Produk</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/riwayat-produk')?>"><i class="fa fa-th-list fa-fw"></i> Riwayat Produk</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/tender')?>"><i class="fa fa-briefcase fa-fw"></i> Tender</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
+            </ul>
+          </span>
+            <button class="btn btn-primary user" type="button">
+            <i class="fa fa-shopping-cart fa-fw"></i>
+           </button>
+        </div>
+    </div>
+        <?php
+      }
     ?>
   </div>
   <div class="nav menu sf-menu responsive-menu superfish sf-js-enabled">

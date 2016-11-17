@@ -266,8 +266,8 @@ class Hal extends CI_Controller {
 		}
 	}
 	function daftar_supplier(){
-		$data['title_web'] = 'Daftar Halaman Supplier | Furnimade';
-		$data['path_content'] = 'default/module/daftar_supplier';
+		$data['title_web'] = 'Daftar Supplier | Furnimade';
+		$data['path_content'] = 'yellow/module/daftar_supplier';
 
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
@@ -276,14 +276,14 @@ class Hal extends CI_Controller {
 
 
 		if(!$this->form_validation->run())
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		else{
 			$data['save'] = $this->muser->daftarSupplier($_POST);
 			$array = array(
 					'post' => TRUE
 				);
 			$this->session->set_flashdata($array);
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		}
 	}
 }
