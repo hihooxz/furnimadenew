@@ -133,7 +133,7 @@ class Akun_penjual extends CI_Controller {
     // Ngeload data
     $perpage = 10;
     $this->load->library('pagination'); // load libraray pagination
-    $config['base_url'] = base_url($this->uri->segment(1).'/akun_penjual/riwayat_produk/'); // configurate link pagination
+    $config['base_url'] = base_url($this->uri->segment(1).'/riwayat_produk/'); // configurate link pagination
     $config['total_rows'] = $this->mod->countData('produk');// fetch total record in databae using load
     $config['per_page'] = $perpage; // Total data in one page
     $config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
@@ -152,6 +152,12 @@ class Akun_penjual extends CI_Controller {
 			$data['links'] = false;
 			$this->load->view('yellow/index',$data);
 		}
+	}
+	function delete_produk(){
+		$id = $this->uri->segment(3);
+		$this->db->where('id_produk',$id);
+		$this->db->delete('produk');
+		redirect(base_url($this->uri->segment(1).'/riwayat_produk/'));
 	}
 	function logout(){
 		$array = array(
