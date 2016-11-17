@@ -92,6 +92,12 @@ class Akun_penjual extends CI_Controller {
 
 		}
 	}
+	function riwayat_produk(){
+		$data['title_web'] = 'Riwayat Produk| Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/riwayat_produk';
+
+		$this->load->view('yellow/index',$data);
+	}
 	function logout(){
 		$array = array(
 					'loginMember' => FALSE,
