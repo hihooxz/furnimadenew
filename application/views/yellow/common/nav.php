@@ -58,8 +58,8 @@
         <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/logo.png')?>">
       </div>
       <div class="col-md-4 hidden-xs fur-navbar">
-        <a href="#"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>
-        <a href="#"><b><i class="fa fa-pencil fa-fw"></i> Buat Furniture Impianmu</b></a>
+        <a href="<?php echo base_url('produk/katalog/')?>"><b><i class="fa fa-bed fa-fw"></i> Lihat Katalog</b></a>
+        <a href="<?php echo base_url('hal/furniture-impian/')?>"><b><i class="fa fa-pencil fa-fw"></i> Buat Furniture Impianmu</a>
       </div>
       <div class="col-md-4 hidden-xs">
         <div class="col-md-7 fur-navbar">
