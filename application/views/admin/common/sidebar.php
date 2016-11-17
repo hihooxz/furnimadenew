@@ -46,7 +46,6 @@
         <i class="fa fa-th"></i> <span>Produk</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="<?php echo base_url('adminpanel/produk/tambah-produk') ?>"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
           <li><a href="<?php echo base_url('adminpanel/produk/lihat-produk') ?>"><i class="fa fa-circle-o"></i> Lihat Semua Produk</a></li>
           <li><a href="<?php echo base_url('adminpanel/produk/tambah-kategori') ?>"><i class="fa fa-circle-o"></i> Tambah Kategori</a></li>
           <li><a href="<?php echo base_url('adminpanel/produk/lihat-kategori') ?>"><i class="fa fa-circle-o"></i> Lihat Semua Kategori</a></li>

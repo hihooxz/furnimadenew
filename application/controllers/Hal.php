@@ -18,13 +18,16 @@ class Hal extends CI_Controller {
 		if(!$this->form_validation->run())
 			$this->load->view('yellow/index',$data);
 		else{
-			redirect(base_url('user/profil'));
+			if($this->session->userdata('hakAkses') == 3)
+				redirect(base_url('akun/profil'));
+			else if($this->session->userdata('hakAkses') == 2)
+				redirect(base_url('akun-penjual/profil'));
 		}
 	}
 	function validLoginMember(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$result = $this->muser->validLoginCustomer($username,$password);
+		$result = $this->muser->validLogin($username,$password);
 		if($result != FALSE){
 			$array = array(
 					'loginMember' => TRUE,
@@ -77,21 +80,28 @@ class Hal extends CI_Controller {
 		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
 		$data['total_rows'] = $this->mod->countData('blog'); // Make a variable (array) link so the view can call the variable
 		$this->load->view('yellow/index',$data);
-
 	}
 	function baca_blog(){
 		$data['title_web'] = 'Baca Blog | Furnimade';
 		$data['path_content'] = 'yellow/module/baca_blog';
 		$id = $this->uri->segment(3);
 		$data['result']=$this->mblog->getLihatBlog($id);
-		$this->load->view('yellow/index',$data);
+		if($data['result'] == FALSE)
+			redirect(base_url('hal/blog'));
 
+		$array = array(
+				'dilihat' => $data['result']['dilihat']+1
+			);
+		$this->db->where('id_blog',$id);
+		$this->db->update('blog',$array);
+
+		$this->load->view('yellow/index',$data);
 	}
 
 
 	function furniture_impian(){
 		$data['title_web'] = 'Buat Furniture Impian | Furnimade';
-		$data['path_content'] = 'default/module/furniture_impian';
+		$data['path_content'] = 'yellow/module/furniture_impian';
 		$data['profile'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
 
 		$this->form_validation->set_rules('nama','Nama','required');
@@ -101,7 +111,7 @@ class Hal extends CI_Controller {
 		$this->form_validation->set_rules('deskripsi','Permintaan Tambahan','required');
 
 		if(!$this->form_validation->run())
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		else{
 			$config['upload_path'] = './asset/gambar/produk/';
 				$config['allowed_types'] = 'gif|jpg|png';
@@ -113,13 +123,13 @@ class Hal extends CI_Controller {
 				$this->load->library('upload', $config);
 				if ( ! $this->upload->do_upload()){
 					$data['error'] = $this->upload->display_errors();
-					$this->load->view('default/index',$data);
+					$this->load->view('yellow/index',$data);
 				}
 
 			else{
 				$save = $this->mproduk->saveFurnitureImpian($_POST,$this->upload->data());
 				$this->session->set_flashdata(array('success'=>TRUE));
-				$this->load->view('default/index',$data);
+				$this->load->view('yellow/index',$data);
 			}
 		}
 	}

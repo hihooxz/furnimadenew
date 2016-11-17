@@ -23,18 +23,20 @@
         <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-6" style="border-right:1px solid #e0e0e0">
+          <form method="POST" action="<?php echo base_url('hal/login')?>">
             <div class="input-group margin-bottom-sm form-group" style="border-radius:0px">
               <span class="input-group-addon modal-fa"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
-                <input class="form-control" type="text" placeholder="Username">
+                <input class="form-control" type="text" placeholder="Username" name="username">
             </div>
               <div class="input-group margin-bottom-sm form-group">
               <span class="input-group-addon modal-fa"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
-                <input class="form-control" type="text" placeholder="Password">
+                <input class="form-control" type="password" placeholder="Password" name="password">
             </div>
             <div class="form-group">
               <a href="#" style="color:#333">Forgot Password ?</a>
             </div>
             <button class="btn btn-md form-control fur-btn-primary" style="border-radius:0px">Login</button>
+            </form>
           </div>
           <div class="col-md-3"></div>
         </div>

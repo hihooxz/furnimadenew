@@ -195,7 +195,7 @@ body, html{
     display: block;
     font-weight: 400 ;
     font-size: 18px ;
-    background-color: ##006f45;
+    background-color: #006f45;
     border-left: 3px solid #f2bb00;
     color: #333 ;
     border-bottom: 1px solid #eee;
@@ -209,4 +209,21 @@ body, html{
 	margin-right:13px;
 	padding:3px 13px 5px 5px;
 	border-right:1px solid #eee;
+}
+.profile button, .profile button:hover, .profile button:active {
+    border-radius: 0;
+    background-color: #fff;
+    border-color: #f2bb00;
+    color: #333;
+    font-family: MyriadProCond;
+    /*padding:5px 5px 5px 5px;*/
+}
+.profile button {
+    color: #fff;
+    background-color: #f2bb00;
+    border-color: #f2bb00;
+    margin-top:5px;
+}
+.fr{
+	font-size:17px;
 }

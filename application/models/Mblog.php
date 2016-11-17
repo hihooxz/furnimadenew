@@ -67,7 +67,8 @@ class Mblog extends CI_Model {
 	    else
 	      $this->db->limit($limit,$start);
 
-	    $this->db->order_by('tanggal_blog','ASC');
+	  	$this->db->join('user','user.id_user = blog.id_user');
+	    $this->db->order_by('tanggal_blog','DESC');
 	    $query = $this->db->get('blog');
 	    if($query->num_rows()>0){
 	      return $query->result();
@@ -75,6 +76,7 @@ class Mblog extends CI_Model {
 	    else return FALSE;
 	  }
 		function getLihatBlog($id){
+			$this->db->join('user','user.id_user = blog.id_user');
 			$this->db->where('id_blog',$id);
 			$query = $this->db->get('blog');
 			if($query->num_rows()>0){

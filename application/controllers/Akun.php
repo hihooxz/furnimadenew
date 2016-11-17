@@ -7,7 +7,7 @@ class Akun extends CI_Controller {
 		$this->load->model('muser');
 		$this->load->model('mproduk','mp');
 		if($this->session->userdata('loginMember') != TRUE){
-			redirect(base_url('halaman/login/'));
+			redirect(base_url('hal/login/'));
 			$array = array(
 					'error_session' => TRUE
 				);
@@ -16,29 +16,28 @@ class Akun extends CI_Controller {
 	}
 	function profil(){
 		$data['title_web'] = 'Profil Member| Furnimade';
-		$data['path_content'] = 'default/akun/profil';
-
+		$data['path_content'] = 'yellow/akun/profil';
 		$data['result'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
-
 		$this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('email','Email','required|valid_email');
 		$this->form_validation->set_rules('no_hp','No Ponsel','required|numeric');
 
 		if(!$this->form_validation->run())
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		else{
 			$this->muser->saveProfil($_POST,$this->session->userdata('idUser'));
 			redirect(base_url('akun/profil'));
 		}
 	}
-	/*function riwayat_order(){
-		$data['title_web'] = 'Riwayat Order| Furnimade';
-		$data['path_content'] = 'default/akun/riwayat_order';
+	function pesan(){
+		$data['title_web'] = 'Profil Member| Furnimade';
+		$data['path_content'] = 'yellow/akun/pesan';
+
+		$data['result'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
 
 
-		$this->load->view('default/index',$data);
+		$this->load->view('yellow/index',$data);
 	}
-	*/
 	function produk_tersimpan(){
 		$data['title_web'] = 'Desain Produk | Furnimade';
 		$data['path_content'] = 'default/akun/produk_tersimpan';
@@ -53,18 +52,18 @@ class Akun extends CI_Controller {
 	}
 	function password(){
 		$data['title_web'] = 'Ganti Password| Furnimade';
-		$data['path_content'] = 'default/akun-supplier/password';
+		$data['path_content'] = 'yellow/akun/password';
 
 		$this->form_validation->set_rules('current','Password Yang Sekarang','required|callback_validPassword');
 		$this->form_validation->set_rules('password','Password Baru','required');
 		$this->form_validation->set_rules('confirm','Konfirmasi Password','required|matches[password]');
 		if(!$this->form_validation->run())
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		else{
 			$this->muser->gantiPassword($_POST,$this->session->userdata('idUser'));
 			$array = array('result'=>TRUE);
 			$this->session->set_flashdata($array);
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		}
 	}
 	function validPassword(){
@@ -145,13 +144,14 @@ class Akun extends CI_Controller {
 		$array = array(
 					'loginMember' => FALSE,
 					'idUser' => NULL,
-					'username' => NULL
+					'username' => NULL,
+					'hakAkses' => NULL
 				);
 			$this->session->set_userdata($array);
 			$array = array(
 					'error_session' => TRUE
 				);
 			$this->session->set_flashdata($array);
-		redirect(base_url('halaman/login'));
+		redirect(base_url('hal/login'));
 	}
 }
