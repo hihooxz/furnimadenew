@@ -36,14 +36,14 @@ class Mproduk extends CI_Model {
     else return FALSE;
   }
   function countAllproduk() {
-    return $this->db->count_all("header_booked");
+    return $this->db->count_all("produk");
     }
 
 		function getproduk($id) {
 			$sql = "select fm_produk.*,fm_user.username,fm_kategori.*
 			FROM
 			fm_produk
-			JOIN fm_user ON fm_product.id_penjual = fm_user.id_user
+			JOIN fm_user ON fm_produk.id_penjual = fm_user.id_user
 			JOIN fm_kategori ON fm_produk.id_kategori = fm_kategori.id_kategori
 			where id_produk = ".$id."
 			";
@@ -194,6 +194,25 @@ class Mproduk extends CI_Model {
 						'tanggal_produk' => date('Y-m-d H:i:s')
 					);
 				$this->db->insert('produk',$array);
+				return 1;
+			}
+
+			function editunggahproduk($data,$id,$upload_data){
+				$array = array(
+					'id_kategori' => $data['id_kategori'],
+					'nama_produk' =>$data['nama_produk'],
+					'harga_produk' => $data['harga_produk'],
+					'deskripsi_produk' =>$data['deskripsi_produk'],
+					'id_penjual' => $this->session->userdata('idUser'),
+					'tanggal_produk' => date('Y-m-d H:i:s')
+
+				);
+
+				if($upload_data!=false){
+					$array['gambar_produk'] = 'asset/gambar/produk/'.$upload_data['file_name'];
+				}
+				$this->db->where('id_produk',$id);
+				$this->db->update('produk',$array);
 				return 1;
 			}
 			// function getKategori($id){
