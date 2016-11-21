@@ -1,41 +1,50 @@
 <div class="container" style="margin-bottom:70px">
   <div class="modal-title text-center" style="margin-bottom:25px">
-        Lihat Katalog dari Sofa
+        Lihat Katalog dari <?php echo $result['nama_kategori']?>
   </div>
-  <div class="row text-center btn-produk" style="margin-top:20px">
-  
-    <div class="col-md-3 col-sm-4 col-xs-6 slick">
-      <a href="#" title="Lihat Sofa 1">
-        <img class="img" width="250" height="180" src="<?php echo base_url('asset/asset_yellow/images/sofa1.jpg') ?>">
-        <b>Sofa 1</b><br/>
-        <span class="produk-disc"><strike>7,120,000</strike> <b>25% off</b></span><br/>
-        Rp 6,408,000
-      </a>
-    </div>
-
-    <div class="col-md-3 col-sm-4 col-xs-6 slick">
-      <a href="#" title="Lihat Sofa 2">
-        <img class="img" width="250" height="180" src="<?php echo base_url('asset/asset_yellow/images/sofa2.jpg') ?>">
-        <b>Sofa 2</b><br/>
-        <span class="produk-disc"><strike>7,120,000</strike> <b>25% off</b></span><br/>
-        Rp 6,408,000
-      </a>
-    </div>
-    <div class="col-md-3 col-sm-4 col-xs-6 slick">
-      <a href="#" title="Lihat Sofa 3 ">
-        <img class="img" width="250" height="180" src="<?php echo base_url('asset/asset_yellow/images/sofa3.jpg') ?>">
-        <b>Sofa 3</b><br/>
-        <span class="produk-disc"><strike>7,120,000</strike> <b>25% off</b></span><br/>
-        Rp 6,408,000
-      </a>
-    </div>
-    <div class="col-md-3 col-sm-4 col-xs-6 slick">
-      <a href="#" title="Lihat Sofa 4">
-        <img class="img" width="250" height="180" src="<?php echo base_url('asset/asset_yellow/images/sofa4.jpg') ?>">
-        <b>Sofa 4</b><br/>
-        <span class="produk-disc"><strike>7,120,000</strike> <b>25% off</b></span><br/>
-        Rp 6,408,000
-      </a>
-    </div>
-  </div>
+  <?php
+    if($results!=FALSE){
+      $i = 1;
+      foreach ($results as $rows) {
+        if($i%4==1){
+          ?>
+          <div class="row text-center btn-produk" style="margin-top:20px">
+          <?php
+        }
+        ?>
+          <div class="col-md-3 col-sm-4 col-xs-6 slick">
+            <a href="<?php echo base_url('produk/detail-produk/'.$rows->id_produk.'/'.$this->mod->toAscii($rows->nama_produk))?>" title="Lihat <?php echo $rows->nama_produk?>">
+              <?php
+                if($rows->gambar_produk!=""){
+                  ?>
+                  <img class="img" width="250" height="180" src="<?php echo base_url($rows->gambar_produk) ?>">
+                  <?php
+                }
+                else{
+                  ?>
+                  <i class="fa fa-cube fa-5x"></i>
+                  <?php
+                }
+              ?>
+              <b><?php echo $rows->nama_produk?></b><br/>
+              <!-- <span class="produk-disc"><strike>7,120,000</strike> <b>25% off</b></span><br/> -->
+              Rp <?php echo number_format($rows->harga_produk)?>
+            </a>
+          </div>
+        <?php
+        if($i%4==0 || $total_rows == $i){
+          ?>
+          </div>
+          <?php
+        }
+      }
+    }
+    else{
+      ?>
+      <div class="row text-center">
+        <h3>Katalog Kosong</h3>
+      </div>
+      <?php
+    }
+  ?>
 </div>

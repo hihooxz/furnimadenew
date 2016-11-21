@@ -73,8 +73,7 @@ class Muser extends CI_Model {
     function validLogin($username,$password){
     $this->db->where('username',$username);
     $this->db->where('password',md5($password));
-    $this->db->where('hak_akses',3);
-    $this->db->or_where('hak_akses',2);
+    $this->db->where('hak_akses != ',1);;
       $query = $this->db->get('user');
     if($query->num_rows()>0){
       return $query->row_array();

@@ -40,44 +40,16 @@ class Produk extends CI_Controller {
     	$data['total_rows'] = $this->mod->countWhereData('produk','id_kategori',$id); // Make a variable (array) link so the view can call the variable
 		$this->load->view('yellow/index',$data);
 	}
-	function lihat_produk(){
-		$data['title_web'] = 'Lihat Produk |  Furnimade';
-		$data['path_content'] = 'default/module/lihat_produk';
-		$data['bahan'] = $this->mp->fetchAllBahan();
-		$data['finishing'] = $this->mp->fetchAllFinishing();
+	function detail_produk(){
+		$data['title_web'] = 'Detail Produk |  Furnimade';
+		$data['path_content'] = 'yellow/module/detail_produk';
 		$id=$this->uri->segment(3);
 		$data['result']= $this->mp->getProduk($id);
 		if($data['result']==FALSE)
-
-		$this->form_validation->set_rules('nama_produk','Nama Produk','required');
-		$this->form_validation->set_rules('deskripsi_produk','Deskripsi','required');
-		$this->form_validation->set_rules('kode_produk','Kode Produk','required');
-				$this->form_validation->set_rules('harga','Harga','required|numeric');
-				$this->form_validation->set_rules('harga_promo','Harga Promo','numeric');
-
-			if(!$this->form_validation->run()){
-				$this->load->view('default/index',$data);
-			}
-
-			else{
-				$config['upload_path'] = './asset/gambar/thumbnail/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '500';
-			$config['max_width']  = '1024';
-			$config['max_height']  = '768';
-
-			$this->load->library('upload', $config);
-			if ( ! $this->upload->do_upload()){
-				$save = $this->mp->editProduk($_POST,$id,FALSE);
-							redirect(base_url($this->uri->segment(1).'/module/lihat_produk'));
-			}
-
-		else{
-			$save = $this->mp->editProduk($_POST,$id,$this->upload->data());
-						redirect(base_url($this->uri->segment(1).'/module/lihat_produk'));
-		}
-
-			}
+			redirect(base_url('hal/produk'));
+		
+		$this->load->view('yellow/index',$data);
+		
 	}
 	function promo(){
 		$id = $this->uri->segment(3);

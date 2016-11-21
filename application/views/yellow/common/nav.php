@@ -3,12 +3,12 @@
 
       <div class="row text-center">
         <div class="col-md-5 col-sm-5 hidden-xs" style="padding-top:5px">
-          <a href="#">TENTANG KAMI</a>
-          <a href="#">FAQ's</a>
+          <a href="<?php echo base_url('hal/tentang-kami/'); ?>">TENTANG KAMI</a>
+          <a href="<?php echo base_url('hal/faq/'); ?>">FAQ's</a>
           <a href="<?php echo base_url('hal/blog/'); ?>">BLOG</a>
-          <a href="#">SYARAT & KETENTUAN</a>
-          <a href="#">PARTNER</a>
-          <a href="#">GABUNG SEBAGAI SUPPLIER</a>
+          <a href="<?php echo base_url('hal/syarat-ketentuan/'); ?>">SYARAT & KETENTUAN</a>
+          <!-- <a href="#">PARTNER</a> -->
+          <a href="<?php echo base_url('hal/daftar-penjual')?>">GABUNG SEBAGAI PENJUAL</a>
         </div>
         <div class="col-md-5 col-sm-5 hidden-xs"></div>
         <div class="col-md-2 col-sm-5 hidden-xs" style="font-size:20px">
@@ -90,9 +90,11 @@
               <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
+          <a href="<?php echo base_url('hal/keranjang')?>">
             <button class="btn btn-primary user" type="button">
             <i class="fa fa-shopping-cart fa-fw"></i>
            </button>
+          </a>
         </div>
       </div>    
       <div class="visible-xs col-xs-12 text-left" style="padding-top:30px">
@@ -113,9 +115,11 @@
               <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
-            <button class="btn btn-primary user" type="button">
-            <i class="fa fa-shopping-cart fa-fw"></i>
-           </button>
+            <a href="<?php echo base_url('hal/keranjang')?>">
+              <button class="btn btn-primary user" type="button">
+              <i class="fa fa-shopping-cart fa-fw"></i>
+             </button>
+            </a>
         </div>
     </div>
         <?php
@@ -147,7 +151,7 @@
             <i class="fa fa-user fa-fw"></i>
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url('akun/profil')?>"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun/profil')?>" style="margin:0 10px 0 5px"><i class="fa fa-user"></i> Profil</a></li>
               <li><a href="<?php echo base_url('akun/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
               <li><a href="<?php echo base_url('akun/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
               <li><a href="<?php echo base_url('akun/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
@@ -158,9 +162,11 @@
               <li><a href="<?php echo base_url('akun/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
-            <button class="btn btn-primary user" type="button">
-            <i class="fa fa-shopping-cart fa-fw"></i>
-           </button>
+            <a href="<?php echo base_url('hal/keranjang')?>">
+             <button class="btn btn-primary user" type="button">
+              <i class="fa fa-shopping-cart fa-fw"></i>
+             </button>
+            </a>
         </div>
       </div>    
       <div class="visible-xs col-xs-12 text-left" style="padding-top:30px">
@@ -181,9 +187,11 @@
               <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
+          <a href="<?php echo base_url('hal/keranjang')?>">
             <button class="btn btn-primary user" type="button">
             <i class="fa fa-shopping-cart fa-fw"></i>
            </button>
+          </a>
         </div>
     </div>
         <?php

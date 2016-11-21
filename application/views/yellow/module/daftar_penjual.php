@@ -3,7 +3,7 @@
     <div class="col-md-3"></div>
     <div class="col-md-6 text-center modal-title">
       <div style="margin-bottom:20px">
-        <i class="fa fa-user" aria-hidden="true"></i> Daftar
+        <i class="fa fa-user" aria-hidden="true"></i> Daftar Sebagai Penjual
       </div>
       <?php echo form_open('');
       if(!$this->form_validation->run() && isset($_POST['username'])){
@@ -40,8 +40,8 @@
     <div class="col-md-3"></div>
   </div>
   <div class="text-center">
-      <a href="<?php echo base_url('hal/daftar-penjual')?>">
-        Daftar Sebagai Penjual
+      <a href="<?php echo base_url('hal/daftar')?>">
+        Daftar Sebagai Pembeli
       </a>
   </div>
 </div>

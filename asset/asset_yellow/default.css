@@ -132,7 +132,8 @@ body, html{
 	color:#333;
 }
 .blog-preview{
-	margin-bottom:20px;
+	margin-bottom:30px;
+ 	font-size: 18px;
 }
 .produk-disc{
 	color:#f2bb00;
@@ -195,7 +196,7 @@ body, html{
     display: block;
     font-weight: 400 ;
     font-size: 18px ;
-    background-color: #006f45;
+    background-color: #f2bb00;
     border-left: 3px solid #f2bb00;
     color: #333 ;
     border-bottom: 1px solid #eee;
@@ -226,4 +227,18 @@ body, html{
 }
 .fr{
 	font-size:17px;
+}
+.title-info{
+	font-size:16px;
+	color:#fff;
+	background-color:#f2bb00;
+	padding:17px 0px 17px 0px;
+	margin-bottom: 20px;
+}
+.pembayaran{
+	font-size:15px;
+	margin-bottom: 20px
+}
+.form-control{
+	border-radius: 0px;
 }

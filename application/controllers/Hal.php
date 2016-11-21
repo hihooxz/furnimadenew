@@ -265,9 +265,9 @@ class Hal extends CI_Controller {
 			$this->load->view('yellow/index',$data);
 		}
 	}
-	function daftar_supplier(){
-		$data['title_web'] = 'Daftar Supplier | Furnimade';
-		$data['path_content'] = 'yellow/module/daftar_supplier';
+	function daftar_penjual(){
+		$data['title_web'] = 'Daftar Penjual | Furnimade';
+		$data['path_content'] = 'yellow/module/daftar_penjual';
 
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
@@ -285,5 +285,36 @@ class Hal extends CI_Controller {
 			$this->session->set_flashdata($array);
 			$this->load->view('yellow/index',$data);
 		}
+	}
+	function keranjang(){
+		$data['title_web'] = 'Keranjang Belanjaan | Furnimade';
+		$data['path_content'] = 'yellow/module/keranjang';
+
+		$this->load->view('yellow/index',$data);
+	}
+	function checkout(){
+		$data['title_web'] = 'Checkout | Furnimade';
+		$data['path_content'] = 'yellow/module/checkout';
+
+		$this->load->view('yellow/index',$data);
+	}
+	function tentang_kami(){
+		$data['title_web'] = 'Tentang Kami | Furnimade';
+		$data['path_content'] = 'yellow/module/tentang_kami';
+
+		$this->load->view('yellow/index',$data);
+	}
+	function faq(){
+		$data['title_web'] = 'FAQ | Furnimade';
+		$data['path_content'] = 'yellow/module/faq';
+
+		$this->load->view('yellow/index',$data);
+	}
+	function syarat_ketentuan(){
+		$data['title_web'] = 'Syarat & Ketentuan | Furnimade';
+		$data['path_content'] = 'yellow/module/syarat_ketentuan';
+
+    	
+    	$this->load->view('yellow/index',$data);	
 	}
 }

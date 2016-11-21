@@ -60,7 +60,6 @@
                 }
               }
               echo form_dropdown('id_kategori',$options,$result['id_kategori'],'class="form-control"');
-
             ?>
 
           </div>

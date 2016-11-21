@@ -153,6 +153,27 @@ class Akun_penjual extends CI_Controller {
 			$this->load->view('yellow/index',$data);
 		}
 	}
+	function riwayat_pesanan(){
+		$data['title_web'] = 'Riwayat Pesanan| Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/riwayat_pesanan';
+
+    	
+    	$this->load->view('yellow/index',$data);
+	}
+	function konfirmasi_pengerjaan(){
+		$data['title_web'] = 'Konfirmasi Pengerjaan | Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/konfirmasi_pengerjaan';
+
+    	
+    	$this->load->view('yellow/index',$data);
+	}
+	function konfirmasi_pembayaran(){
+		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/konfirmasi_pembayaran';
+
+    	
+    	$this->load->view('yellow/index',$data);
+	}
 	function delete_produk(){
 		$id = $this->uri->segment(3);
 		$this->db->where('id_produk',$id);
