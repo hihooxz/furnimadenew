@@ -4,9 +4,7 @@
         Terms & Conditions <i class="fa fa-warning fa-1x" aria-hidden="true"></i>
   </div>
     <ol>
-      <li><?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?> </li>
-      <li><?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?> </li>
-      <li><?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?> </li>
-    </ol>
+      <?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?>
+      </ol>
   </div>
 </div>
