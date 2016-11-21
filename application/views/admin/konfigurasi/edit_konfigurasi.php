@@ -23,19 +23,19 @@
       <div class="form-group">
         <label>FAQ</label>
         <div class="hero-unit" style="margin-top:40px">
-                <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px;"><?php echo $result['faq']?></textarea>
+                <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px;"name="faq"><?php echo $result['faq']?></textarea>
             </div>
       </div>
       <div class="form-group">
         <label>Syarat Ketentuan</label>
         <div class="hero-unit" style="margin-top:40px">
-                <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px;"><?php echo $result['syarat_ketentuan']?></textarea>
+                <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px;"name="syarat_ketentuan"><?php echo $result['syarat_ketentuan']?></textarea>
             </div>
       </div>
       <div class="form-group">
         <label>Tentang Kami</label>
         <div class="hero-unit" style="margin-top:40px">
-                <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px;"><?php echo $result['tentang_kami']?></textarea>
+                <textarea class="textarea" placeholder="Enter text ..." style="width: 810px; height: 200px;" name="tentang_kami"><?php echo $result['tentang_kami']?></textarea>
             </div>
       </div>
       <div class="form-group">

@@ -27,6 +27,8 @@
 <!-- bootstrap wysihtml5 - text editor -->
 <link rel="stylesheet" href="<?php echo base_url('asset/asset_lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>">
 
+
+
 <script src="<?php echo base_url('asset/asset_lte/holder.min.js/')?>"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,3 +43,14 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/asset_lte/plugins/jQueryUI/jquery-ui.min.css') ?>">
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script>
+           $('.textarea').wysihtml5({
+             "font-styles": false, //Font styling, e.g. h1, h2, etc.
+        "emphasis": true, //Italics, bold, etc.
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers.
+        "html": true, //Button which allows you to edit the generated HTML.
+        "link": true, //Button to insert a link.
+        "image": false, //Button to insert an image.
+        "color": true //Button to change color of font
+           });
+</script>
