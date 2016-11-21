@@ -174,6 +174,13 @@ class Akun_penjual extends CI_Controller {
     	
     	$this->load->view('yellow/index',$data);
 	}
+	function pesan(){
+		$data['title_web'] = 'Pesan | Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/pesan';
+
+    	
+    	$this->load->view('yellow/index',$data);
+	}
 	function delete_produk(){
 		$id = $this->uri->segment(3);
 		$this->db->where('id_produk',$id);
