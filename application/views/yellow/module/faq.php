@@ -4,11 +4,11 @@
         FAQ's <i class="fa fa-question-circle fa-1x" aria-hidden="true"></i>
   </div>
     <ol>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet ?</li>
+      <li><?php if($result['faq'] != "") echo $result['faq']; else echo "data not found"?> </li>
       <p><b>Answer</b> Lorem ipsum dolor sil amet</p>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet ?</li>
+      <li><?php if($result['faq'] != "") echo $result['faq']; else echo "data not found"?> </li>
       <p><b>Answer</b> Lorem ipsum dolor sil amet</p>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet ?</li>
+      <li><?php if($result['faq'] != "") echo $result['faq']; else echo "data not found"?> </li>
       <p><b>Answer</b> Lorem ipsum dolor sil amet</p>
     </ol>
   </div>

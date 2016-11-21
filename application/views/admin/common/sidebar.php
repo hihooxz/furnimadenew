@@ -82,6 +82,16 @@
           <li><a href="<?php echo base_url('adminpanel/pesan/lihat-pesan') ?>"><i class="fa fa-circle-o"></i> Lihat Pesan</a></li>
         </ul>
     </li>
+    <li class="treeview">
+      <a href="#">
+        <i class="fa fa-gear" aria-hidden="true"></i>
+        <span>Konfigurasi</span>
+        <span class="label label-primary pull-right"></span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="<?php echo base_url('adminpanel/konfigurasi/edit-konfigurasi') ?>"><i class="fa fa-gear"></i>edit konfigurasi</a></li>
+      </ul>
+    </li>
 
 
 </section>

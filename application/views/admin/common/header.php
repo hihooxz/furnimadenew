@@ -25,7 +25,7 @@
 <!-- Daterange picker -->
 <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
 <!-- bootstrap wysihtml5 - text editor -->
-<link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+<link rel="stylesheet" href="<?php echo base_url('asset/asset_lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>">
 
 <script src="<?php echo base_url('asset/asset_lte/holder.min.js/')?>"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

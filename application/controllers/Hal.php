@@ -7,6 +7,7 @@ class Hal extends CI_Controller {
 		$this->load->model('muser');
 		$this->load->model('mproduk');
 		$this->load->model('mblog');
+		$this->load->model('mkonfigurasi');
 	}
 	function login(){
 		$data['title_web'] = 'Masuk ke Halaman Member | Furnimade';
@@ -211,7 +212,7 @@ class Hal extends CI_Controller {
 		$data['finishing'] = $message;
 		echo json_encode($data);
 	}*/
-	
+
 	function login_supplier(){
 		$data['title_web'] = 'Masuk ke Halaman Supplier | Furnimade';
 		$data['path_content'] = 'default/module/login_supplier';
@@ -301,20 +302,23 @@ class Hal extends CI_Controller {
 	function tentang_kami(){
 		$data['title_web'] = 'Tentang Kami | Furnimade';
 		$data['path_content'] = 'yellow/module/tentang_kami';
-
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mkonfigurasi->getkonfigurasi($id);
 		$this->load->view('yellow/index',$data);
 	}
 	function faq(){
 		$data['title_web'] = 'FAQ | Furnimade';
 		$data['path_content'] = 'yellow/module/faq';
-
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mkonfigurasi->getkonfigurasi($id);
 		$this->load->view('yellow/index',$data);
 	}
 	function syarat_ketentuan(){
 		$data['title_web'] = 'Syarat & Ketentuan | Furnimade';
 		$data['path_content'] = 'yellow/module/syarat_ketentuan';
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mkonfigurasi->getkonfigurasi($id);
 
-    	
-    	$this->load->view('yellow/index',$data);	
+    	$this->load->view('yellow/index',$data);
 	}
 }

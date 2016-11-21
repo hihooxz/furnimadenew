@@ -4,11 +4,9 @@
         Terms & Conditions <i class="fa fa-warning fa-1x" aria-hidden="true"></i>
   </div>
     <ol>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet </li>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet </li>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet </li>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet </li>
-      <li>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet </li>
+      <li><?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?> </li>
+      <li><?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?> </li>
+      <li><?php if($result['syarat_ketentuan'] != "") echo $result['syarat_ketentuan']; else echo "data not found"?> </li>
     </ol>
   </div>
 </div>

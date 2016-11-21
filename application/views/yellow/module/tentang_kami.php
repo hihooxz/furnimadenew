@@ -3,7 +3,7 @@
   <img src="<?php echo base_url('asset/gambar/bg/about_us.png')?>" width="100%" style="margin-bottom: 20px">
 
 
-        <p>Lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet lorem ipsum dolor sil amet</p>
+        <p><?php if($result['tentang_kami'] != "") echo $result['tentang_kami']; else echo "data not found"?></p>
 
 
 
