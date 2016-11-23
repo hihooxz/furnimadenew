@@ -3,7 +3,7 @@
         Profil
   </div>
   <div class="row text-center">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <?php $this->load->view('yellow/akun/nav_member');?>
     </div>
     <div class="col-md-8 form-group form-impian">

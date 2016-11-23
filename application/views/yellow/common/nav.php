@@ -90,10 +90,10 @@
               <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
-          <a href="<?php echo base_url('hal/keranjang')?>">
-            <button class="btn btn-primary user" type="button">
-            <i class="fa fa-shopping-cart fa-fw"></i>
-           </button>
+          <a href="<?php echo base_url('akun-penjual/keranjang')?>">
+              <button class="btn btn-primary user" type="button">
+                <i class="fa fa-shopping-cart fa-fw"></i>
+              </button>
           </a>
         </div>
       </div>    
@@ -115,11 +115,11 @@
               <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
-            <a href="<?php echo base_url('hal/keranjang')?>">
+            <a href="<?php echo base_url('akun-penjual/keranjang')?>">
               <button class="btn btn-primary user" type="button">
-              <i class="fa fa-shopping-cart fa-fw"></i>
-             </button>
-            </a>
+                <i class="fa fa-shopping-cart fa-fw"></i>
+              </button>
+          </a>
         </div>
     </div>
         <?php
@@ -162,11 +162,11 @@
               <li><a href="<?php echo base_url('akun/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
-            <a href="<?php echo base_url('hal/keranjang')?>">
-             <button class="btn btn-primary user" type="button">
-              <i class="fa fa-shopping-cart fa-fw"></i>
-             </button>
-            </a>
+            <a href="<?php echo base_url('akun/keranjang')?>">
+              <button class="btn btn-primary user" type="button">
+                <i class="fa fa-shopping-cart fa-fw"></i>
+              </button>
+          </a>
         </div>
       </div>    
       <div class="visible-xs col-xs-12 text-left" style="padding-top:30px">
@@ -175,19 +175,18 @@
             <i class="fa fa-user fa-fw"></i>
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url('akun-penjual/profil')?>"><i class="fa fa-user"></i> Profil</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/pesan')?>"><i class="fa fa-comments fa-fw"></i> Pesan</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/konfirmasi-pengerjaan')?>"><i class="fa fa-exchange fa-fw"></i> Konfirmasi Pengerjaan</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/unggah-produk')?>"><i class="fa fa-cloud-upload fa-fw"></i> Unggah Produk</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/riwayat-produk')?>"><i class="fa fa-th-list fa-fw"></i> Riwayat Produk</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/tender')?>"><i class="fa fa-briefcase fa-fw"></i> Tender</a></li>
-              <li><a href="<?php echo base_url('akun-penjual/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
+              <li><a href="<?php echo base_url('akun/profil')?>" style="margin:0 10px 0 5px"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
+              <li><a href="<?php echo base_url('akun/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
+              <li><a href="<?php echo base_url('akun/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
+              <li><a href="<?php echo base_url('akun/pesan')?>"><i class="fa fa-comments fa-fw"></i> Pesan</a></li>
+              <li><a href="<?php echo base_url('hal/furniture-impian')?>"><i class="fa fa-cloud-upload fa-fw"></i> Unggah Desain Produk</a></li>
+              <li><a href="<?php echo base_url('akun/riwayat-desain-produk')?>"><i class="fa fa-th-list fa-fw"></i> Riwayat Desain Produk</a></li>
+              <li><a href="<?php echo base_url('akun/tender')?>"><i class="fa fa-briefcase fa-fw"></i> Tender</a></li>
+              <li><a href="<?php echo base_url('akun/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
             </ul>
           </span>
-          <a href="<?php echo base_url('hal/keranjang')?>">
+          <a href="<?php echo base_url('akun/keranjang')?>">
             <button class="btn btn-primary user" type="button">
             <i class="fa fa-shopping-cart fa-fw"></i>
            </button>

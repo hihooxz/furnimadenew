@@ -287,12 +287,6 @@ class Hal extends CI_Controller {
 			$this->load->view('yellow/index',$data);
 		}
 	}
-	function keranjang(){
-		$data['title_web'] = 'Keranjang Belanjaan | Furnimade';
-		$data['path_content'] = 'yellow/module/keranjang';
-
-		$this->load->view('yellow/index',$data);
-	}
 	function checkout(){
 		$data['title_web'] = 'Checkout | Furnimade';
 		$data['path_content'] = 'yellow/module/checkout';

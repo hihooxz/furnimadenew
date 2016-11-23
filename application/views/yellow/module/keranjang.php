@@ -118,7 +118,7 @@
       </a>
     </div>
     <div class="col-md-4">
-      <a class="btn btn-md form-control fur-btn-primary" style="margin-top:10px" href="<?php echo base_url('hal/checkout/')?>" role="button" type="submit">
+      <a class="btn btn-md form-control fur-btn-primary" style="margin-top:10px" href="<?php echo base_url('akun-penjual/checkout/')?>" role="button" type="submit">
           Checkout <i class="fa fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>

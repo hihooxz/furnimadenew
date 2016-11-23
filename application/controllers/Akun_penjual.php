@@ -191,7 +191,18 @@ class Akun_penjual extends CI_Controller {
     		show_404();
     	
     	$this->load->view('yellow/index',$data);
+	}
+	function keranjang(){
+		$data['title_web'] = 'Keranjang Belanjaan | Furnimade';
+		$data['path_content'] = 'yellow/module/keranjang';
 
+		$this->load->view('yellow/index',$data);
+	}
+	function checkout(){
+		$data['title_web'] = 'Checkout & Pembayaran Belanjaan | Furnimade';
+		$data['path_content'] = 'yellow/module/checkout';
+
+		$this->load->view('yellow/index',$data);
 	}
 	function delete_produk(){
 		$id = $this->uri->segment(3);

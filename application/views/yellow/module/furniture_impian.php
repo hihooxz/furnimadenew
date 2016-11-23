@@ -19,7 +19,18 @@
       <input type="text" class="form-control" placeholder="Finishing yang digunakan">
       <input type="text" class="form-control" placeholder="Nama Produk">
       <textarea class="form-control" placeholder="Deskripsi Furniture"></textarea>
+      <?php
+        if($this->session->userdata('loginMember') == TRUE){
+      ?>
       <button class="btn fur-btn-primary form-control" id="fur-btn-primary" role="button" type="submit">Next <i class="fa fa-arrow-right fa-fw"></i></button>
+      <?php
+      }
+      else{
+        ?>
+        <button class="btn fur-btn-primary form-control" id="fur-btn-primary" role="button" data-toggle="modal" data-target="#loginModal">Next <i class="fa fa-arrow-right fa-fw"></i></button>
+        <?php
+      }
+      ?>
     </div>
     <div class="col-md-3"></div>
   </div>
