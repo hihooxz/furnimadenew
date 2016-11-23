@@ -181,6 +181,18 @@ class Akun_penjual extends CI_Controller {
     	
     	$this->load->view('yellow/index',$data);
 	}
+	function kirim_pesan(){
+		$data['title_web'] = 'Kirim Pesan | Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/kirim_pesan';
+
+		$id = $this->uri->segment(3);
+    	$data['result'] = $this->mod->getDataWhere('user','id_user',$id);
+    	if($data['result'] == FALSE)
+    		show_404();
+    	
+    	$this->load->view('yellow/index',$data);
+
+	}
 	function delete_produk(){
 		$id = $this->uri->segment(3);
 		$this->db->where('id_produk',$id);

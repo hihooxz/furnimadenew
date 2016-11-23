@@ -3,7 +3,27 @@
         <?php echo $result['nama_produk']?>
   </div>
   <div class="row text-center btn-produk" style="margin-top:20px">
-  <span class="pull-right">Product by: <i class="fa fa-user fa-fw"></i> <?php echo $result['username']?></span>
+  <span class="pull-right">Product by: <i class="fa fa-user fa-fw"></i> <?php echo $result['username']?>
+  <?php
+    if($this->session->userdata('hakAkses') == 2){
+      ?>
+      <a href="<?php echo base_url('akun-penjual/kirim-pesan/'.$result['id_penjual'])?>" title="Kirim Pesan">
+      <button class="btn fur-btn-primary">
+      <i class="fa fa-envelope"></i> Kirim Pesan
+      </button></a>
+      <?php
+    }
+    else if($this->session->userdata('hakAkses') == 3){
+      ?>
+      <a href="<?php echo base_url('akun/kirim-pesan/'.$result['id_penjual'])?>" title="Kirim Pesan">
+      <button class="btn fur-btn-primary">
+      <i class="fa fa-envelope"></i> Kirim Pesan
+      </button></a>
+      <?php
+    }
+  ?>
+  
+  </span>
     <div class="col-md-6 col-sm-4 col-xs-6">
       <?php
                 if($result['gambar_produk']!=""){
