@@ -26,6 +26,7 @@ class Akun extends CI_Controller {
 			$this->load->view('yellow/index',$data);
 		else{
 			$this->muser->saveProfil($_POST,$this->session->userdata('idUser'));
+			$this->session->set_flashdata(array('success_form'=>TRUE));
 			redirect(base_url('akun/profil'));
 		}
 	}
@@ -61,8 +62,7 @@ class Akun extends CI_Controller {
 			$this->load->view('yellow/index',$data);
 		else{
 			$this->muser->gantiPassword($_POST,$this->session->userdata('idUser'));
-			$array = array('result'=>TRUE);
-			$this->session->set_flashdata($array);
+			$this->session->set_flashdata(array('success_form'=>TRUE));
 			$this->load->view('yellow/index',$data);
 		}
 	}
@@ -79,61 +79,14 @@ class Akun extends CI_Controller {
 		}
 	}
 
-	function riwayat_order(){
-		$data['title_web'] = 'Progress Pesanan | Furnimade';
-		$data['path_content'] = 'default/akun/riwayat_order';
+	function riwayat_pesanan(){
+		$data['title_web'] = 'Riwayat Pesanan | Furnimade';
+		$data['path_content'] = 'default/akun/riwayat_pesanan';
 
-
-		if(!$this->form_validation->run()){
-		// Ngeload data
-		$perpage = 10;
-		$this->load->library('pagination'); // load libraray pagination
-		$config['base_url'] =base_url('akun/riwayat_order'); // configurate link pagination
-		$config['total_rows'] = $this->mod->countData('progress');// fetch total record in databae using load
-		$config['per_page'] = $perpage; // Total data in one page
-		$config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
-		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
-		$config['num_links'] = round($choice); // Rounding Choice Variable
-		$config['use_page_numbers'] = TRUE;
-		$this->pagination->initialize($config); // intialize var config
-		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-		$data['results'] = $this->mp->fetchRiwayatPesanan($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
-		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
-		$data['total_rows'] = $this->mod->countData('progress'); // Make a variable (array) link so the view can call the variable
 		$this->load->view('default/index',$data);
-		}
-		else{
-			$data['results'] = $this->mp->fetchCustomSearch($_POST); // fetch data using limit and pagination
-			$data['links'] = false;
-			$this->load->view('default/index',$data);
-		}
 	}
 
-	function lihat_progress(){
-		$data['title_web'] = 'Lihat Progress | Furnimade';
-		$data['path_content'] = 'default/akun/lihat_progress';
-		$id=$this->uri->segment(3);
-		$data['result']=$this->mp->getBuatProduk($id);
-		if($data['result']==FALSE)
-			redirect(base_url('akun/riwayat-order'));
-
-		$perpage = 10;
-		$this->load->library('pagination'); // load libraray pagination
-		$config['base_url'] = base_url('akun/lihat-progress/'.$id.'/'); // configurate link pagination
-		$config['total_rows'] = $this->mod->countData('progress');// fetch total record in databae using load
-		$config['per_page'] = $perpage; // Total data in one page
-		$config['uri_segment'] = 4; // catch uri segment where locate in 4th posisition
-		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
-		$config['num_links'] = round($choice); // Rounding Choice Variable
-		$config['use_page_numbers'] = TRUE;
-		$this->pagination->initialize($config); // intialize var config
-		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-		$data['results'] = $this->mp->fetchLihatProgress($config['per_page'],$page,$this->uri->segment(4),$id); // fetch data using limit and pagination
-		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
-		$data['total_rows'] = $this->mod->countData('progress'); // Make a variable (array) link so the view can call the variable
-		$this->load->view('default/index',$data);
-
-	}
+	
 
 	
 

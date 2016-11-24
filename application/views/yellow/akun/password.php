@@ -3,14 +3,36 @@
         Ganti Password
   </div>
   <div class="row text-center">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <?php $this->load->view('yellow/akun/nav_member');?>
     </div>
     <div class="col-md-8 form-group form-impian">
       <?php echo form_open(''); 
-      echo validation_errors();
       ?>
       <div class="row">
+      <?php
+        if($this->session->flashdata('success_form') == TRUE){
+          ?>
+          <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Hore!</strong> Kamu Berhasil Mengupdate Profil
+          </div>
+          <?php
+        }
+        if(!$this->form_validation->run() && isset($_POST['current'])){
+          ?>
+          <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Ouch!</strong> 
+            <?php echo validation_errors()?>
+          </div>
+          <?php
+        }
+      ?>
       </div>
       <div class="input-group margin-bottom-sm form-group">
           <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
