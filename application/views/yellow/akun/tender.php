@@ -4,7 +4,7 @@
   </div>
   <div class="row text-center">
     <div class="col-md-4">
-      <?php $this->load->view('yellow/akun_penjual/nav_penjual');?>
+      <?php $this->load->view('yellow/akun/nav_member');?>
     </div>
     <div class="col-md-8 form-group form-impian table-responsive">
       <div class="row">

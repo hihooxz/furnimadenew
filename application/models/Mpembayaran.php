@@ -80,6 +80,20 @@ class Mpembayaran extends CI_Model {
 	    return $this->db->count_all("konfirmasi_pembayaran");
 	  }
 
+		function saveKonfirmasi($data){
+			$array = array(
+					'id_user' =>$this->session->userdata('idUser'),
+					'id_pembayaran' => $data['id_pembayaran'],
+					'atas_nama' => $data['atas_nama'],
+					'no_rekening' => $data['no_rekening'],
+					'bank' =>$data['bank'],
+					'tanggal_transfer' => $data['tanggal_transfer']
+
+
+				);
+			$this->db->insert('konfirmasi_pembayaran',$array);
+			return 1;
+		}
 
 	    function editKonfirmasi($data,$id){
 	      $array = array(
@@ -123,5 +137,14 @@ class Mpembayaran extends CI_Model {
 		      $status_pembayaran = "Pending";
 		  }
 
+			function fetchAllPembayaran(){
+
+				$this->db->order_by('nama_bank','ASC');
+				$query = $this->db->get('pembayaran');
+				if($query->num_rows()>0){
+					return $query->result();
+				}
+				else return FALSE;
+			}
 
 }

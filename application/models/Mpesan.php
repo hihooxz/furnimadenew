@@ -26,7 +26,22 @@ class Mpesan extends CI_Model {
     return $this->db->count_all("pesan");
   }
 
-  
+	function simpanPesan($data,$id,$upload_data){
+    $array = array(
+        'id_ruangpesan' => $id,
+        'id_user' => $this->session->userdata('idUser'),
+				'pesan' => $data['pesan'],
+        'gambar_pesan' => 'asset/gambar/pesan/'.$upload_data['orig_name'],
+				'tanggal_pesan' => date('Y-m-d H:i:s')
+
+      );
+			if($upload_data!=false){
+				$array['gambar_pesan'] = 'asset/gambar/pesan/'.$upload_data['orig_name'];
+			}
+    $this->db->insert('pesan',$array);
+    return 1;
+  }
+
 
 		function fetchPesanSearch($data) {
 			$this->db->like($data['by'],$data['search']);
@@ -37,5 +52,30 @@ class Mpesan extends CI_Model {
 	    }
 	    else return FALSE;
 		}
+
+		function fetchRuangpesan($limit,$start,$pagenumber){
+
+			if($pagenumber!=""){
+				/*$this->db->limit($limit,($pagenumber*$limit)-$limit);*/
+				$limit = ($pagenumber*$limit)-$limit.",".$limit;
+			}
+	    else{
+				/* $this->db->limit($limit,$start); */
+				$limit = $start.",".$limit;
+			}
+
+	    $sql = "select fm_ruangpesan.*,fm_user.nama_lengkap ,table_user.nama_lengkap as nama_lengkap_penjual
+	          FROM
+	          fm_ruangpesan
+	          JOIN fm_user ON fm_ruangpesan.id_pembeli = fm_user.id_user
+	          JOIN (select * from fm_user) as table_user ON fm_ruangpesan.id_penjual = table_user.id_user
+						limit ".$limit."
+	          ";
+						$query = $this->db->query($sql);
+				    if($query->num_rows()>0){
+				      return $query->result();
+				    }
+				    else return FALSE;
+	  }
 
 }

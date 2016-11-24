@@ -102,7 +102,7 @@ class Muser extends CI_Model {
     $this->db->where('id_user',$id);
     $this->db->update('user',$array);
     return 1;
-  } 
+  }
   function gantiPassword($data,$id){
     $array = array(
         'password' => md5($data['password'])
@@ -110,7 +110,7 @@ class Muser extends CI_Model {
     $this->db->where('id_user',$id);
     $this->db->update('user',$array);
     return 1;
-  }  
+  }
   function daftarCustomer($data){
     $array = array(
         'username' => $data['username'],
@@ -134,5 +134,48 @@ class Muser extends CI_Model {
       );
     $this->db->insert('user',$array);
     return 1;
+  }
+	function bikinRuangpesan($id_pembeli,$id_penjual){
+    $array = array(
+        'id_pembeli' => $id_pembeli,
+        'id_penjual' => $id_penjual,
+        'tanggal_ruangpesan' => date('Y-m-d H:i:s')
+      );
+    $this->db->insert('ruangpesan',$array);
+    return 1;
+  }
+	function ruangPesan($id_pembeli,$id_penjual){
+    $this->db->where('id_pembeli',$id_pembeli);
+    $this->db->where('id_penjual',$id_penjual);
+    $query = $this->db->get('ruangpesan');
+    if($query->num_rows()>0){
+      return $query->row_array();
+    }
+    else return false;
+  }
+	function fetchPesan($id){
+		$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_ruangpesan');
+		$this->db->join('user','user.id_user = pesan.id_user');
+		$this->db->order_by('tanggal_pesan','ASC');
+		$this->db->where('pesan.id_ruangpesan',$id);
+		$query = $this->db->get('pesan');
+		if($query->num_rows()>0){
+			return $query->result();
+		}
+		else return false;
+	}
+	function getRuangpesan($id){
+
+    $sql = "select fm_ruangpesan.*,id_penjual.nama_lengkap as nama_lengkap_penjual,fm_user.*
+          FROM
+          fm_ruangpesan
+          JOIN fm_user ON fm_ruangpesan.id_pembeli = fm_user.id_user
+          JOIN (select * from fm_user) as penjual ON fm_ruangpesan.id_penjual = penjual.id_user
+          ";
+    $query = $this->db->query($sql);
+    if($query->num_rows()>0){
+      return $query->row_array();
+    }
+    else return FALSE;
   }
 }
