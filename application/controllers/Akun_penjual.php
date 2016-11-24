@@ -157,29 +157,36 @@ class Akun_penjual extends CI_Controller {
 		$data['title_web'] = 'Riwayat Pesanan| Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/riwayat_pesanan';
 
-    	
+
     	$this->load->view('yellow/index',$data);
 	}
 	function konfirmasi_pengerjaan(){
 		$data['title_web'] = 'Konfirmasi Pengerjaan | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/konfirmasi_pengerjaan';
 
-    	
+
     	$this->load->view('yellow/index',$data);
 	}
 	function konfirmasi_pembayaran(){
 		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/konfirmasi_pembayaran';
 
-    	
+
     	$this->load->view('yellow/index',$data);
 	}
 	function pesan(){
 		$data['title_web'] = 'Pesan | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/pesan';
 
-    	
+
     	$this->load->view('yellow/index',$data);
+	}
+	function tender(){
+		$data['title_web'] = 'Tender | Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/tender';
+
+
+			$this->load->view('yellow/index',$data);
 	}
 	function kirim_pesan(){
 		$data['title_web'] = 'Kirim Pesan | Furnimade';
@@ -189,7 +196,7 @@ class Akun_penjual extends CI_Controller {
     	$data['result'] = $this->mod->getDataWhere('user','id_user',$id);
     	if($data['result'] == FALSE)
     		show_404();
-    	
+
     	$this->load->view('yellow/index',$data);
 	}
 	function keranjang(){

@@ -27,6 +27,6 @@
           <a <?php if($this->uri->segment(2) == 'riwayat-produk') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/riwayat-produk') ?>"><i class="fa fa-th-list" aria-hidden="true"></i>Riwayat Produk</a>
         </li>
         <li>
-          <a <?php if($this->uri->segment(2) == 'tender') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/riwayat-produk') ?>"><i class="fa fa-briefcase" aria-hidden="true"></i>Tender</a>
+          <a <?php if($this->uri->segment(2) == 'tender') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/tender') ?>"><i class="fa fa-briefcase" aria-hidden="true"></i>Tender</a>
         </li>
       </ul>

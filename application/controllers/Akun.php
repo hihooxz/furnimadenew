@@ -81,14 +81,51 @@ class Akun extends CI_Controller {
 
 	function riwayat_pesanan(){
 		$data['title_web'] = 'Riwayat Pesanan | Furnimade';
-		$data['path_content'] = 'default/akun/riwayat_pesanan';
+		$data['path_content'] = 'yellow/akun/riwayat_pesanan';
 
-		$this->load->view('default/index',$data);
+		$this->load->view('yellow/index',$data);
+	}
+	function konfirmasi_pembayaran(){
+		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
+		$data['path_content'] = 'yellow/akun/konfirmasi_pembayaran';
+
+		$this->load->view('yellow/index',$data);
+	}
+	function riwayat_desain_produk(){
+		$data['title_web'] = 'Riwayat Produk| Furnimade';
+		$data['path_content'] = 'yellow/akun/riwayat_desain_produk';
+		if(!$this->form_validation->run()){
+		// Ngeload data
+		$perpage = 10;
+		$this->load->library('pagination'); // load libraray pagination
+		$config['base_url'] = base_url($this->uri->segment(1).'/riwayat_desain_produk/'); // configurate link pagination
+		$config['total_rows'] = $this->mod->countData('produk');// fetch total record in databae using load
+		$config['per_page'] = $perpage; // Total data in one page
+		$config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
+		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
+		$config['num_links'] = round($choice); // Rounding Choice Variable
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config); // intialize var config
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+		$data['results'] = $this->mp->fetchProduk($config['per_page'],$page,$this->uri->segment(3)); // fetch data using limit and pagination
+		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
+		$data['total_rows'] = $this->mod->countData('produk'); // Make a variable (array) link so the view can call the variable
+		$this->load->view('yellow/index',$data);
+		}
+		else{
+			$data['results'] = $this->mp->fetchProdukSearch($_POST); // fetch data using limit and pagination
+			$data['links'] = false;
+			$this->load->view('yellow/index',$data);
+		}
 	}
 
-	
+	function tender(){
+		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
+		$data['path_content'] = 'yellow/akun/tender';
 
-	
+		$this->load->view('yellow/index',$data);
+	}
+
 
 
 
