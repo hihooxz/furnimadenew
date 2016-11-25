@@ -88,7 +88,7 @@ class Mpesan extends CI_Model {
 				    else return FALSE;
 	  }
 	  function fetchAllPesanPembeli($id) {
-	  	$this->db->select('pesan.*');
+	  	$this->db->select('pesan.*,user.username');
 	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_pesan');
 	  	$this->db->join('user','user.id_user = ruangpesan.id_penjual');
 	  	$this->db->where('pesan.id_ruangpesan',$id);

@@ -34,15 +34,22 @@
             else{
               ?>
               <div class="row text-left">
-                <div class="col-xs-8">
-                  <div class="alert alert-info" role="alert">
+              <div class="col-xs-8">
+                <div class="alert alert-warning" role="alert">
+                  <div class="col-xs-10">
+                    <h4><?php echo $rows->username?></h4>
                     <?php
                       echo $rows->pesan;
                     ?><br />
                     <small><?php echo date('D, d M Y H:i',strtotime($rows->tanggal_pesan))?></small>
                   </div>
+                  <div class="col-xs-2">
+                      <i class="fa fa-user fa-4x"></i>
+                  </div>
+                  <div class="clearfix"></div>
                 </div>
               </div>
+            </div>
               <?php
             }
           }
