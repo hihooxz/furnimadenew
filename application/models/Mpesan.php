@@ -39,8 +39,7 @@ class Mpesan extends CI_Model {
     $array = array(
         'id_ruangpesan' => $id,
         'id_user' => $this->session->userdata('idUser'),
-				'pesan' => $data['pesan'],
-        'gambar_pesan' => 'asset/gambar/pesan/'.$upload_data['orig_name'],
+				'pesan' => $data['pesan'],	
 				'tanggal_pesan' => date('Y-m-d H:i:s')
 
       );
@@ -92,7 +91,7 @@ class Mpesan extends CI_Model {
 	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_pesan');
 	  	$this->db->join('user','user.id_user = ruangpesan.id_penjual');
 	  	$this->db->where('pesan.id_ruangpesan',$id);
-		$this->db->order_by('tanggal_pesan');	
+		$this->db->order_by('tanggal_pesan');
 	    $query = $this->db->get('pesan');
 	    if($query->num_rows()>0){
 	      return $query->result();
