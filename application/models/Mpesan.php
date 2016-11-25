@@ -31,6 +31,15 @@ class Mpesan extends CI_Model {
   	}
   	else return false;
   }
+	function getRuangpenjual($id){
+		$this->db->join('user','user.id_user = ruangpesan.id_pembeli');
+		$this->db->where('id_ruangpesan',$id);
+		$query = $this->db->get('ruangpesan');
+		if($query->num_rows()>0){
+			return $query->row_array();
+		}
+		else return false;
+	}
   function countAllpesan() {
     return $this->db->count_all("pesan");
   }
@@ -40,7 +49,6 @@ class Mpesan extends CI_Model {
         'id_ruangpesan' => $id,
         'id_user' => $this->session->userdata('idUser'),
 				'pesan' => $data['pesan'],
-        'gambar_pesan' => 'asset/gambar/pesan/'.$upload_data['orig_name'],
 				'tanggal_pesan' => date('Y-m-d H:i:s')
 
       );
@@ -87,12 +95,49 @@ class Mpesan extends CI_Model {
 				    }
 				    else return FALSE;
 	  }
+		function fetchRuangpesanPenjual($limit,$start,$pagenumber,$id_user){
+
+			if($pagenumber!=""){
+				/*$this->db->limit($limit,($pagenumber*$limit)-$limit);*/
+				$limit = ($pagenumber*$limit)-$limit.",".$limit;
+			}
+	    else{
+				/* $this->db->limit($limit,$start); */
+				$limit = $start.",".$limit;
+			}
+
+	    $sql = "select fm_ruangpesan.*,fm_user.nama_lengkap ,table_user.nama_lengkap as nama_lengkap_pembeli
+	          FROM
+	          fm_ruangpesan
+	          JOIN fm_user ON fm_ruangpesan.id_penjual = fm_user.id_user
+	          JOIN (select * from fm_user) as table_user ON fm_ruangpesan.id_pembeli = table_user.id_user
+	          Where id_penjual = ".$id_user."
+						limit ".$limit."
+	          ";
+						$query = $this->db->query($sql);
+				    if($query->num_rows()>0){
+				      return $query->result();
+				    }
+				    else return FALSE;
+	  }
 	  function fetchAllPesanPembeli($id) {
 	  	$this->db->select('pesan.*,user.username');
 	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_ruangpesan');
 	  	$this->db->join('user','user.id_user = ruangpesan.id_penjual');
 	  	$this->db->where('pesan.id_ruangpesan',$id);
-		$this->db->order_by('tanggal_pesan','DESC');	
+		$this->db->order_by('tanggal_pesan','DESC');
+	    $query = $this->db->get('pesan');
+	    if($query->num_rows()>0){
+	      return $query->result();
+	    }
+	    else return FALSE;
+		}
+		function fetchAllPesanPenjual($id) {
+	  	$this->db->select('pesan.*,user.username');
+	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_ruangpesan');
+	  	$this->db->join('user','user.id_user = ruangpesan.id_pembeli');
+	  	$this->db->where('pesan.id_ruangpesan',$id);
+		$this->db->order_by('tanggal_pesan','DESC');
 	    $query = $this->db->get('pesan');
 	    if($query->num_rows()>0){
 	      return $query->result();

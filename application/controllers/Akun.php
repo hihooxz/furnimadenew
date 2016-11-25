@@ -118,7 +118,7 @@ class Akun extends CI_Controller {
 		if($data['result'] == false)
 			show_404();
 
-		$data['results'] = $this->muser->fetchRuangpesan($id);
+		$data['results'] = $this->muser->fetchRuangpesanPembeli($id);
 		$this->load->view('yellow/index',$data);
 	}
 

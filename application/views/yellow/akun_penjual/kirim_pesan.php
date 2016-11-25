@@ -19,7 +19,7 @@
           </div>
           <div class="col-md-3 col-sm-3 hidden-xs"></div>
         </div>
-      </div>      
+      </div>
       <div class="form-group">
         <div class="row">
           <div class="col-md-3 col-sm-3 col-xs-3 text-right">
@@ -38,16 +38,16 @@
           </div>
           <div class="col-md-6 col-sm-6 col-xs-9">
              <input type="file" name="userfile" class="form-control col-md-7 col-xs-12">
-            <a class="btn btn-md form-control fur-btn-primary" style="margin-top:10px" href="#" role="button" type="submit">
+            <button class="btn btn-md form-control fur-btn-primary" style="margin-top:10px" href="#" role="button" type="submit">
               Submit
-            </a>
+            </button>
           </div>
           <div class="col-md-3 col-sm-3 hidden-xs"></div>
         </div>
       </div>
       </form>
     </div>
-       
+
     </div>
   </div>
 </div>

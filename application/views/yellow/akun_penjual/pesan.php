@@ -4,47 +4,48 @@
   </div>
   <div class="row text-center">
     <div class="col-md-4">
-      <?php $this->load->view('yellow/akun_penjual/nav_penjual');?>
+      <?php $this->load->view('yellow/akun/nav_member');?>
     </div>
     <div class="col-md-8 form-group form-impian table-responsive">
       <div class="row">
       </div>
       <table class="table table-striped profile" style="border:1px solid #ddd">
-        <thead> 
+        <thead>
           <tr>
-            <td>Pengirim</td>
-            <td style="padding:0px 50px 0px 50px">Tanggal Kirim</td>
-            <td>Isi Pesan</td>
+            <td>No</td>
+            <td>Dari</td>
+            <td>tanggal</td>
             <td style="padding:0px 50px 0px 50px"></td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>haha@gmail.com</td>
-            <td>15 Oktober 2016</td>
-            <td>Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>hehe@gmail.com</td>
-            <td>15 Oktober 2016</td>
-            <td>Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet</td>
-            <td style="padding-top:30px">
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
+          <?php
+            if($results!=FALSE){
+              $i= 1;
+              foreach ($results as $rows) {
+                ?>
+                <tr>
+                  <td><?php echo $i ?></td>
+                  <td><?php echo $rows->nama_lengkap_pembeli ?></td>
+                  <td><?php echo date('D d M Y H:i',strtotime($rows->tanggal_ruangpesan))?>
+                  <td>
+                    <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/lihat-pesan/'.$rows->id_ruangpesan)?>">
+                      <i class="fa fa-eye"></i>
+                    </a>
+                    <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/delete-pesan/'.$rows->id_ruangpesan)?>">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+                <?php
+                $i++;
+              }
+            }
+          ?>
+          <?php
+            echo $links;
+          ?>
+
         </tbody>
   </table>
     </div>

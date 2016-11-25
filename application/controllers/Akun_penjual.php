@@ -6,6 +6,8 @@ class Akun_penjual extends CI_Controller {
 		parent::__construct();
 		$this->load->model('muser');
 		$this->load->model('mproduk','mp');
+		$this->load->model('mpembayaran');
+		$this->load->model('mpesan');
 		if($this->session->userdata('hakAkses') != 2){
 			redirect(base_url('hal/login/'));
 			$array = array(
@@ -177,10 +179,45 @@ class Akun_penjual extends CI_Controller {
 	function pesan(){
 		$data['title_web'] = 'Pesan | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/pesan';
-
+		$data['result'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
+		if(!$this->form_validation->run()){
+    // Ngeload data
+    $perpage = 10;
+    $this->load->library('pagination'); // load libraray pagination
+    $config['base_url'] = base_url($this->uri->segment(1).'/pesan/'); // configurate link pagination
+    $config['total_rows'] = $this->mod->countData('pesan');// fetch total record in databae using load
+    $config['per_page'] = $perpage; // Total data in one page
+    $config['uri_segment'] = 3; // catch uri segment where locate in 3th posisition
+    $choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
+    $config['num_links'] = round($choice); // Rounding Choice Variable
+    $config['use_page_numbers'] = TRUE;
+    $this->pagination->initialize($config); // intialize var config
+    $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+    $data['results'] = $this->mpesan->fetchRuangpesanPenjual($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
+    $data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
+    $data['total_rows'] = $this->mod->countData('pesan'); // Make a variable (array) link so the view can call the variable
+    $this->load->view('yellow/index',$data);
+		}
+		else{
+			$data['results'] = $this->mpesan->fetchRuangpesanSearch($_POST); // fetch data using limit and pagination
+			$data['links'] = false;
+			$this->load->view('yellow/index',$data);
+		}
 
     	$this->load->view('yellow/index',$data);
 	}
+
+	function lihat_pesan(){
+		$data['title_web'] = 'Lihat Pesan| Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/lihat_pesan';
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mpesan->getRuangpenjual($id);
+
+
+		$data['results'] = $this->mpesan->fetchAllPesanPenjual($id);
+		$this->load->view('yellow/index',$data);
+	}
+
 	function tender(){
 		$data['title_web'] = 'Tender | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/tender';
@@ -188,17 +225,62 @@ class Akun_penjual extends CI_Controller {
 
 			$this->load->view('yellow/index',$data);
 	}
+	public function ruang_pesan(){
+		$id = $this->uri->segment(3);
+		$data['result']	= $this->muser->getRuangpenjual($id);
+		if($data['result'] == false)
+			show_404();
+
+		$data['results'] = $this->muser->fetchRuangpesanPenjual($id);
+		$this->load->view('yellow/index',$data);
+	}
+
 	function kirim_pesan(){
 		$data['title_web'] = 'Kirim Pesan | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/kirim_pesan';
-
 		$id = $this->uri->segment(3);
     	$data['result'] = $this->mod->getDataWhere('user','id_user',$id);
     	if($data['result'] == FALSE)
     		show_404();
 
-    	$this->load->view('yellow/index',$data);
-	}
+				$this->form_validation->set_rules('username','Penerima pesan','required');
+				$this->form_validation->set_rules('pesan','isi Pesan','required');
+
+
+        if(!$this->form_validation->run()){
+          $this->load->view('yellow/index',$data);
+        }
+
+        else{
+        $config['upload_path'] = './asset/gambar/pesan/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']	= '500';
+				$config['max_width']  = '1024';
+				$config['max_height']  = '768';
+
+				$this->load->library('upload', $config);
+				if ( ! $this->upload->do_upload()){
+						$ruangpesan= $this->muser->ruangPesan($id,$this->session->userdata('idUser'));
+						if($ruangpesan == FALSE){
+							$this->muser->bikinRuangpesan($id,$this->session->userdata('idUser'));
+							$ruangpesan= $this->muser->ruangPesan($id,$this->session->userdata('idUser'));
+							$save = $this->mpesan->simpanPesan($_POST,$ruangpesan['id_ruangpesan'],FALSE);
+							redirect(base_url($this->uri->segment(1).'/pesan'));
+						}
+						else{
+							$save = $this->mpesan->simpanPesan($_POST,$ruangpesan['id_ruangpesan'],$this->upload->data());
+							redirect(base_url($this->uri->segment(1).'/pesan'));
+						}
+				}
+
+			else{
+				$save = $this->mpesan->simpanPesan($_POST,$id,$this->upload->data());
+          		redirect(base_url($this->uri->segment(1).'/kirim_pesan'));
+					}
+
+      }
+		}
+
 	function keranjang(){
 		$data['title_web'] = 'Keranjang Belanjaan | Furnimade';
 		$data['path_content'] = 'yellow/module/keranjang';
