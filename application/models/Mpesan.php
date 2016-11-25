@@ -89,10 +89,10 @@ class Mpesan extends CI_Model {
 	  }
 	  function fetchAllPesanPembeli($id) {
 	  	$this->db->select('pesan.*,user.username');
-	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_pesan');
+	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_ruangpesan');
 	  	$this->db->join('user','user.id_user = ruangpesan.id_penjual');
 	  	$this->db->where('pesan.id_ruangpesan',$id);
-		$this->db->order_by('tanggal_pesan');	
+		$this->db->order_by('tanggal_pesan','DESC');	
 	    $query = $this->db->get('pesan');
 	    if($query->num_rows()>0){
 	      return $query->result();

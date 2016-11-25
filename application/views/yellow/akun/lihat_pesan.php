@@ -7,6 +7,12 @@
       <?php $this->load->view('yellow/akun/nav_member');?>
     </div>
     <div class="col-md-8">
+      <div class="text-left">
+      <a href="<?php echo base_url($this->uri->segment(1).'/kirim-pesan/'.$result['id_penjual'])?>">
+        <button class="btn btn-md fur-btn-primary" style="border-radius:0px">
+        <i class="fa fa-envelope"></i> Kirim Pesan</button>
+      </a>
+      </div>
       <?php
         if($results!=FALSE){
           foreach ($results as $rows) {
@@ -55,12 +61,6 @@
           }
         }
       ?>
-      <div class="text-left">
-      <a href="<?php echo base_url($this->uri->segment(1).'/kirim-pesan/'.$result['id_penjual'])?>">
-        <button class="btn btn-md fur-btn-primary" style="border-radius:0px">
-        <i class="fa fa-envelope"></i> Kirim Pesan</button>
-      </a>
-      </div>
     </div>
   </div>
 </div>
