@@ -15,7 +15,7 @@
           <a <?php if($this->uri->segment(2) == 'barang-diterima') echo "class=\"active\""?> href="<?php echo base_url('akun/barang-diterima')?>"><i class="fa fa-th-large" aria-hidden="true"></i> Barang Diterima</a>
         </li>
         <li>
-          <a <?php if($this->uri->segment(2) == 'pesan') echo "class=\"active\""?> href="<?php echo base_url('akun/pesan') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Pesan</a>
+          <a <?php if($this->uri->segment(2) == 'pesan' || $this->uri->segment(2) == 'lihat-pesan' || $this->uri->segment(2) == 'kirim-pesan') echo "class=\"active\""?> href="<?php echo base_url('akun/pesan') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Pesan</a>
         </li>
         <li>
           <a <?php if($this->uri->segment(2) == 'furniture-impian') echo "class=\"active\""?> href="<?php echo base_url('hal/furniture-impian') ?>"><i class="fa fa-cloud-upload" aria-hidden="true"></i>Unggah Desain Produk</a>

@@ -13,8 +13,7 @@
         <thead>
           <tr>
             <td>No</td>
-            <td>Pengirim</td>
-            <td>Penerima</td>
+            <td>Dari</td>
             <td>tanggal</td>
             <td style="padding:0px 50px 0px 50px"></td>
           </tr>
@@ -28,10 +27,9 @@
                 <tr>
                   <td><?php echo $i ?></td>
                   <td><?php echo $rows->nama_lengkap_penjual ?></td>
-                  <td><?php echo $rows->nama_lengkap?></td>
-                  <td><?php echo date('D d m y H:i',strtotime($rows->tanggal_ruangpesan))?>
+                  <td><?php echo date('D d M Y H:i',strtotime($rows->tanggal_ruangpesan))?>
                   <td>
-                    <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/edit-pesan/'.$rows->id_ruangpesan)?>">
+                    <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/lihat-pesan/'.$rows->id_ruangpesan)?>">
                       <i class="fa fa-eye"></i>
                     </a>
                     <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/delete-pesan/'.$rows->id_ruangpesan)?>">

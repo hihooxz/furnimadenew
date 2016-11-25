@@ -22,6 +22,15 @@ class Mpesan extends CI_Model {
     }
     else return FALSE;
   }
+  function getRuangpesan($id){
+  	$this->db->join('user','user.id_user = ruangpesan.id_penjual');
+  	$this->db->where('id_ruangpesan',$id);
+  	$query = $this->db->get('ruangpesan');
+  	if($query->num_rows()>0){
+  		return $query->row_array();
+  	}
+  	else return false;
+  }
   function countAllpesan() {
     return $this->db->count_all("pesan");
   }
@@ -46,14 +55,14 @@ class Mpesan extends CI_Model {
 		function fetchPesanSearch($data) {
 			$this->db->like($data['by'],$data['search']);
 			$this->db->order_by('tanggal_pesan','ASC');
-	    $query = $this->db->get('pesan');
+	    	$query = $this->db->get('pesan');
 	    if($query->num_rows()>0){
 	      return $query->result();
 	    }
 	    else return FALSE;
 		}
 
-		function fetchRuangpesan($limit,$start,$pagenumber){
+		function fetchRuangpesanPembeli($limit,$start,$pagenumber,$id_user){
 
 			if($pagenumber!=""){
 				/*$this->db->limit($limit,($pagenumber*$limit)-$limit);*/
@@ -69,6 +78,7 @@ class Mpesan extends CI_Model {
 	          fm_ruangpesan
 	          JOIN fm_user ON fm_ruangpesan.id_pembeli = fm_user.id_user
 	          JOIN (select * from fm_user) as table_user ON fm_ruangpesan.id_penjual = table_user.id_user
+	          Where id_pembeli = ".$id_user."
 						limit ".$limit."
 	          ";
 						$query = $this->db->query($sql);
@@ -77,5 +87,17 @@ class Mpesan extends CI_Model {
 				    }
 				    else return FALSE;
 	  }
+	  function fetchAllPesanPembeli($id) {
+	  	$this->db->select('pesan.*');
+	  	$this->db->join('ruangpesan','ruangpesan.id_ruangpesan = pesan.id_pesan');
+	  	$this->db->join('user','user.id_user = ruangpesan.id_penjual');
+	  	$this->db->where('pesan.id_ruangpesan',$id);
+		$this->db->order_by('tanggal_pesan');	
+	    $query = $this->db->get('pesan');
+	    if($query->num_rows()>0){
+	      return $query->result();
+	    }
+	    else return FALSE;
+		}
 
 }

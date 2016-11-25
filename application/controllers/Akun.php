@@ -33,7 +33,7 @@ class Akun extends CI_Controller {
 		}
 	}
 	function pesan(){
-		$data['title_web'] = 'Profil Member| Furnimade';
+		$data['title_web'] = 'Pesan Member| Furnimade';
 		$data['path_content'] = 'yellow/akun/pesan';
 		$data['result'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
 		if(!$this->form_validation->run()){
@@ -49,7 +49,7 @@ class Akun extends CI_Controller {
     $config['use_page_numbers'] = TRUE;
     $this->pagination->initialize($config); // intialize var config
     $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-    $data['results'] = $this->mpesan->fetchRuangpesan($config['per_page'],$page,$this->uri->segment(3)); // fetch data using limit and pagination
+    $data['results'] = $this->mpesan->fetchRuangpesanPembeli($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
     $data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
     $data['total_rows'] = $this->mod->countData('pesan'); // Make a variable (array) link so the view can call the variable
     $this->load->view('yellow/index',$data);
@@ -59,7 +59,16 @@ class Akun extends CI_Controller {
 			$data['links'] = false;
 			$this->load->view('yellow/index',$data);
 		}
+	}
+	function lihat_pesan(){
+		$data['title_web'] = 'Lihat Pesan| Furnimade';
+		$data['path_content'] = 'yellow/akun/lihat_pesan';
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mpesan->getRuangpesan($id);
 
+
+		$data['results'] = $this->mpesan->fetchAllPesanPembeli($id);
+		$this->load->view('yellow/index',$data);
 	}
 	function produk_tersimpan(){
 		$data['title_web'] = 'Desain Produk | Furnimade';
