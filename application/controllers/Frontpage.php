@@ -14,5 +14,5 @@ class Frontpage extends CI_Controller {
 		$data['results2'] = $this->mp->fetchKategori(6,0,FALSE); // fetch data using limit and pagination
 		$this->load->view('yellow/index',$data);
 	}
-	
+
 }

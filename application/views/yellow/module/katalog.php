@@ -1,81 +1,29 @@
-<div class="container" style="margin-bottom:70px">
-  <div class="modal-title text-center" style="margin-bottom:25px">
-        Furnimade Katalog
-  </div>
-  <div class="row text-center btn-produk" style="margin-top:20px">
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/wallpaper.jpg') ?>">
-        <b>Wallpaper</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lantai.jpg') ?>">
-        <b>Lantai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/hiasan.jpg') ?>">
-        <b>Hiasan Lantai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/tirai.jpg') ?>">
-        <b>Tirai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_gantung.jpg') ?>">
-        <b>Lampu Gantung</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_lantai.jpg') ?>">
-        <b>Lampu Lantai</b>
-      </a>
-    </div>
-  </div>
-  <div class="row text-center btn-produk" style="margin-top:20px">
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/wallpaper.jpg') ?>">
-        <b>Wallpaper</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lantai.jpg') ?>">
-        <b>Lantai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/hiasan.jpg') ?>">
-        <b>Hiasan Lantai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/tirai.jpg') ?>">
-        <b>Tirai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_gantung.jpg') ?>">
-        <b>Lampu Gantung</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_lantai.jpg') ?>">
-        <b>Lampu Lantai</b>
-      </a>
-    </div>
-  </div>
-</div>
+		<div class="container">
+			<div style="margin-bottom:20px">
+				<center><h2>Lihat Katalog</h2></center>
+			</div>
+			<?php
+				if($results!=false){
+					foreach ($results as $rows) {
+						?>
+						<div class="col-md-2 col-xs-12">
+							<center>
+								<a href="<?php echo base_url('produk/kategori/'.$rows->id_kategori)?>" title="Lihat Katalog dari <?php echo $rows->nama_kategori?>">
+								<?php if($rows->gambar_kategori!= "") {
+				                  ?>
+				                  	<img src="<?php echo base_url($rows->gambar_kategori)?>">
+				                  <?php
+				                } else{
+				                  ?>
+				                  <i class="fa fa-cube fa-4x"></i>
+				                  <?php
+				                }?>
+				                </a><br />
+								<b><?php echo $rows->nama_kategori?></b><br /><br />
+							</center>
+						</div>
+						<?php
+					}
+				}
+			?>
+		</div>

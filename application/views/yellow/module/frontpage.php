@@ -53,60 +53,34 @@
   </div>
   <div class="row text-center" style="margin-top:20px">
     <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
-      </a>
-      <span class="label label-warning">
-        <b>Rp 5,000,000</b>
-      </span><br/>
-      Sofa Ketje
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
-      </a>
-      <span class="label label-warning">
-        <b>Rp 5,000,000</b>
-      </span><br/>
-      Sofa Ketje
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
-      </a>
-      <span class="label label-warning">
-        <b>Rp 5,000,000</b>
-      </span><br/>
-      Sofa Ketje
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
-      </a>
-      <span class="label label-warning">
-        <b>Rp 5,000,000</b>
-      </span><br/>
-      Sofa Ketje
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
-      </a>
-      <span class="label label-warning">
-        <b>Rp 5,000,000</b>
-      </span><br/>
-      Sofa Ketje
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="imd-responsive" src="<?php echo base_url('asset/asset_yellow/images/sofa_ketje.jpg')?>">
-      </a>
-      <span class="label label-warning">
-        <b>Rp 5,000,000</b>
-      </span><br/>
-      Sofa Ketje
-    </div>
+      <?php
+        if($results!=FALSE){
+          foreach ($results as $rows) {
+            ?>
 
+      <a href="#" title="Lihat Sofa Ketje">
+        <?php
+                  if($rows->gambar_produk!= ""){
+                    ?>
+                    <img class="img" width="250" height="180" src="<?php echo base_url($rows->gambar_produk) ?>">
+                    <?php
+                  }
+                  else{
+                    ?>
+                    <i class="fa fa-cube fa-3x"></i>
+                    <?php
+                  }
+                ?>
+      </a>
+      <span class="label label-warning">
+        <b>Rp <?php echo number_format($rows->harga_produk) ?></b>
+      </span><br/>
+      <?php echo $rows->nama_produk ?>
+    </div>
+    <?php
+    }
+  }
+  ?>
   </div>
 </div>
 <div class="container">
@@ -117,42 +91,31 @@
     </div>
     <div class="col-md-4 col-sm-3 col-xs-2" style="border-bottom:1px solid #333"></div>
   </div>
-  <div class="row text-center btn-produk" style="margin-top:20px">
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/wallpaper.jpg')?>">
-        <b>Wallpaper</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lantai.jpg')?>">
-        <b>Lantai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/hiasan.jpg')?>">
-        <b>Hiasan Lantai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/tirai.jpg')?>">
-        <b>Tirai</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_gantung.jpg')?>">
-        <b>Lampu Gantung</b>
-      </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-      <a href="#" title="Lihat Sofa Ketje">
-        <img class="img-responsive" src="<?php echo base_url('asset/asset_yellow/images/lampu_lantai.jpg')?>">
-        <b>Lampu Lantai</b>
-      </a>
-    </div>
+  <div class="container">
+
+    <?php
+  if($results2!=false){
+    foreach ($results2 as $rows) {
+      ?>
+      <div class="col-md-2">
+        <center>
+          <a href="<?php echo base_url('produk/kategori/'.$rows->id_kategori)?>" title="Lihat Katalog dari <?php echo $rows->nama_kategori?>">
+          <?php if($rows->gambar_kategori!= "") {
+                    ?>
+                      <img src="<?php echo base_url($rows->gambar_kategori)?>">
+                    <?php
+                  } else{
+                    ?>
+                      <i class="fa fa-cube fa-3x"></i>
+                    <?php
+                  }?>
+                  </a><br />
+          <b><?php echo $rows->nama_kategori?></b><br /><br />
+        </center>
+      </div>
+      <?php
+          }
+        }
+      ?>
   </div>
 </div>
