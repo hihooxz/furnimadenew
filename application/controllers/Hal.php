@@ -100,7 +100,7 @@ class Hal extends CI_Controller {
 	}
 
 
-	function furniture_impian(){
+	function furniture_impian_2(){
 		$data['title_web'] = 'Buat Furniture Impian | Furnimade';
 		$data['path_content'] = 'yellow/module/furniture_impian';
 		$data['profile'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
@@ -117,8 +117,6 @@ class Hal extends CI_Controller {
 			$config['upload_path'] = './asset/gambar/produk/';
 				$config['allowed_types'] = 'gif|jpg|png';
 				$config['max_size']	= '2000';
-				$config['max_width']  = '1024';
-				$config['max_height']  = '768';
 				$config['file_name'] = 'furniturimpian_'.$this->session->userdata('idUser').'_'.date('YmdHis');
 
 				$this->load->library('upload', $config);
@@ -134,18 +132,18 @@ class Hal extends CI_Controller {
 			}
 		}
 	}
-	function furniture_impian_desain(){
+	function furniture_impian(){
 		$data['title_web'] = 'Buat Furniture Impian dengan Desain | Furnimade';
-		$data['path_content'] = 'default/module/furniture_impian_desain';
+		$data['path_content'] = 'yellow/module/furniture_impian';
 		$data['profile'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
-		$data['bahan'] = $this->mproduk->fetchAllBahan();
-		$data['finishing'] = $this->mproduk->fetchAllFinishing();
+		
+
 		$this->form_validation->set_rules('bahan','bahan','required');
 		$this->form_validation->set_rules('finishing','finishing','required');
 		$this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('deskripsi','Permintaan Tambahan','required');
 		if(!$this->form_validation->run()){
-			$this->load->view('default/index',$data);
+			$this->load->view('yellow/index',$data);
 		}
 		else {
 			/*$config = array();
@@ -155,7 +153,7 @@ class Hal extends CI_Controller {
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
     	$config['overwrite']     = FALSE;*/
-			$this->load->library('upload');
+		$this->load->library('upload');
 	    $files = $_FILES;
 	    $cpt = 2;
 			$flag = 0;
@@ -172,12 +170,12 @@ class Hal extends CI_Controller {
 	    }
 			if (!$this->upload->do_upload()){
 				$data['error'] = $this->upload->display_errors();
-				$this->load->view('default/index',$data);
+				$this->load->view('yellow/index',$data);
 			}
 			else{
 				$save = $this->mproduk->saveFurnitureImpian2($_POST,$this->upload->data(),$cpt);
 				$this->session->set_flashdata(array('success'=>TRUE));
-				$this->load->view('default/index',$data);
+				$this->load->view('yellow/index',$data);
 			}
 		}
 	}
