@@ -203,8 +203,8 @@ class Akun extends CI_Controller {
 		// Ngeload data
 		$perpage = 10;
 		$this->load->library('pagination'); // load libraray pagination
-		$config['base_url'] = base_url($this->uri->segment(1).'/riwayat_desain_produk/'); // configurate link pagination
-		$config['total_rows'] = $this->mod->countData('produk');// fetch total record in databae using load
+		$config['base_url'] = base_url($this->uri->segment(1).'/riwayat-desain-produk/'); // configurate link pagination
+		$config['total_rows'] = $this->mod->countWhereData('desain_produk','id_pembeli',$this->session->userdata('idUser'));// fetch total record in databae using load
 		$config['per_page'] = $perpage; // Total data in one page
 		$config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
 		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
@@ -214,11 +214,11 @@ class Akun extends CI_Controller {
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
 		$data['results'] = $this->mp->fetchDesainProduk($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
 		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
-		$data['total_rows'] = $this->mod->countData('produk'); // Make a variable (array) link so the view can call the variable
+		$data['total_rows'] = $this->mod->countWhereData('desain_produk','id_pembeli',$this->session->userdata('idUser')); // Make a variable (array) link so the view can call the variable
 		$this->load->view('yellow/index',$data);
 		}
 		else{
-			$data['results'] = $this->mp->fetchProdukSearch($_POST); // fetch data using limit and pagination
+			$data['results'] = $this->mp->fetchDesainProdukSearch($_POST); // fetch data using limit and pagination
 			$data['links'] = false;
 			$this->load->view('yellow/index',$data);
 		}
@@ -236,7 +236,7 @@ class Akun extends CI_Controller {
 		$this->load->view('yellow/index',$data);
 	}
 	function tender(){
-		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
+		$data['title_web'] = 'Tender | Furnimade';
 		$data['path_content'] = 'yellow/akun/tender';
 
 		$this->load->view('yellow/index',$data);

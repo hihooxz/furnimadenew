@@ -304,7 +304,7 @@ class Mproduk extends CI_Model {
 					$this->session->set_userdata(array('path_file2'.$i =>NULL));
 	    	} // end for
 		} // end if $desain
-    return 1;
+    return $desain['id_desain_produk'];
   }
   function fetchDesainProduk($limit,$start,$pagenumber,$id_user){
 	if($pagenumber!="")
@@ -319,6 +319,21 @@ class Mproduk extends CI_Model {
 				return $query->result();
 			}
 			else return FALSE;  	
+  }
+  function countTender($id_user){
+  	/*$this->db->where('id_pembeli',$id_user);
+  	$this->db->where('ditenderkan',1);
+  	return $this->db->count_all_results('desain_produk');*/
+  }
+  function saveTender($data,$id){
+  	$array = array(
+  			'id_desain_produk' => $id,
+  			'tanggal_selesai_tender' => date('Y-m-d',strtotime($data['tanggal_selesai_tender'])),
+  			'range_harga' => $data['range_harga'],
+  			'status_tender' => 0
+  		);
+  	$this->db->insert('tender_desain',$array);
+  	return 1;
   }
  }
  

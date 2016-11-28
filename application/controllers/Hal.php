@@ -185,11 +185,10 @@ class Hal extends CI_Controller {
 			}
 			else{
 				$save = $this->mproduk->saveFurnitureImpian($_POST,$this->upload->data(),$cpt,$cpt2);
-				$this->session->set_flashdata(array('success_form'=>TRUE));
 				if($this->input->post('ditenderkan') == 1)
-					$this->load->view('yellow/index',$data);
+					redirect(base_url($this->uri->segment(1).'/furniture-impian-tender/'.$save));
 				else{
-					redirect(base_url($this->uri->segment(1).'/furniture-impian-next/'));
+					redirect(base_url($this->uri->segment(1).'/furniture-impian-next/'.$save));
 				}
 			}
 		}
@@ -216,27 +215,26 @@ private function set_upload_options2($i){
 
     return $config;
 }
-	/*function data_bahan(){
-		$id_bahan = $this->input->post('id_bahan');
-		$finishing = $this->mod->fetchDataWhere('finishing','id_bahan',$id_bahan);
+	function furniture_impian_tender(){
+		$data['title_web'] = 'Furniture Impian | Furnimade';
+		$data['path_content'] = 'yellow/module/furniture_impian_tender';
 
-		$message = "";
-		if($finishing != FALSE){
-			foreach ($finishing as $rows) {
-				$message = "
-					<div class=\"col-md-2 col-xs-12 col-sm-6\">
-						<img src=\"".base_url($rows->gambar_finishing)."\" class=\"img-responsive\">
-					</div>
-				";
-			}
-		}
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mod->getDataWhere('desain_produk','id_desain_produk',$id);
+		if($data['result'] == false)
+			show_404();
+
+		$this->form_validation->set_rules('tanggal_selesai_tender','Tanggal Selesai Tender','required');
+		$this->form_validation->set_rules('range_harga','Range Harga','required');
+
+		if(!$this->form_validation->run())
+		$this->load->view('yellow/index',$data);
 		else{
-			$data['finishing'] = "error";
+			$this->session->set_flashdata(array('success_form'=>TRUE));
+			$data['save'] = $this->mproduk->saveTender($_POST,$id);
+			$this->load->view('yellow/index',$data);
 		}
-		$data['finishing'] = $message;
-		echo json_encode($data);
-	}*/
-
+	}
 	function login_supplier(){
 		$data['title_web'] = 'Masuk ke Halaman Supplier | Furnimade';
 		$data['path_content'] = 'default/module/login_supplier';
