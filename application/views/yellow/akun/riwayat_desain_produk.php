@@ -20,7 +20,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
             <?php
           		if($results!=FALSE){
                 $i= 1;
@@ -46,12 +45,13 @@
           			}
           		}
           	?>
-          	<?php
-          		echo $links;
-          	?>
 
         </tbody>
   </table>
+  
+            <?php
+              echo $links;
+            ?>
     </div>
     <div class="col-md-1"></div>
   </div>

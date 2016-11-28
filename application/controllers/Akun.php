@@ -197,7 +197,7 @@ class Akun extends CI_Controller {
 		}
 	}
 	function riwayat_desain_produk(){
-		$data['title_web'] = 'Riwayat Produk| Furnimade';
+		$data['title_web'] = 'Riwayat Desain Produk| Furnimade';
 		$data['path_content'] = 'yellow/akun/riwayat_desain_produk';
 		if(!$this->form_validation->run()){
 		// Ngeload data
@@ -223,7 +223,18 @@ class Akun extends CI_Controller {
 			$this->load->view('yellow/index',$data);
 		}
 	}
+	function lihat_desain(){
+		$data['title_web'] = 'Lihat Desain Produk| Furnimade';
+		$data['path_content'] = 'yellow/akun/lihat_desain_produk';
 
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mod->getDataWhere('desain_produk','id_desain_produk',$id);
+		if($data['result'] == false)
+			redirect(base_url($this->uri->segment(1).'/riwayat-desain-produk'));
+
+		$data['results'] = $this->mod->fetchDataWhere('gambar_desain','id_desain_produk',$id);
+		$this->load->view('yellow/index',$data);
+	}
 	function tender(){
 		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
 		$data['path_content'] = 'yellow/akun/tender';
