@@ -182,6 +182,7 @@ class Akun extends CI_Controller {
 		$this->form_validation->set_rules('bank','Banj Asal','required');
 		$this->form_validation->set_rules('atas_nama','Atas Nama','required');
 		$this->form_validation->set_rules('no_rekening','Nomor Rekening','required');
+		$this->form_validation->set_rules('nominal','Nominal','required|numeric');
 		$this->form_validation->set_rules('tanggal_transfer','tanggal_transfer','required');
 
 
@@ -211,7 +212,7 @@ class Akun extends CI_Controller {
 		$config['use_page_numbers'] = TRUE;
 		$this->pagination->initialize($config); // intialize var config
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
-		$data['results'] = $this->mp->fetchProduk($config['per_page'],$page,$this->uri->segment(3)); // fetch data using limit and pagination
+		$data['results'] = $this->mp->fetchDesainProduk($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
 		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
 		$data['total_rows'] = $this->mod->countData('produk'); // Make a variable (array) link so the view can call the variable
 		$this->load->view('yellow/index',$data);

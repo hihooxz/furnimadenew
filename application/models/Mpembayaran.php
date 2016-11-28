@@ -29,10 +29,8 @@ class Mpembayaran extends CI_Model {
     $array = array(
         'nama_bank' => $data['nama_bank'],
         'atas_nama' => $data['atas_nama'],
-				'no_rekening' => $data['no_rekening'],
+		'no_rekening' => $data['no_rekening'],
         'gambar_bank' => 'asset/gambar/pembayaran/'.$upload_data['orig_name']
-
-
       );
     $this->db->insert('pembayaran',$array);
     return 1;
@@ -67,6 +65,7 @@ class Mpembayaran extends CI_Model {
 	      $this->db->limit($limit,($pagenumber*$limit)-$limit);
 	    else
 	      $this->db->limit($limit,$start);
+	  	$this->db->select('konfirmasi_pembayaran.*,user.username,pembayaran.nama_bank');
 			$this->db->join('pembayaran','konfirmasi_pembayaran.id_pembayaran = pembayaran.id_pembayaran');
 			$this->db->join('user','konfirmasi_pembayaran.id_user = user.id_user');
 	    $this->db->order_by('tanggal_transfer','ASC');
@@ -86,10 +85,10 @@ class Mpembayaran extends CI_Model {
 					'id_pembayaran' => $data['id_pembayaran'],
 					'atas_nama' => $data['atas_nama'],
 					'no_rekening' => $data['no_rekening'],
+					'nominal' => $data['nominal'],
 					'bank' =>$data['bank'],
-					'tanggal_transfer' => $data['tanggal_transfer']
-
-
+					'tanggal_transfer' => date('Y-m-d',strtotime($data['tanggal_transfer'])),
+					'tanggal_konfirmasi_pembayaran' => date('Y-m-d H:i:s')
 				);
 			$this->db->insert('konfirmasi_pembayaran',$array);
 			return 1;
@@ -98,10 +97,7 @@ class Mpembayaran extends CI_Model {
 	    function editKonfirmasi($data,$id){
 	      $array = array(
 					'status' => $data['status']
-
 	        	);
-
-
 	      $this->db->where('id_konfirmasi_pembayaran',$id);
 	      $this->db->update('konfirmasi_pembayaran',$array);
 	      return 1;
@@ -109,6 +105,9 @@ class Mpembayaran extends CI_Model {
 
 			function fetchKonfirmasiPembayaranSearch($data) {
 				$this->db->like($data['by'],$data['search']);
+				$this->db->select('konfirmasi_pembayaran.*,user.username,pembayaran.nama_bank');
+			$this->db->join('pembayaran','konfirmasi_pembayaran.id_pembayaran = pembayaran.id_pembayaran');
+			$this->db->join('user','konfirmasi_pembayaran.id_user = user.id_user');
 				$this->db->order_by('tanggal_transfer','ASC');
 		    $query = $this->db->get('konfirmasi_pembayaran');
 		    if($query->num_rows()>0){

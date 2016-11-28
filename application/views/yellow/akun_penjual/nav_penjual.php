@@ -15,7 +15,7 @@
           <a <?php if($this->uri->segment(2) == 'barang-diterima') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/barang-diterima')?>"><i class="fa fa-th-large" aria-hidden="true"></i> Barang Diterima</a>
         </li>
         <li>
-          <a <?php if($this->uri->segment(2) == 'pesan') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/pesan') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Pesan</a>
+          <a <?php if($this->uri->segment(2) == 'pesan' || $this->uri->segment(2) == 'lihat-pesan' || $this->uri->segment(2) == 'kirim-pesan') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/pesan') ?>"><i class="fa fa-comments" aria-hidden="true"></i> Pesan</a>
         </li>
         <li>
           <a <?php if($this->uri->segment(2) == 'konfirmasi-pengerjaan') echo "class=\"active\""?> href="<?php echo base_url('akun-penjual/konfirmasi-pengerjaan')?>"><i class="fa fa-exchange" aria-hidden="true"></i> Konfirmasi Pengerjaan</a>

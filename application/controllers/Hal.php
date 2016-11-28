@@ -142,20 +142,20 @@ class Hal extends CI_Controller {
 		$this->form_validation->set_rules('finishing','finishing','required');
 		$this->form_validation->set_rules('nama','Nama','required');
 		$this->form_validation->set_rules('deskripsi','Permintaan Tambahan','required');
+		$this->form_validation->set_rules('ditenderkan','Ditenderkan','required');
 		if(!$this->form_validation->run()){
 			$this->load->view('yellow/index',$data);
 		}
 		else {
 			/*$config = array();
-	    $config['upload_path'] = './images/gambar/produk';
+	    $config['upload_path'] = './asset/gambar/desain-produk';
 	    $config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '2000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
     	$config['overwrite']     = FALSE;*/
 		$this->load->library('upload');
 	    $files = $_FILES;
-	    $cpt = 2;
+	    $cpt = count($_FILES['userfile']['name']);
+	    $cpt2 = count($_FILES['userfile2']['name']);
 			$flag = 0;
 	    for($i=0; $i<$cpt; $i++){
 	        $_FILES['userfile']['name']= $files['userfile']['name'][$i];
@@ -166,24 +166,50 @@ class Hal extends CI_Controller {
 	        $this->upload->initialize($this->set_upload_options($i));
 	        $this->upload->do_upload();
 	        $img_file = $this->upload->data();
-	        $this->session->set_userdata(array('path_file'.$i =>'asset/gambar/produk/'.$img_file['file_name']));
+	        $this->session->set_userdata(array('path_file'.$i =>'asset/gambar/desain-produk/'.$img_file['file_name']));
+	    }
+	    for($i=0; $i<$cpt2; $i++){
+	        $_FILES['userfile']['name']= $files['userfile2']['name'][$i];
+	        $_FILES['userfile']['type']= $files['userfile2']['type'][$i];
+	        $_FILES['userfile']['tmp_name']= $files['userfile2']['tmp_name'][$i];
+	        $_FILES['userfile']['error']= $files['userfile2']['error'][$i];
+	        $_FILES['userfile']['size']= $files['userfile2']['size'][$i];
+	        $this->upload->initialize($this->set_upload_options2($i));
+	        $this->upload->do_upload();
+	        $img_file = $this->upload->data();
+	        $this->session->set_userdata(array('path_file2'.$i =>'asset/gambar/desain-produk/'.$img_file['file_name']));
 	    }
 			if (!$this->upload->do_upload()){
 				$data['error'] = $this->upload->display_errors();
 				$this->load->view('yellow/index',$data);
 			}
 			else{
-				$save = $this->mproduk->saveFurnitureImpian2($_POST,$this->upload->data(),$cpt);
-				$this->session->set_flashdata(array('success'=>TRUE));
-				$this->load->view('yellow/index',$data);
+				$save = $this->mproduk->saveFurnitureImpian($_POST,$this->upload->data(),$cpt,$cpt2);
+				$this->session->set_flashdata(array('success_form'=>TRUE));
+				if($this->input->post('ditenderkan') == 1)
+					$this->load->view('yellow/index',$data);
+				else{
+					redirect(base_url($this->uri->segment(1).'/furniture-impian-next/'));
+				}
 			}
 		}
 	}
 	private function set_upload_options($i){
     	//upload an image options
     	$config = array();
-		$config['file_name'] = $this->session->userdata('username').'_gambarbuat_'.$i.'_'.date('YmdHis');
-		$config['upload_path'] = './asset/gambar/produk';
+		$config['file_name'] = $this->session->userdata('username').'_gambardesain_'.$i.'_'.date('YmdHis');
+		$config['upload_path'] = './asset/gambar/desain-produk';
+	    $config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '5000';
+	    $config['overwrite']     = TRUE;
+
+    return $config;
+}
+private function set_upload_options2($i){
+    	//upload an image options
+    	$config = array();
+		$config['file_name'] = $this->session->userdata('username').'_gambar3d_'.$i.'_'.date('YmdHis');
+		$config['upload_path'] = './asset/gambar/desain-produk';
 	    $config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '5000';
 	    $config['overwrite']     = TRUE;

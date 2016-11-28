@@ -15,9 +15,8 @@
         <?php
           $options = array(
                 'nominal'=>'Nominal',
-                'Bank'=> 'Bank',
-                'Atas Nama'=>'atas Nama',
-                'status'=> 'Status'
+                'bank'=> 'Bank',
+                'konfirmasi_pembayaran.atas_nama'=>'Atas Nama'
                 );
           echo form_dropdown('by',$options,set_value('by'),"class='form-control'");
         ?>
@@ -32,13 +31,14 @@
       <tr>
         <th>Username</th>
         <th>Nominal</th>
-        <th>Bank</th>
+        <th>Bank Asal</th>
         <th>Atas Nama</th>
         <th>No rekening </th>
+        <th>Nominal</th>
+        <th>Bank Tujuan</th>
         <th>Tanggal Transfer</th>
         <th>Tanggal Konfirmasi</th>
-        <th>pembayaran Status</th>
-        <th width="20%">Action</th>
+        <!-- <th width="5%">Action</th> -->
       </tr>
       </thead>
       <tbody>
@@ -51,11 +51,13 @@
                 <td><?php echo $rows->username ?></td>
                 <td><?php echo  number_format($rows->nominal) ?></td>
                 <td><?php echo $rows->bank?></td>
-                <td><?php echo $rows->atas_nama_konfirmasi?></td>
+                <td><?php echo $rows->atas_nama?></td>
                 <td><?php echo $rows->no_rekening?></td>
+                <td><?php echo number_format($rows->nominal) ?></td>
+                <td><?php echo $rows->nama_bank?></td>
                 <td><?php echo date('D, d M Y ',strtotime($rows->tanggal_transfer)) ?></td>
                 <td><?php echo date('D, d M Y H:i ',strtotime($rows->tanggal_konfirmasi_pembayaran)) ?></td>
-                <td><?php if($rows->status==1) echo "<button type='button' class='btn btn-block btn-success '>Done</button>";
+                <!-- <td><?php if($rows->status==1) echo "<button type='button' class='btn btn-block btn-success '>Done</button>";
                  elseif($rows->status==2) echo "<button type='button' class='btn btn-block btn-info '>Pending</button>"; ?></td>
                 <td>
                     <?php
@@ -92,7 +94,7 @@
                   <a href ="<?php echo base_url('adminpanel/pembayaran/hapus-konfirmasi-pembayaran/'.$rows->id_konfirmasi_pembayaran)?>" >
                     <i class="fa fa-trash"></i>
                   </a>
-                </td>
+                </td> -->
               </tr>
       				<?php
       			}
@@ -106,13 +108,14 @@
       <tr>
         <th>Username</th>
         <th>Nominal</th>
-        <th>Bank</th>
+        <th>Bank Asal</th>
         <th>Atas Nama</th>
         <th>No rekening </th>
+        <th>Nominal</th>
+        <th>Bank Tujuan</th>
         <th>Tanggal Transfer</th>
         <th>Tanggal Konfirmasi</th>
-        <th>pembayaran Status</th>
-        <th >Action</th>
+        <!-- <th width="5%">Action</th> -->
       </tr>
       </tfoot>
     </table>

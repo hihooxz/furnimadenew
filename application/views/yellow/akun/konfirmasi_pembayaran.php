@@ -17,7 +17,7 @@
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <strong>Hore!</strong> Kamu Telah Mengkonfirmasi Pembayaran
+              <strong>Hore!</strong> Kamu Berhasil Melakukan Konfirmasi Pembayaran
             </div>
             <?php
           }
@@ -87,6 +87,17 @@
           <div class="col-md-3 col-sm-3 hidden-xs"></div>
         </div>
       </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-3 text-right">
+            <label class="control-label">Nominal</label>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-9">
+            <input type="text" class="form-control col-md-7 col-xs-12" name="nominal">
+          </div>
+          <div class="col-md-3 col-sm-3 hidden-xs"></div>
+        </div>
+      </div> 
       <div class="form-group">
         <div class="row">
           <div class="col-md-3 col-sm-3 col-xs-3 text-right">

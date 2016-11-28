@@ -173,8 +173,22 @@ class Akun_penjual extends CI_Controller {
 		$data['title_web'] = 'Konfirmasi Pembayaran | Furnimade';
 		$data['path_content'] = 'yellow/akun_penjual/konfirmasi_pembayaran';
 
+		$data['results'] = $this->mod->fetchAllData('pembayaran');
 
-    	$this->load->view('yellow/index',$data);
+		$this->form_validation->set_rules('id_pembayaran','Bank Tujuan','required');
+		$this->form_validation->set_rules('bank','Bank Asal','required');
+		$this->form_validation->set_rules('atas_nama','Atas Nama','required');
+		$this->form_validation->set_rules('no_rekening','No Rekening','required|numeric');
+		$this->form_validation->set_rules('nominal','Nominal','required|numeric');
+		$this->form_validation->set_rules('tanggal_transfer','Tanggal Transfer','required');
+
+		if(!$this->form_validation->run())
+    		$this->load->view('yellow/index',$data);
+    	else{
+    		$data['save'] = $this->mpembayaran->saveKonfirmasi($_POST);
+    		$this->session->set_flashdata(array('success_form'=>TRUE));
+    		$this->load->view('yellow/index',$data);
+    	}
 	}
 	function pesan(){
 		$data['title_web'] = 'Pesan | Furnimade';

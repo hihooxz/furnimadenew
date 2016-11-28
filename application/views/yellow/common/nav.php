@@ -78,7 +78,7 @@
             <i class="fa fa-user fa-fw"></i>
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url('akun-penjual/profil')?>"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/profil')?>"><i class="fa fa-user"></i> Profil (<?php echo $this->session->userdata('username')?>)</a></li>
               <li><a href="<?php echo base_url('akun-penjual/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
               <li><a href="<?php echo base_url('akun-penjual/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
               <li><a href="<?php echo base_url('akun-penjual/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
@@ -103,7 +103,7 @@
             <i class="fa fa-user fa-fw"></i>
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url('akun-penjual/profil')?>"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun-penjual/profil')?>"><i class="fa fa-user"></i> Profil (<?php echo $this->session->userdata('username')?>)</a></li>
               <li><a href="<?php echo base_url('akun-penjual/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
               <li><a href="<?php echo base_url('akun-penjual/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
               <li><a href="<?php echo base_url('akun-penjual/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
@@ -151,7 +151,7 @@
             <i class="fa fa-user fa-fw"></i>
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url('akun/profil')?>" style="margin:0 10px 0 5px"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun/profil')?>" style="margin:0 10px 0 5px"><i class="fa fa-user"></i> Profil (<?php echo $this->session->userdata('username')?>)</a></li>
               <li><a href="<?php echo base_url('akun/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
               <li><a href="<?php echo base_url('akun/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
               <li><a href="<?php echo base_url('akun/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>
@@ -175,7 +175,7 @@
             <i class="fa fa-user fa-fw"></i>
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo base_url('akun/profil')?>" style="margin:0 10px 0 5px"><i class="fa fa-user"></i> Profil</a></li>
+              <li><a href="<?php echo base_url('akun/profil')?>" style="margin:0 10px 0 5px"><i class="fa fa-user"></i> Profil (<?php echo $this->session->userdata('username')?>)</a></li>
               <li><a href="<?php echo base_url('akun/riwayat-pesanan')?>"><i class="fa fa-fw fa-shopping-bag"></i> Riwayat Pesanan</a></li>
               <li><a href="<?php echo base_url('akun/konfirmasi-pembayaran')?>"><i class="fa fa-check-square fa-fw"></i> Konfirmasi Pembayaran</a></li>
               <li><a href="<?php echo base_url('akun/barang-diterima')?>"><i class="fa fa-th-large fa-fw"></i> Barang Diterima</a></li>

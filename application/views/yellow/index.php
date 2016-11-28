@@ -48,8 +48,31 @@
     </div>
   </div>
 </div>
-
+  
     <script src="<?php echo base_url('asset/asset_yellow/asset_index/bootstrap/js/jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('asset/asset_yellow/asset_index/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <!-- datepicker -->
+    <script src="<?php echo base_url('asset/asset_lte/plugins/datepicker/bootstrap-datepicker.js') ?>"></script>
+
+    <script>
+$('#datepicker').datepicker({
+    format:"d M yyyy",
+      autoclose: true,
+      todayBtn:"linked"
+    });
+    $(".timepicker").timepicker({
+      defaultTime: '07:00',
+    minuteStep: 15,
+    disableFocus: true,
+    showMeridian:false
+
+    });
+    $(".timepicker2").timepicker({
+      defaultTime: '07:00',
+    minuteStep: 15,
+    disableFocus: true,
+    showMeridian:false
+    });
+</script>
 </body>
 </html>

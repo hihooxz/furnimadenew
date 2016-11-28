@@ -260,5 +260,67 @@ class Mproduk extends CI_Model {
 			}
 			else return FALSE;
 		}
+		 function getProdukDesain($id_user,$date){
+  	$this->db->where('id_pembeli',$id_user);
+  	$this->db->where('tanggal_desain',$date);
+  	$query = $this->db->get('desain_produk');
+  	if($query->num_rows()>0){
+  		return $query->row_array();
+  	}
+  	else return false;
   }
+
+  function saveFurnitureImpian($data,$upload_data,$cpt,$cpt2){
+  	$date = date('Y-m-d H:i:s');
+  	$array = array(
+        'judul_desain' => $data['nama'],
+        'bahan_desain' => $data['bahan'], // tidak ada bahann
+        'finishing_desain' => $data['finishing'], // tidak ada finishing
+        'deskripsi_desain' =>($data['deskripsi']),
+        'tanggal_desain' => $date,
+        'ditenderkan' => $data['ditenderkan'],
+        'id_pembeli' => $this->session->userdata('idUser')
+      );
+    $this->db->insert('desain_produk',$array);
+
+    $desain = $this->getProdukDesain($this->session->userdata('idUser'),$date,$upload_data);
+    if($desain!=FALSE){
+		    for($i=0; $i<$cpt; $i++){
+						$array = array(
+								'id_desain_produk' => $desain['id_desain_produk'],
+								'jenis_desain' => 0
+							);
+						$array['url_desain_produk'] = $this->session->userdata('path_file'.$i);
+						$this->db->insert('gambar_desain',$array);
+						$this->session->set_userdata(array('path_file'.$i =>NULL));
+		    } // end for
+		    for($i=0; $i<$cpt2; $i++){
+					$array = array(
+							'id_desain_produk' => $desain['id_desain_produk'],
+							'jenis_desain' => 1
+						);
+					$array['url_desain_produk'] = $this->session->userdata('path_file2'.$i);
+					$this->db->insert('gambar_desain',$array);
+					$this->session->set_userdata(array('path_file2'.$i =>NULL));
+	    	} // end for
+		} // end if $desain
+    return 1;
+  }
+  function fetchDesainProduk($limit,$start,$pagenumber,$id_user){
+	if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+
+			$this->db->where('id_pembeli',$id_user);
+			$this->db->order_by('tanggal_desain','DESC');
+			$query = $this->db->get('desain_produk');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;  	
+  }
+ }
+ 
+
 ?>

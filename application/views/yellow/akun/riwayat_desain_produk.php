@@ -12,10 +12,10 @@
         <thead>
           <tr>
             <td>No</td>
-            <td>Nama Produk</td>
-            <td style="width:10%">Gambar</td>
-            <td>Harga</td>
-            <td style="padding:0px 50px 0px 50px">Deskripsi</td>
+            <td>Nama Desain</td>
+            <td>Bahan</td>
+            <td>Finishing</td>
+            <td>Deskripsi</td>
             <td>Aksi</td>
           </tr>
         </thead>
@@ -28,19 +28,15 @@
           				?>
           				<tr>
                     <td><?php echo $i ?></td>
-                    <td><?php echo $rows->nama_produk ?></td>
-                    <td><?php if($rows->gambar_produk!= "") {
-                      ?>
-                      <img src="<?php echo base_url($rows->gambar_produk)?>"class="img-responsive">
-                      <?php
-                    } ?></td>
-                    <td>Rp <?php echo number_format($rows->harga_produk) ?></td>
-                    <td><?php echo $rows->deskripsi_produk ?></td>
+                    <td><?php echo $rows->judul_desain ?></td>
+                    <td><?php echo $rows->bahan_desain ?></td>
+                    <td><?php echo $rows->finishing_desain ?></td>
+                    <td><?php echo substr($rows->deskripsi_desain, 0,50) ?></td>
                     <td>
-                      <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/edit-produk/'.$rows->id_produk)?>">
-                        <i class="fa fa-pencil"></i>
+                      <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/lihat-desain/'.$rows->id_desain_produk)?>">
+                        <i class="fa fa-eye"></i>
                       </a>
-                      <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/delete-produk/'.$rows->id_produk)?>">
+                      <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/delete-desaom/'.$rows->id_desain_produk)?>">
                         <i class="fa fa-trash"></i>
                       </a>
                     </td>
