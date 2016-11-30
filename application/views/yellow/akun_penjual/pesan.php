@@ -4,7 +4,7 @@
   </div>
   <div class="row text-center">
     <div class="col-md-4">
-      <?php $this->load->view('yellow/akun/nav_member');?>
+      <?php $this->load->view('yellow/akun_penjual/nav_penjual');?>
     </div>
     <div class="col-md-8 form-group form-impian table-responsive">
       <div class="row">
@@ -15,7 +15,7 @@
             <td>No</td>
             <td>Dari</td>
             <td>tanggal</td>
-            <td style="padding:0px 50px 0px 50px"></td>
+            <td>Aksi</td>
           </tr>
         </thead>
         <tbody>
@@ -29,10 +29,10 @@
                   <td><?php echo $rows->nama_lengkap_pembeli ?></td>
                   <td><?php echo date('D d M Y H:i',strtotime($rows->tanggal_ruangpesan))?>
                   <td>
-                    <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/lihat-pesan/'.$rows->id_ruangpesan)?>">
+                    <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/lihat-pesan/'.$rows->id_ruangpesan)?>" title="Lihat Pesan">
                       <i class="fa fa-eye"></i>
                     </a>
-                    <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/delete-pesan/'.$rows->id_ruangpesan)?>">
+                    <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/hapus-pesan/'.$rows->id_ruangpesan)?>" title="Hapus Pesan">
                       <i class="fa fa-trash"></i>
                     </a>
                   </td>
@@ -42,13 +42,12 @@
               }
             }
           ?>
-          <?php
-            echo $links;
-          ?>
 
         </tbody>
   </table>
+          <?php
+            echo $links;
+          ?>
     </div>
-    <div class="col-md-1"></div>
   </div>
 </div>

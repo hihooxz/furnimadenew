@@ -6,7 +6,7 @@
           <a <?php if($this->uri->segment(2) == 'password') echo "class=\"active\""?> href="<?php echo base_url('akun/password') ?>"><i class="fa fa-key" aria-hidden="true"></i>Ganti Password</a>
         </li>
         <li>
-          <a <?php if($this->uri->segment(2) == 'riwayat-pesanan') echo "class=\"active\""?> href="<?php echo base_url('akun/riwayat-pesanan') ?>"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Riwayat Pesanan</a>
+          <a <?php if($this->uri->segment(2) == 'riwayat-pesanan' || $this->uri->segment(2) == 'detail-pesanan') echo "class=\"active\""?> href="<?php echo base_url('akun/riwayat-pesanan') ?>"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Riwayat Pesanan</a>
         </li>
         <li>
           <a <?php if($this->uri->segment(2) == 'konfirmasi-pembayaran') echo "class=\"active\""?> href="<?php echo base_url('akun/konfirmasi-pembayaran')?>"><i class="fa fa-check-square" aria-hidden="true"></i> Konfirmasi Pembayaran</a>
@@ -21,9 +21,9 @@
           <a <?php if($this->uri->segment(2) == 'furniture-impian') echo "class=\"active\""?> href="<?php echo base_url('hal/furniture-impian') ?>"><i class="fa fa-cloud-upload" aria-hidden="true"></i>Unggah Desain Produk</a>
         </li>
         <li>
-          <a <?php if($this->uri->segment(2) == 'riwayat-desain-produk') echo "class=\"active\""?> href="<?php echo base_url('akun/riwayat-desain-produk') ?>"><i class="fa fa-th-list" aria-hidden="true"></i>Riwayat Desain Produk</a>
+          <a <?php if($this->uri->segment(2) == 'riwayat-desain-produk' || $this->uri->segment(2) == "lihat-desain") echo "class=\"active\""?> href="<?php echo base_url('akun/riwayat-desain-produk') ?>"><i class="fa fa-th-list" aria-hidden="true"></i>Riwayat Desain Produk</a>
         </li>
         <li>
-          <a <?php if($this->uri->segment(2) == 'tender') echo "class=\"active\""?> href="<?php echo base_url('akun/tender') ?>"><i class="fa fa-briefcase" aria-hidden="true"></i>Tender</a>
+          <a <?php if($this->uri->segment(2) == 'tender' || $this->uri->segment(2) == 'lihat-tender') echo "class=\"active\""?> href="<?php echo base_url('akun/tender') ?>"><i class="fa fa-briefcase" aria-hidden="true"></i>Tender</a>
         </li>
       </ul>

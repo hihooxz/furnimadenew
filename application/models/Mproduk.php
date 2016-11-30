@@ -321,9 +321,32 @@ class Mproduk extends CI_Model {
 			else return FALSE;  	
   }
   function countTender($id_user){
-  	/*$this->db->where('id_pembeli',$id_user);
-  	$this->db->where('ditenderkan',1);
-  	return $this->db->count_all_results('desain_produk');*/
+  	$this->db->join('desain_produk','desain_produk.id_desain_produk = tender_desain.id_desain_produk');
+  	$this->db->where('id_pembeli',$id_user);
+  	return $this->db->count_all_results('tender_desain');
+  }
+  function fetchTender($limit,$start,$pagenumber,$id_user){
+  	if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+			$this->db->join('desain_produk','desain_produk.id_desain_produk = tender_desain.id_desain_produk');
+			$this->db->where('id_pembeli',$id_user);
+			$this->db->order_by('tanggal_desain','DESC');
+			$query = $this->db->get('tender_desain');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;  
+  }
+  function getTender($id){
+		$this->db->join('desain_produk','desain_produk.id_desain_produk = tender_desain.id_desain_produk');
+		$this->db->where('id_tender_desain',$id);
+		$query = $this->db->get('tender_desain');
+		if($query->num_rows()>0){
+			return $query->row_array();
+		}
+		else return FALSE;  
   }
   function saveTender($data,$id){
   	$array = array(
@@ -335,6 +358,127 @@ class Mproduk extends CI_Model {
   	$this->db->insert('tender_desain',$array);
   	return 1;
   }
+  function countTenderPenjual($id){
+  	$this->db->where('id_tender',$id);
+  	return $this->db->count_all_results('tender_penjual');
+  }
+  function fetchTenderPenjual($limit,$start,$pagenumber,$id){
+  	if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+			$this->db->join('user','user.id_user = tender_penjual.id_penjual');
+			$this->db->where('id_tender',$id);
+			$this->db->order_by('tanggal_tender_penjual','DESC');
+			$query = $this->db->get('tender_penjual');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;  
+  }
+  function fetchAllTender($limit,$start,$pagenumber){
+  	if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+			$this->db->join('desain_produk','desain_produk.id_desain_produk = tender_desain.id_desain_produk');
+			$this->db->join('user','user.id_user = desain_produk.id_pembeli');
+			$this->db->order_by('tanggal_selesai_tender','DESC');
+			$query = $this->db->get('tender_desain');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;  
+  }
+  function saveFurnitureImpianNext($data,$id){
+  	$result = $this->mod->getDataWhere('user','username',$data['username']);
+
+  	$array = array(
+  			'id_penjual' => $result['id_user']
+  		);
+  	$this->db->where('id_desain_produk',$id);
+	$this->db->update('desain_produk',$array);
+	return 1;
+  }
+  function updateCart($data){
+  	$this->load->library('cart');
+		foreach ($this->cart->contents() as $items) {
+			$array = array(
+					'rowid' => $items['rowid'],
+					'qty' => $data['qty_'.$items['id']]
+				);
+			$this->cart->update($array);
+		}
+	}
+	function pesananTerakhir($id_user){
+		$this->db->where('id_user',$id_user);
+		$this->db->order_by('tanggal_pesan','DESC');
+		$query = $this->db->get('pesanan');
+		if($query->num_rows()>0){
+			return $query->row_array();
+		}
+		else return FALSE;
+	}
+	function pesanan($data){
+		$this->load->library('cart');
+		$array = array(
+				'jumlah_barang' => $this->cart->total_items(),
+				'total' => $this->cart->total(),
+				'id_user' => $this->session->userdata('idUser'),
+				'id_pembayaran' => $data['id_pembayaran'],
+				'nama_lengkap' => $data['nama_lengkap'],
+				'email' => $data['email'],
+				'no_hp' => $data['no_hp'],
+				'alamat' => $data['alamat'],
+				'status_pesanan' => 0,
+				'tanggal_pesan' => date('Y-m-d H:i:s')
+			);
+		$this->db->insert('pesanan',$array);
+
+		$pesanan = $this->pesananTerakhir($this->session->userdata('idUser'));
+		foreach ($this->cart->contents() as $items) {
+			$array2 = array(
+					'id_pesanan' => $pesanan['id_pesanan'],
+					'id_produk' => $items['id'],
+					'nama_produk' => $items['name'],
+					'gambar_produk' => $items['image'],
+					'harga_beli' => $items['price'],
+					'qty' => $items['qty']
+				);
+			$this->db->insert('detail_pesanan',$array2);
+		}
+		$this->cart->destroy();
+		return 1;
+	}
+	function fetchPesanan($limit,$start,$pagenumber,$id){
+		if($pagenumber!="")
+				$this->db->limit($limit,($pagenumber*$limit)-$limit);
+			else
+				$this->db->limit($limit,$start);
+			$this->db->where('id_user',$id);
+			$this->db->order_by('tanggal_pesan','DESC');
+			$query = $this->db->get('pesanan');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;  
+	}
+	function fetchDetailPesanan($id){
+		$this->db->where('id_pesanan',$id);
+			$query = $this->db->get('detail_pesanan');
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+			else return FALSE;  	
+	}
+	function totalPesanan($id_pesanan){
+		$select = "select sum(jumlah_barang) as total_item from fm_pesanan where id_pesanan = ".$id_pesanan;
+		$query = $this->db->query($select);
+		$data = $query->row_array();
+		if($query->num_rows()>0)
+			return $data['total_item'];
+		else return 0;
+	}
  }
  
 

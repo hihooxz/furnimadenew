@@ -4,7 +4,13 @@
 			</div>
 			<?php
 				if($results!=false){
+					$i = 1;
 					foreach ($results as $rows) {
+						if($i%6==1){
+							?>
+							<div class="row">
+							<?php
+						}
 						?>
 						<div class="col-md-2 col-xs-12">
 							<center>
@@ -15,7 +21,7 @@
 				                  <?php
 				                } else{
 				                  ?>
-				                  <i class="fa fa-cube fa-4x"></i>
+				                  <i class="fa fa-archive fa-5x" style="color:#f2bb00"></i>
 				                  <?php
 				                }?>
 				                </a><br />
@@ -23,6 +29,12 @@
 							</center>
 						</div>
 						<?php
+						if($i%6==0 || $i == $total_rows){
+							?>
+							</div>
+							<?php
+						}
+						$i++;
 					}
 				}
 			?>

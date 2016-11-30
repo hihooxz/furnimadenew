@@ -13,9 +13,9 @@
         <thead>
           <tr>
             <td>No</td>
-            <td style="padding:0px 50px 0px 50px">Pembeli</td>
-            <td>Gambar Desain</td>
-            <td style="padding:0px 50px 0px 50px">Keterangan</td>
+            <td>Judul Desain</td>
+            <td width="20%">Gambar</td>
+            <td>Keterangan</td>
             <td>Range Harga</td>
             <td>Tanggal Selesai</td>
             <td>Status</td>
@@ -23,82 +23,49 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Pakpol</td>
-            <td>
-              <img class="img-responsive" src="asset/images/sofa1.jpg">
-            </td>
-            <td>Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet</td>
-            <td>Rp 1,200,000 - Rp 1,600,000</td>
-            <td>23 Oktober 2016</td>
-            <td>Terbuka</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Pakpol</td>
-            <td>
-              <img class="img-responsive" src="asset/images/sofa1.jpg">
-            </td>
-            <td>Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet</td>
-            <td>Rp 1,200,000 - Rp 1,600,000</td>
-            <td>23 Oktober 2016</td>
-            <td>Terbuka</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Pakpol</td>
-            <td>
-              <img class="img-responsive" src="asset/images/sofa1.jpg">
-            </td>
-            <td>Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet</td>
-            <td>Rp 1,200,000 - Rp 1,600,000</td>
-            <td>23 Oktober 2016</td>
-            <td>Terbuka</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Pakpol</td>
-            <td>
-              <img class="img-responsive" src="asset/images/sofa1.jpg">
-            </td>
-            <td>Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet Lorem Ipsum Dolor Sil Amet</td>
-            <td>Rp 1,200,000 - Rp 1,600,000</td>
-            <td>23 Oktober 2016</td>
-            <td>Terbuka</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
+          <?php
+            if($results!=FALSE){
+              $i = 1;
+              foreach ($results as $rows) {
+                ?>
+                <tr>
+                  <td><?php echo $i;?></td>
+                  <td><?php echo $rows->judul_desain;?></td>
+                  <td>
+                    <?php
+                      $img = $this->mod->getDataWhere('gambar_desain','id_desain_produk',$rows->id_desain_produk);
+                    ?>
+                    <img class="img-responsive" src="<?php echo base_url($img['url_desain_produk']) ?>">
+                  </td>
+                  <td><?php echo substr($rows->deskripsi_desain,0,100)?></td>
+                  <td><?php echo $rows->range_harga ?></td>
+                  <td><?php echo date('d M Y',strtotime($rows->tanggal_selesai_tender)) ?></td>
+                  <td>
+                    <?php
+                      if($rows->status_tender == 0){
+                        echo "Terbuka";
+                      }
+                      else echo "Tutup";
+                    ?>
+                  </td>
+                  <td>
+                    <a href="<?php echo base_url($this->uri->segment(1).'/lihat-tender/'.$rows->id_tender_desain)?>" title="Lihat Tender">
+                      <button class="btn btn-default dropdown-toggle">
+                        <i class="fa fa-list"></i>
+                      </button>
+                    </a>
+                    <a href="<?php echo base_url($this->uri->segment(1).'/tutup-tender/'.$rows->id_tender_desain)?>" title="Tutup Tender" onclick="return confirm('Apakah anda yakin ingin menutup tender ini?')">
+                    <button class="btn btn-default dropdown-toggle">
+                      <i class="fa fa-window-close-o"></i>
+                    </button>
+                    </a>
+                  </td>
+                </tr>
+                <?php
+                $i++;
+              }
+            }
+          ?>
         </tbody>
   </table>
     </div>

@@ -178,4 +178,13 @@ class Muser extends CI_Model {
     }
     else return FALSE;
   }
+  function getPenjualUsername($username){
+    $this->db->where('username',$username);
+    $this->db->where('hak_akses',2);
+    $query = $this->db->get('user');
+    if($query->num_rows()>0){
+      return $query->row_array();
+    }
+    else return false;
+  }
 }

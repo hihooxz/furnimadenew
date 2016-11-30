@@ -35,7 +35,7 @@
                       <a  class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/lihat-desain/'.$rows->id_desain_produk)?>">
                         <i class="fa fa-eye"></i>
                       </a>
-                      <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/delete-desaom/'.$rows->id_desain_produk)?>">
+                      <a class="btn btn-default dropdown-toggle" href="<?php echo base_url($this->uri->segment(1).'/hapus-desain/'.$rows->id_desain_produk)?>" onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">
                         <i class="fa fa-trash"></i>
                       </a>
                     </td>

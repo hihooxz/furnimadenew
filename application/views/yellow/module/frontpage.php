@@ -106,7 +106,7 @@
                     <?php
                   } else{
                     ?>
-                      <i class="fa fa-cube fa-3x"></i>
+                      <i class="fa fa-archive fa-5x" style="color:#f2bb00"></i>
                     <?php
                   }?>
                   </a><br />

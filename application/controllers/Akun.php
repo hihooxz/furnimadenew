@@ -15,6 +15,7 @@ class Akun extends CI_Controller {
 				);
 			$this->session->set_flashdata($array);
 		}
+		$this->load->library('cart');
 	}
 	function profil(){
 		$data['title_web'] = 'Profil Member| Furnimade';
@@ -172,6 +173,40 @@ class Akun extends CI_Controller {
 		$data['title_web'] = 'Riwayat Pesanan | Furnimade';
 		$data['path_content'] = 'yellow/akun/riwayat_pesanan';
 
+		if(!$this->form_validation->run()){
+		// Ngeload data
+		$perpage = 10;
+		$this->load->library('pagination'); // load libraray pagination
+		$config['base_url'] = base_url($this->uri->segment(1).'/riwayat-pesanan/'); // configurate link pagination
+		$config['total_rows'] = $this->mod->countWhereData('pesanan','id_user',$this->session->userdata('idUser'));// fetch total record in databae using load
+		$config['per_page'] = $perpage; // Total data in one page
+		$config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
+		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
+		$config['num_links'] = round($choice); // Rounding Choice Variable
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config); // intialize var config
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+		$data['results'] = $this->mp->fetchPesanan($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
+		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
+		$data['total_rows'] = $this->mod->countWhereData('pesanan','id_user',$this->session->userdata('idUser')); // Make a variable (array) link so the view can call the variable
+		$this->load->view('yellow/index',$data);
+		}
+		else{
+			$data['results'] = $this->mp->fetchPesananSearch($_POST); // fetch data using limit and pagination
+			$data['links'] = false;
+			$this->load->view('yellow/index',$data);
+		}
+	}
+	function detail_pesanan(){
+		$data['title_web'] = 'Detail Pesanan | Furnimade';
+		$data['path_content'] = 'yellow/akun/detail_pesanan';
+
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mod->getDataWhere('pesanan','id_pesanan',$id);
+		if($data['result'] == FALSE)
+			redirect(base_url($this->uri->segment(1).'/riwayat-pesanan'));
+
+		$data['results'] = $this->mp->fetchDetailPesanan($id);
 		$this->load->view('yellow/index',$data);
 	}
 	function konfirmasi_pembayaran(){
@@ -193,7 +228,7 @@ class Akun extends CI_Controller {
 		else{
 			$save = $this->mpembayaran->saveKonfirmasi($_POST);
 			$this->session->set_flashdata(array('success_form'=>TRUE));
-			redirect(base_url($this->uri->segment(1).'/konfirmasi_pembayaran'));
+			redirect(base_url($this->uri->segment(1).'/konfirmasi-pembayaran'));
 		}
 	}
 	function riwayat_desain_produk(){
@@ -235,17 +270,188 @@ class Akun extends CI_Controller {
 		$data['results'] = $this->mod->fetchDataWhere('gambar_desain','id_desain_produk',$id);
 		$this->load->view('yellow/index',$data);
 	}
+	function hapus_desain(){
+		$this->load->helper("file");
+		$id = $this->uri->segment(3);
+		$result = $this->mod->getDataWhere('desain_produk','id_desain_produk',$id);
+		$this->db->where('id_desain_produk',$id);
+		$this->db->delete('desain_produk');
+
+		$results = $this->mod->fetchDataWhere('gambar_desain','id_desain_produk',$id);
+		foreach ($results as $rows) {
+			unlink($rows->url_desain_produk);
+		}
+
+		$this->db->where('id_desain_produk',$id);
+		$this->db->delete('gambar_desain');		
+
+		if($result['ditenderkan'] == 1){
+			$this->db->where('id_desain_produk',$id);
+			$this->db->delete('tender_desain');					
+		}
+		redirect(base_url($this->uri->segment(1).'/riwayat-desain-produk'));
+	}
 	function tender(){
 		$data['title_web'] = 'Tender | Furnimade';
 		$data['path_content'] = 'yellow/akun/tender';
 
+		if(!$this->form_validation->run()){
+		// Ngeload data
+		$perpage = 10;
+		$this->load->library('pagination'); // load libraray pagination
+		$config['base_url'] = base_url($this->uri->segment(1).'/tender/'); // configurate link pagination
+		$config['total_rows'] = $this->mp->countTender($this->session->userdata('idUser'));// fetch total record in databae using load
+		$config['per_page'] = $perpage; // Total data in one page
+		$config['uri_segment'] = 3; // catch uri segment where locate in 4th posisition
+		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
+		$config['num_links'] = round($choice); // Rounding Choice Variable
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config); // intialize var config
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+		$data['results'] = $this->mp->fetchTender($config['per_page'],$page,$this->uri->segment(3),$this->session->userdata('idUser')); // fetch data using limit and pagination
+		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
+		$data['total_rows'] = $this->mp->countTender($this->session->userdata('idUser')); // Make a variable (array) link so the view can call the variable
 		$this->load->view('yellow/index',$data);
+		}
+		else{
+			$data['results'] = $this->mp->fetchTenderSearch($_POST); // fetch data using limit and pagination
+			$data['links'] = false;
+			$this->load->view('yellow/index',$data);
+		}
 	}
 
+	function lihat_tender(){
+		$data['title_web'] = 'Lihat Tender | Furnimade';
+		$data['path_content'] = 'yellow/akun/lihat_tender';
 
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mp->getTender($id);
+		if($data['result'] == FALSE)
+			redirect(base_url($this->uri->segment(1).'/tender'));
 
+		if(!$this->form_validation->run()){
+		// Ngeload data
+		$perpage = 10;
+		$this->load->library('pagination'); // load libraray pagination
+		$config['base_url'] = base_url($this->uri->segment(1).'/lihat-tender/'.$id.'/'); // configurate link pagination
+		$config['total_rows'] = $this->mp->countTenderPenjual($id);// fetch total record in databae using load
+		$config['per_page'] = $perpage; // Total data in one page
+		$config['uri_segment'] = 4; // catch uri segment where locate in 4th posisition
+		$choice = $config['total_rows']/$config['per_page'] = $perpage; // Total record divided by total data in one page
+		$config['num_links'] = round($choice); // Rounding Choice Variable
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config); // intialize var config
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0; // If uri segment in 4th = 0 so this program not catch the uri segment
+		$data['results'] = $this->mp->fetchTenderPenjual($config['per_page'],$page,$this->uri->segment(4),$id); // fetch data using limit and pagination
+		$data['links'] = $this->pagination->create_links(); // Make a variable (array) link so the view can call the variable
+		$data['total_rows'] = $this->mp->countTenderPenjual($id); // Make a variable (array) link so the view can call the variable
+		$this->load->view('yellow/index',$data);
+		}
+		else{
+			$data['results'] = $this->mp->fetchTenderPenjualSearch($_POST); // fetch data using limit and pagination
+			$data['links'] = false;
+			$this->load->view('yellow/index',$data);
+		}
+	}
+	function tutup_tender(){
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mp->getTender($id);
+		if($data['result'] == FALSE)
+			redirect(base_url($this->uri->segment(1).'/tender'));
 
+		$this->db->where('id_tender',$id);
+		$this->db->update('tender',array('status_tender'=>1));
+		redirect(base_url($this->uri->segment(1).'/tender'));
+	}
 
+	function keranjang(){
+		$data['title_web'] = 'Keranjang Belanjaan | Furnimade';
+		$data['path_content'] = 'yellow/akun/keranjang';
+
+		$this->form_validation->set_rules('hidden','Hidden','required');
+		if(!$this->form_validation->run())
+			$this->load->view('yellow/index',$data);
+		else{
+			$this->mp->updateCart($_POST);
+			$this->load->view('yellow/index',$data);
+		}
+	}
+	function tambahkan_keranjang(){
+		$qty = $this->input->post('qty');
+		$id = $this->input->post('id_produk');
+		
+		$result = $this->mod->getDataWhere('produk','id_produk',$id);
+
+		$flag = 0;
+		foreach ($this->cart->contents() as $items) {
+			if($items['id'] == $id){
+				$flag = 1;
+				$rowid = $items['rowid'];
+				$qty_before = $items['qty'];
+			}
+		}
+
+		if($flag==0){
+			$data = array(array(
+	        'id'      => $id,
+	        'qty'     => $qty,
+	        'name'	  => $result['nama_produk'],
+	        'price'   => $result['harga_produk'],
+	        'image'   => $result['gambar_produk']
+			));
+			$this->cart->insert($data);
+		}
+		if($flag == 1){
+			$data = array(
+			    'rowid' => $rowid,
+			    'qty'   => $qty_before+$qty
+			);
+
+			$this->cart->update($data);
+		}
+
+		redirect(base_url($this->uri->segment(1).'/'.'keranjang'));
+	}
+	function hapus_item(){
+		$rowid = $this->uri->segment(3);
+		$data = array(
+			    'rowid' => $rowid,
+			    'qty'   => 0
+			);
+		$this->cart->update($data);
+		redirect(base_url($this->uri->segment(1).'/'.'keranjang'));
+	}
+	function kosongkan_keranjang(){
+		$this->cart->destroy();
+		redirect(base_url($this->uri->segment(1).'/'.'keranjang'));
+	}
+	function checkout(){
+		$data['title_web'] = 'Pembayaran & Checkout | Furnimade';
+		$data['path_content'] = 'yellow/akun/checkout';
+		$data['result'] = $this->mod->getDataWhere('user','id_user',$this->session->userdata('idUser'));
+
+		$data['bank'] = $this->mpembayaran->fetchAllPembayaran();
+		$data['total_bank'] = $this->mod->countData('pembayaran');
+		$this->form_validation->set_rules('nama_lengkap','Nama Lengkap','required');
+		$this->form_validation->set_rules('email','Email','required|valid_email');
+		$this->form_validation->set_rules('no_hp','Nomor Telepon','required');
+		$this->form_validation->set_rules('alamat','Alamat','required');
+		$this->form_validation->set_rules('id_pembayaran','Metode Pembayaran','required');
+
+		if(!$this->form_validation->run())
+			$this->load->view('yellow/index',$data);
+		else{
+			$this->mp->pesanan($_POST);
+			$this->session->set_flashdata(array('success_form'=>TRUE));
+			redirect(base_url($this->uri->segment(1).'/sukses-order/'));
+		}
+	}
+	function sukses_order(){
+		$data['title_web'] = 'Sukses Order | Furnimade';
+		$data['path_content'] = 'yellow/akun/sukses_order';
+
+		$this->load->view('yellow/index',$data);
+	}
 	function logout(){
 		$array = array(
 					'loginMember' => FALSE,

@@ -104,7 +104,7 @@
             <label class="control-label">Tanggal Transfer</label>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-9">
-             <input type="date" class="form-control col-md-7 col-xs-12" name="tanggal_transfer">
+             <input type="text" class="form-control col-md-7 col-xs-12" id="datepicker" name="tanggal_transfer">
             <button class="btn btn-md form-control fur-btn-primary" style="margin-top:10px" href="#"  type="submit">
               Submit
             </button>

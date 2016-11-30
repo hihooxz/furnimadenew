@@ -10,11 +10,10 @@
       <div class="row">
       </div>
       <table class="table table-striped profile" style="border:1px solid #ddd">
-        <thead> 
+        <thead>
           <tr>
             <td>No</td>
             <td>Kode Pesanan</td>
-            <td>Total Item</td>
             <td>Jumlah Barang</td>
             <td>Total</td>
             <td style="padding:0px 50px 0px 50px">Tanggal Pesan</td>
@@ -23,74 +22,47 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>GE1293</td>
-            <td>2</td>
-            <td>3</td>
-            <td>Rp 4,890,000</td>
-            <td>5 November 2016</td>
-            <td>Pending</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-eye"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>GE1293</td>
-            <td>2</td>
-            <td>3</td>
-            <td>Rp 4,890,000</td>
-            <td>5 November 2016</td>
-            <td>Pending</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-eye"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>GE1293</td>
-            <td>2</td>
-            <td>3</td>
-            <td>Rp 4,890,000</td>
-            <td>5 November 2016</td>
-            <td>Pending</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-eye"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>GE1293</td>
-            <td>2</td>
-            <td>3</td>
-            <td>Rp 4,890,000</td>
-            <td>5 November 2016</td>
-            <td>Pending</td>
-            <td>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-eye"></i>
-              </button>
-              <button class="btn btn-default dropdown-toggle">
-                <i class="fa fa-trash"></i>
-              </button>
-            </td>
-          </tr>
+        <?php
+          if($results!=FALSE){
+            $i = 1;
+            foreach ($results as $rows) {
+              ?>
+              <tr>
+                <td><?php echo $i;?></td>
+                <td><?php echo $rows->id_pesanan ?></td>
+                <td>
+                  <?php
+                    echo $this->mp->totalPesanan($rows->id_pesanan);
+                  ?>
+                </td>
+                <td>Rp <?php echo number_format($rows->total)?></td>
+                <td><?php echo date('d M Y',strtotime($rows->tanggal_pesan))?></td>
+                <td>
+                  <?php
+                    if($rows->status_pesanan == 0)
+                      echo "Pending";
+                    if($rows->status_pesanan == 1)
+                      echo "Proses";
+                    else if($rows->status_pesanan == 2)
+                      echo "Terkirim";
+                  ?>
+                </td>
+                <td>
+                  <a href="<?php echo base_url($this->uri->segment(1).'/detail-pesanan/'.$rows->id_pesanan) ?>" title="Lihat Detail Pesanan">
+                    <button class="btn btn-default dropdown-toggle">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                  </a>
+                  <!-- <button class="btn btn-default dropdown-toggle">
+                    <i class="fa fa-trash"></i>
+                  </button>-->
+                </td> 
+              </tr>
+              <?php
+              $i++;
+            }
+          }
+        ?>
         </tbody>
   </table>
     </div>

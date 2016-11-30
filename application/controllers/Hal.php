@@ -216,7 +216,7 @@ private function set_upload_options2($i){
     return $config;
 }
 	function furniture_impian_tender(){
-		$data['title_web'] = 'Furniture Impian | Furnimade';
+		$data['title_web'] = 'Furniture Impian Ajukkan Tender | Furnimade';
 		$data['path_content'] = 'yellow/module/furniture_impian_tender';
 
 		$id = $this->uri->segment(3);
@@ -234,6 +234,34 @@ private function set_upload_options2($i){
 			$data['save'] = $this->mproduk->saveTender($_POST,$id);
 			$this->load->view('yellow/index',$data);
 		}
+	}
+	function furniture_impian_next(){
+		$data['title_web'] = 'Furniture Impian Pilih Penjual | Furnimade';
+		$data['path_content'] = 'yellow/module/furniture_impian_next';
+
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mod->getDataWhere('desain_produk','id_desain_produk',$id);
+		if($data['result'] == false)
+			show_404();
+
+		$this->form_validation->set_rules('username','Username Penjual','required|callback_validUsernamePenjual');
+
+		if(!$this->form_validation->run())
+		$this->load->view('yellow/index',$data);
+		else{
+			$this->session->set_flashdata(array('success_form'=>TRUE));
+			$this->mproduk->saveFurnitureImpianNext($_POST,$id);
+			$this->load->view('yellow/index',$data);
+		}
+	}
+	function validUsernamePenjual(){
+		$username = $this->input->post('username');
+		$result = $this->muser->getPenjualUsername($username);
+		if($result == FALSE){
+			$this->form_validation->set_message('validUsernamePenjual','Username Penjual Tidak Ditemukan');
+			return FALSE;
+		}
+		else return TRUE;
 	}
 	function login_supplier(){
 		$data['title_web'] = 'Masuk ke Halaman Supplier | Furnimade';
