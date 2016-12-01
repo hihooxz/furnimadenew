@@ -306,10 +306,38 @@ class Akun_penjual extends CI_Controller {
 		
 		$data['results'] = $this->mod->fetchDataWhere('gambar_desain','id_desain_produk',$data['result']['id_desain_produk']);
 		$data['total_penjual'] = $this->mod->countWhereData('tender_penjual','id_tender_desain',$id);
+
+		$data['penjual'] = $this->mod->getDataWhere('tender_penjual','id_penjual',$this->session->userdata('idUser'));
 		$this->load->view('yellow/index',$data);
 	}
 	function ajukkan_penawaran(){
+		$data['title_web'] = 'Ajukkan Penawaran | Furnimade';
+		$data['path_content'] = 'yellow/akun_penjual/ajukkan_penawaran';
 
+		$id = $this->uri->segment(3);
+		$data['result'] = $this->mp->getTender($id);
+		if($data['result'] == FALSE)
+			redirect(base_url($this->uri->segment(1).'/tender'));
+
+		$data['penjual'] = $this->mod->getDataWhere('tender_penjual','id_penjual',$this->session->userdata('idUser'));
+
+		$this->form_validation->set_rules('lama_pengerjaan','Lama Pengerjaan','required');
+		$this->form_validation->set_rules('harga','Harga','required|numeric');
+		$this->form_validation->set_rules('bahan','Bahan','required');
+		$this->form_validation->set_rules('keterangan','Keterangan','required');
+
+		if(!$this->form_validation->run())
+			$this->load->view('yellow/index',$data);		
+		else{
+			if($data['penjual'] == FALSE){
+			$data['save'] = $this->mp->ajukkanPenawaran($_POST,$id);
+			$this->session->set_flashdata(array('success_form'=>TRUE));
+			}
+			else{
+				$this->session->set_flashdata(array('failed_form'=>TRUE));	
+			}
+			$this->load->view('yellow/index',$data);
+		}
 	}
 	public function ruang_pesan(){
 		$id = $this->uri->segment(3);

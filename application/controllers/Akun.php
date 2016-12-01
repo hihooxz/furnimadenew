@@ -8,7 +8,7 @@ class Akun extends CI_Controller {
 		$this->load->model('mproduk','mp');
 		$this->load->model('mpembayaran');
 		$this->load->model('mpesan');
-		if($this->session->userdata('loginMember') != TRUE){
+		if($this->session->userdata('hakAkses') != 3){
 			redirect(base_url('hal/login/'));
 			$array = array(
 					'error_session' => TRUE

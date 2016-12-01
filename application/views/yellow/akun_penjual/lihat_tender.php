@@ -1,10 +1,18 @@
+<?php
+  if($penjual == FALSE){
+    $modal = '#tenderModal';
+  }
+  else{
+   $modal = '#sudahModal'; 
+  }
+?>
 <div class="container" style="margin-bottom:70px">
   <div class="modal-title text-center" style="margin-bottom:25px">
       Lihat Tender
   </div>
   <div class="row text-center">
     <div class="col-md-4">
-      <?php $this->load->view('yellow/akun/nav_member');?>
+      <?php $this->load->view('yellow/akun_penjual/nav_penjual');?>
     </div>
     <div class="col-md-8 ">
       <div class="row" style="margin-bottom: 10px;">
@@ -14,7 +22,7 @@
           </a>
         </div>
         <div class="col-xs-3 col-xs-offset-6">
-            <button class="btn btn-md fur-btn-primary" data-toggle="modal" data-target="#tenderModal" role="button"><i class="fa fa-edit"></i> Ajukkan Penawaran</button>
+            <button class="btn btn-md fur-btn-primary" data-toggle="modal" data-target="<?php echo $modal ?>" role="button"><i class="fa fa-edit"></i> Ajukkan Penawaran</button>
         </div>
       </div>
     <div class="form-group form-impian table-responsive">
@@ -118,7 +126,7 @@
               ?>
           </div>
           <div class="col-md-8">
-            <form method="POST" action="<?php echo base_url($this->uri->segment(1).'/ajukkan-penawaran')?>">
+            <form method="POST" action="<?php echo base_url($this->uri->segment(1).'/ajukkan-penawaran/'.$this->uri->segment(3))?>">
               <div class="input-group margin-bottom-sm form-group" style="border-radius:0px">
                 <span class="input-group-addon modal-fa"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i></span>
                   <input class="form-control" type="text" placeholder="Lama Pengerjaan (contoh: 5 Hari, 1 Minggu, 1 Bulan, dst)" name="lama_pengerjaan">
@@ -139,6 +147,44 @@
               <button class="btn btn-md form-control fur-btn-primary" style="border-radius:0px" type="submit">Ajukkan Penawaran
               <i class="fa fa-edit"></i></button>
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer text-center">
+        Belum punya akun ?
+         <a href="<?php echo base_url('hal/daftar')?>"> Daftar Disini</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div id="sudahModal" class="modal fade in" role="dialog">
+  <div class="modal-dialog modal-lg product-modal">
+    <div class="modal-content flat text-center" style="border-radius:0px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fa fa-close fa-2x"></i>
+        </button>
+        <h4 class="modal-title">Ajukkan Penawaran</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <?php
+                if($img['url_desain_produk']!=""){
+                  ?>
+                  <img class="img-responsive" src="<?php echo base_url($img['url_desain_produk']) ?>">
+                  <?php
+                }
+                else{
+                  ?>
+                  <i class="fa fa-archive fa-5x"></i>
+                  <?php
+                }
+              ?>
+          </div>
+          <div class="col-md-8 text-center">
+            <h4>Anda Sudah Pernah Melakukkan Penawaran</h4>
             </div>
           </div>
         </div>

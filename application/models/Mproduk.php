@@ -359,7 +359,7 @@ class Mproduk extends CI_Model {
   	return 1;
   }
   function countTenderPenjual($id){
-  	$this->db->where('id_tender',$id);
+  	$this->db->where('id_tender_desain',$id);
   	return $this->db->count_all_results('tender_penjual');
   }
   function fetchTenderPenjual($limit,$start,$pagenumber,$id){
@@ -368,7 +368,7 @@ class Mproduk extends CI_Model {
 			else
 				$this->db->limit($limit,$start);
 			$this->db->join('user','user.id_user = tender_penjual.id_penjual');
-			$this->db->where('id_tender',$id);
+			$this->db->where('id_tender_desain',$id);
 			$this->db->order_by('tanggal_tender_penjual','DESC');
 			$query = $this->db->get('tender_penjual');
 			if($query->num_rows()>0){
@@ -478,6 +478,19 @@ class Mproduk extends CI_Model {
 		if($query->num_rows()>0)
 			return $data['total_item'];
 		else return 0;
+	}
+	function ajukkanPenawaran($data,$id){
+		$array = array(
+				'lama_pengerjaan' => $data['lama_pengerjaan'],
+				'id_tender_desain' => $id,
+				'id_penjual' => $this->session->userdata('idUser'),
+				'harga' => $data['harga'],
+				'bahan' => $data['bahan'],
+				'keterangan' => $data['keterangan'],
+				'tanggal_tender_penjual' => date('Y-m-d H:i:s')
+			);
+		$this->db->insert('tender_penjual',$array);
+		return 1;
 	}
  }
  

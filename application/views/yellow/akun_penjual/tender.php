@@ -55,11 +55,6 @@
                         <i class="fa fa-list"></i>
                       </button>
                     </a>
-                    <a href="<?php echo base_url($this->uri->segment(1).'/tutup-tender/'.$rows->id_tender_desain)?>" title="Tutup Tender" onclick="return confirm('Apakah anda yakin ingin menutup tender ini?')">
-                    <button class="btn btn-default dropdown-toggle">
-                      <i class="fa fa-window-close-o"></i>
-                    </button>
-                    </a>
                   </td>
                 </tr>
                 <?php
